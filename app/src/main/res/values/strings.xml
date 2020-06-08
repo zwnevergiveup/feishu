@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">feishu</string>
+    <string name="app_title">飞 书</string>
+    <string name="account_name">账号:</string>
+    <string name="account_secret">密码:</string>
+    <string name="register_login">注册/登陆</string>
+</resources>
