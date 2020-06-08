@@ -14,6 +14,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginOrRegister(View view) {
+        System.out.println("wwwww");
 
 
     }
