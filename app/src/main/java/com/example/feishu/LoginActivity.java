@@ -1,5 +1,7 @@
 package com.example.feishu;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -7,10 +9,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.feishu.application.Base.BaseActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.example.feishu.Base.BaseActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends BaseActivity {
 
@@ -23,7 +30,39 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         accountName = findViewById(R.id.input_account);
         accountSecret = findViewById(R.id.input_secret);
-        EMClient.getInstance().logout(true);
+        requestPermission();
+    }
+
+    private void requestPermission() {
+        List<String> permissonList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissonList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            permissonList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        }
+        if (!permissonList.isEmpty()) {
+            ActivityCompat.requestPermissions(this,permissonList.toArray(new String[0]),1);
+        }
+    }
+
+    public void logout(View view) {
+        EMClient.getInstance().logout(true, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                Log.e(TAGS,"logout success");
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Log.e(TAGS,"logout error "+ s);
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+                Log.e(TAGS,"logouting: "+i);
+            }
+        });
     }
 
     public void loginOrRegister(View view) {

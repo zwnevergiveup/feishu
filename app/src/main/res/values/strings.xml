@@ -4,4 +4,5 @@
     <string name="account_name">账号:</string>
     <string name="account_secret">密码:</string>
     <string name="register_login">注册/登陆</string>
+    <string name="logout">退出登录</string>
 </resources>
