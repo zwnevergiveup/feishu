@@ -40,6 +40,7 @@
         app:layout_constraintStart_toEndOf="@id/account_name"
         android:layout_marginTop="110dp"
         android:layout_marginStart="20dp"
+        android:id="@+id/input_account"
         />
 
     <TextView
@@ -62,6 +63,8 @@
         app:layout_constraintStart_toEndOf="@id/account_secret"
         android:layout_marginTop="50dp"
         android:layout_marginStart="20dp"
+        android:id="@+id/input_secret"
+
         />
 
     <Button
@@ -75,6 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/account_secret"
         android:layout_marginTop="200dp"
+        android:id="@+id/login"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
