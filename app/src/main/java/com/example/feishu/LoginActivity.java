@@ -19,4 +19,10 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("wwwww");
     }
 
+    public void test(){
+
+    }
+
 }
+
+
