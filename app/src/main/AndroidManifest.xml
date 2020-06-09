@@ -59,6 +59,10 @@
         <activity android:name=".login.LoginActivity">
 
         </activity>
+<!--        首页-->
+        <activity android:name=".main.MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

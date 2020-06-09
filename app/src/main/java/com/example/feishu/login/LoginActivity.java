@@ -1,6 +1,7 @@
 package com.example.feishu.login;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.feishu.Base.BaseActivity;
 import com.example.feishu.R;
+import com.example.feishu.main.MainActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -31,18 +33,8 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         accountName = findViewById(R.id.input_account);
         accountSecret = findViewById(R.id.input_secret);
-        requestPermission();
     }
 
-    private void requestPermission() {
-        List<String> permissionList = new ArrayList<>();
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        if (!permissionList.isEmpty()) {
-            ActivityCompat.requestPermissions(this,permissionList.toArray(new String[0]),1);
-        }
-    }
 
     public void logout(View view) {
         EMClient.getInstance().logout(true, new EMCallBack() {
@@ -75,12 +67,7 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess() {
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_LONG).show();
-                    }
-                });
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
 
             @Override
