@@ -47,12 +47,17 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <activity android:name=".LoginActivity">
+<!--        启动-->
+        <activity android:name=".login.SplashActivity"
+            android:theme="@style/AppTheme.Full">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+<!--        登陆-->
+        <activity android:name=".login.LoginActivity">
+
         </activity>
     </application>
 

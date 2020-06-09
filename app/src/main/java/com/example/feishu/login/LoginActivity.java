@@ -1,4 +1,4 @@
-package com.example.feishu;
+package com.example.feishu.login;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.feishu.Base.BaseActivity;
+import com.example.feishu.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -34,15 +35,12 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void requestPermission() {
-        List<String> permissonList = new ArrayList<>();
+        List<String> permissionList = new ArrayList<>();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            permissonList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//            permissonList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        }
-        if (!permissonList.isEmpty()) {
-            ActivityCompat.requestPermissions(this,permissonList.toArray(new String[0]),1);
+        if (!permissionList.isEmpty()) {
+            ActivityCompat.requestPermissions(this,permissionList.toArray(new String[0]),1);
         }
     }
 
