@@ -1,14 +1,14 @@
-package com.example.feishu.ui.home;
+package com.example.feishu.ui.mine;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class MineViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public MineViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
     }

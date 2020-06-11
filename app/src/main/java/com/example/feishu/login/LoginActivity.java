@@ -36,24 +36,7 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    public void logout(View view) {
-        EMClient.getInstance().logout(true, new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                Log.e(TAGS,"logout success");
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                Log.e(TAGS,"logout error "+ s);
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-                Log.e(TAGS,"logouting: "+i);
-            }
-        });
-    }
 
     public void loginOrRegister(View view) {
         String name = accountName.getText().toString().trim();

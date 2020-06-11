@@ -3,23 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.feishu.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.feishu.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+    app:startDestination="@+id/navigation_notifications">
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.feishu.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.example.feishu.ui.conversation.ConversationFragment"
+        android:label="@string/conversation"
+        tools:layout="@layout/fragment_conversation" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.feishu.ui.compact.CompactFragment"
+        android:label="@string/compact"
+        tools:layout="@layout/fragment_compact" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.feishu.ui.mine.MineFragment"
+        android:label="@string/mine"
+        tools:layout="@layout/fragment_mine" />
+
+
+
+
 </navigation>

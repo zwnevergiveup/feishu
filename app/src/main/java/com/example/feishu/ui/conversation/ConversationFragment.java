@@ -1,4 +1,4 @@
-package com.example.feishu.ui.notifications;
+package com.example.feishu.ui.conversation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.feishu.R;
 
-public class NotificationsFragment extends Fragment {
+public class ConversationFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private ConversationViewModel conversationViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        conversationViewModel =
+                ViewModelProviders.of(this).get(ConversationViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_conversation, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        conversationViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
