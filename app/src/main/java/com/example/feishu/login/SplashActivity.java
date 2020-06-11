@@ -36,10 +36,10 @@ public class SplashActivity extends BaseActivity {
         }
     }
     private void turnToLogin() {
-        if (EMClient.getInstance().isLoggedInBefore()) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        }else {
+//        if (EMClient.getInstance().isLoggedInBefore()) {
+//            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//        }else {
             startActivity(new Intent(SplashActivity.this,LoginActivity.class));
-        }
+//        }
     }
 }
