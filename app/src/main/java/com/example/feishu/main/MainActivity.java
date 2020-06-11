@@ -25,9 +25,9 @@ public class MainActivity extends BaseActivity {
 
     public void getConversation(View view) {
 
-        EMConversation conversation = EMClient.getInstance().chatManager().getConversation("", EMConversation.EMConversationType.Chat,true);
-//        EMMessage a = EMMessage.createTxtSendMessage("testst","wus6");
-//        EMClient.getInstance().chatManager().sendMessage(a);
+        EMConversation conversation = EMClient.getInstance().chatManager().getConversation("zhongwu", EMConversation.EMConversationType.Chat,true);
+        EMMessage a = EMMessage.createTxtSendMessage("testst","wus6");
+        EMClient.getInstance().chatManager().sendMessage(a);
         List<EMMessage> list = conversation.getAllMessages();
         TextView tv = findViewById(R.id.main_tv);
     }
