@@ -1,8 +1,6 @@
-package com.example.feishu.login;
+package com.example.chuanyu.login;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,17 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.example.feishu.Base.BaseActivity;
-import com.example.feishu.R;
-import com.example.feishu.main.MainActivity;
+import com.example.chuanyu.Base.BaseActivity;
+import com.example.chuanyu.R;
+import com.example.chuanyu.main.MainActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginActivity extends BaseActivity {
 

@@ -1,4 +1,4 @@
-package com.example.feishu.application;
+package com.example.chuanyu.application;
 
 import android.app.Application;
 import android.content.Context;

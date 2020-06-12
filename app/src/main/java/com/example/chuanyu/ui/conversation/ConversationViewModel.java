@@ -1,4 +1,4 @@
-package com.example.feishu.ui.conversation;
+package com.example.chuanyu.ui.conversation;
 
 import android.util.Log;
 import android.view.View;
@@ -30,7 +30,7 @@ public class ConversationViewModel extends ViewModel {
 
     public ConversationViewModel() {
         mText = new MutableLiveData<>();
-        conversation = EMClient.getInstance().chatManager().getConversation("", EMConversation.EMConversationType.Chat,true);
+        conversation = EMClient.getInstance().chatManager().getConversation("zhongwu", EMConversation.EMConversationType.Chat,true);
         mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {

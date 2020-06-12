@@ -1,10 +1,10 @@
-package com.example.feishu.main;
+package com.example.chuanyu.main;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.feishu.R;
+import com.example.chuanyu.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;

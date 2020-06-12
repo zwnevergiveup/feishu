@@ -1,4 +1,4 @@
-package com.example.feishu;
+package com.example.chuanyu;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.feishu", appContext.getPackageName());
+        assertEquals("com.example.chuanyu", appContext.getPackageName());
     }
 }

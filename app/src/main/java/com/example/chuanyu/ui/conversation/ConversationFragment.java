@@ -1,4 +1,4 @@
-package com.example.feishu.ui.conversation;
+package com.example.chuanyu.ui.conversation;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.feishu.R;
+import com.example.chuanyu.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
@@ -42,7 +42,7 @@ public class ConversationFragment extends Fragment {
             public void onClick(View v) {
                 String s = editText.getText().toString().trim();
                 if (!s.isEmpty()) {
-                    sendMessage(s,"");
+                    sendMessage(s,"zhongwu");
                 }
             }
         });

@@ -1,4 +1,4 @@
-package com.example.feishu.ui.compact;
+package com.example.chuanyu.ui.compact;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.feishu.R;
+import com.example.chuanyu.R;
 
 public class CompactFragment extends Fragment {
 

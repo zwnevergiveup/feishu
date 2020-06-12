@@ -1,18 +1,14 @@
-package com.example.feishu.login;
+package com.example.chuanyu.login;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.feishu.Base.BaseActivity;
-import com.example.feishu.main.MainActivity;
+import com.example.chuanyu.Base.BaseActivity;
+import com.example.chuanyu.main.MainActivity;
 import com.hyphenate.chat.EMClient;
 
 import java.util.ArrayList;

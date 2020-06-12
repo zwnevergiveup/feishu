@@ -1,4 +1,4 @@
-package com.example.feishu.ui.mine;
+package com.example.chuanyu.ui.mine;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.feishu">
+    package="com.example.chuanyu">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,7 +34,7 @@
 
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1126200608098897#feishu" />
+            android:value="1126200608098897#chuanyu" />
 
         <service
             android:name="com.hyphenate.chat.EMChatService"

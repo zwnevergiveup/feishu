@@ -1,4 +1,4 @@
-package com.example.feishu.ui.compact;
+package com.example.chuanyu.ui.compact;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
