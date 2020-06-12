@@ -18,10 +18,8 @@ public class ConversationFragment extends Fragment {
 
     private ConversationViewModel conversationViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        conversationViewModel =
-                ViewModelProviders.of(this).get(ConversationViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        conversationViewModel = ViewModelProviders.of(this).get(ConversationViewModel.class);
         View root = inflater.inflate(R.layout.fragment_conversation, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
         conversationViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
