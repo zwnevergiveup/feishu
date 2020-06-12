@@ -34,11 +34,4 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
-    public void getConversation(View view) {
-        EMConversation conversation = EMClient.getInstance().chatManager().getConversation("zhongwu", EMConversation.EMConversationType.Chat,true);
-        EMMessage a = EMMessage.createTxtSendMessage("testst","wus6");
-        EMClient.getInstance().chatManager().sendMessage(a);
-        List<EMMessage> list = conversation.getAllMessages();
-//        TextView tv = findViewById(R.id.main_tv);
-    }
 }

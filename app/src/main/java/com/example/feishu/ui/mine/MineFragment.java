@@ -45,7 +45,7 @@ public class MineFragment extends Fragment {
     }
 
 
-    public void logout() {
+    private void logout() {
         EMClient.getInstance().logout(true, new EMCallBack() {
             @Override
             public void onSuccess() {
