@@ -22,15 +22,15 @@ import io.reactivex.functions.Consumer;
 
 public class ConversationViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<List<EMMessage>> messageList;
     private EMConversation conversation;
     private Disposable mDisposable;
     private List<EMMessage> list;
 
 
     public ConversationViewModel() {
-        mText = new MutableLiveData<>();
-        conversation = EMClient.getInstance().chatManager().getConversation("zhongwu", EMConversation.EMConversationType.Chat,true);
+        messageList = new MutableLiveData<>();
+        conversation = EMClient.getInstance().chatManager().getConversation("wus6", EMConversation.EMConversationType.Chat,true);
         mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
@@ -44,17 +44,18 @@ public class ConversationViewModel extends ViewModel {
             public void accept(Long aLong) throws Exception {
                 Log.e("FS","设置文本: " + aLong + "\n");
                 if (list.isEmpty()) {
-                    mText.setValue("没有任何消息");
+
                 }else{
                     EMMessageBody body = list.get(list.size() -1).getBody();
                     String content = body.toString();
-                    mText.setValue(content);
+//                    mText.setValue(content);
+                    messageList.setValue(list);
                 }
             }
         });
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<EMMessage>> getMessageList() {
+        return messageList;
     }
 }
