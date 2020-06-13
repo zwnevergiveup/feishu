@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".application.FSApplication"
+        android:name=".application.CYApplication"
         android:allowBackup="true"
         android:icon="@mipmap/chuanyu_icon"
         android:label="@string/app_name"
@@ -55,22 +55,28 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
-        </receiver> <!-- 启动 -->
+        </receiver>
+        <!-- 启动 -->
         <activity
-            android:name=".login.SplashActivity"
+            android:name=".activity.login.SplashActivity"
             android:theme="@style/AppTheme.Full">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 登陆 -->
-        <activity android:name=".login.LoginActivity">
-
-        </activity> <!-- 首页 -->
+        </activity>
+        <!-- 登陆 -->
+        <activity android:name=".activity.login.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+        </activity>
+        <!-- 首页 -->
         <activity
-            android:name=".main.MainActivity"
+            android:name=".activity.main.MainActivity"
             android:label="@string/title_activity_main">
+        </activity>
+<!--        聊天页面-->
+        <activity android:name=".activity.conversation.CurrentConversationActivity">
 
         </activity>
     </application>

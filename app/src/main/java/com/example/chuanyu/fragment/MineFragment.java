@@ -1,5 +1,6 @@
-package com.example.chuanyu.ui.mine;
+package com.example.chuanyu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.chuanyu.R;
+import com.example.chuanyu.activity.login.LoginActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -22,7 +24,7 @@ import java.util.Objects;
 public class MineFragment extends Fragment {
 
     private MineViewModel mineViewModel;
-    private String TAGS = "FS";
+    private String TAGS = "CYLogger";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +52,8 @@ public class MineFragment extends Fragment {
             @Override
             public void onSuccess() {
                 Log.e(TAGS,"logout success");
-                Objects.requireNonNull(getActivity()).finish();
+                Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(),LoginActivity.class));
+                getActivity().finish();
             }
 
             @Override

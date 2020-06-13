@@ -4,21 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="90dp"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:id="@+id/app_title"
-        />
+    tools:context=".activity.login.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,16 +13,16 @@
         android:textSize="18sp"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_title"
-        android:layout_marginTop="120dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/input_account"
         android:id="@+id/account_name"
         />
 
     <EditText
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/app_title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/account_name"
         android:layout_marginTop="110dp"
         android:layout_marginStart="20dp"
@@ -50,21 +36,20 @@
         android:textSize="18sp"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/account_name"
-        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toTopOf="@id/login"
         android:layout_marginStart="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/input_secret"
         android:id="@+id/account_secret"
         />
 
     <EditText
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/account_name"
+        app:layout_constraintTop_toBottomOf="@id/input_account"
         app:layout_constraintStart_toEndOf="@id/account_secret"
         android:layout_marginTop="50dp"
         android:layout_marginStart="20dp"
         android:id="@+id/input_secret"
-
         />
 
     <Button
@@ -76,8 +61,8 @@
         android:onClick="loginOrRegister"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="60dp"
+        app:layout_constraintTop_toBottomOf="@id/input_secret"
+        android:layout_marginTop="200dp"
         android:id="@+id/login"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

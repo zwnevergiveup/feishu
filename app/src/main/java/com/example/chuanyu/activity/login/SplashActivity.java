@@ -1,4 +1,4 @@
-package com.example.chuanyu.login;
+package com.example.chuanyu.activity.login;
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.chuanyu.Base.BaseActivity;
-import com.example.chuanyu.main.MainActivity;
+import com.example.chuanyu.activity.BaseActivity;
+import com.example.chuanyu.activity.main.MainActivity;
 import com.hyphenate.chat.EMClient;
 
 import java.util.ArrayList;
@@ -37,5 +37,6 @@ public class SplashActivity extends BaseActivity {
         }else {
             startActivity(new Intent(SplashActivity.this,LoginActivity.class));
         }
+        finish();
     }
 }

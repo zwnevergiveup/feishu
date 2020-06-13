@@ -1,4 +1,4 @@
-package com.example.chuanyu.login;
+package com.example.chuanyu.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.chuanyu.Base.BaseActivity;
+import com.example.chuanyu.activity.BaseActivity;
 import com.example.chuanyu.R;
-import com.example.chuanyu.main.MainActivity;
+import com.example.chuanyu.activity.main.MainActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -43,6 +43,7 @@ public class LoginActivity extends BaseActivity {
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
 
             @Override

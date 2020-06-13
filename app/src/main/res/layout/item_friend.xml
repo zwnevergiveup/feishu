@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/chuanyu_icon"
+        android:layout_marginStart="20dp"
+        android:id="@+id/item_friend_iv"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/item_friend_Name"
+        app:layout_constraintStart_toStartOf="@id/item_friend_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="50dp"
+        android:text="测试"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

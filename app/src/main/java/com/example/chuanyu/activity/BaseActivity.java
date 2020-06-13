@@ -1,7 +1,7 @@
-package com.example.chuanyu.Base;
+package com.example.chuanyu.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
-    public String TAGS = "FS";
+    public String TAGS = "CYLogger";
 }

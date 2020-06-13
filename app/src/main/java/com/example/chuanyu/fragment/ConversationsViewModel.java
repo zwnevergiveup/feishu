@@ -1,14 +1,13 @@
-package com.example.chuanyu.ui.compact;
+package com.example.chuanyu.fragment;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class CompactViewModel extends ViewModel {
-
+public class ConversationsViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
-    public CompactViewModel() {
+    public ConversationsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is dashboard fragment");
     }
@@ -16,4 +15,5 @@ public class CompactViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
 }

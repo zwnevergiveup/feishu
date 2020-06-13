@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">chuanyu</string>
+    <string name="app_name">传语</string>
     <string name="app_title">传 语</string>
     <string name="account_name">账号:</string>
     <string name="account_secret">密码:</string>
@@ -10,4 +10,5 @@
     <string name="compact">联系人</string>
     <string name="mine">我的</string>
     <string name="send">发送</string>
+    <string name="add_new_friend">添加好友</string>
 </resources>

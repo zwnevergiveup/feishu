@@ -6,7 +6,7 @@ import android.content.Context;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
-public class FSApplication extends Application {
+public class CYApplication extends Application {
     private static Context mContext;
 
     @Override
