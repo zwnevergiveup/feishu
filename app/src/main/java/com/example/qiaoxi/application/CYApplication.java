@@ -1,4 +1,4 @@
-package com.example.chuanyu.application;
+package com.example.qiaoxi.application;
 
 import android.app.Application;
 import android.content.Context;

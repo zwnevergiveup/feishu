@@ -1,4 +1,4 @@
-package com.example.chuanyu.fragment;
+package com.example.qiaoxi.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,18 +10,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chuanyu.R;
-import com.example.chuanyu.activity.conversation.CurrentConversationActivity;
-import com.example.chuanyu.activity.main.MainActivity;
-import com.example.chuanyu.adapter.FriendAdapter;
+import com.example.qiaoxi.R;
+import com.example.qiaoxi.activity.conversation.CurrentConversationsActivity;
+import com.example.qiaoxi.adapter.FriendAdapter;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -46,7 +43,7 @@ public class CompactFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 String str = ((TextView)view.findViewById(R.id.item_friend_Name)).getText().toString();
-                Intent intent = new Intent(getActivity(), CurrentConversationActivity.class);
+                Intent intent = new Intent(getActivity(), CurrentConversationsActivity.class);
                 intent.putExtra("title",str);
                 getActivity().startActivity(intent);
             }
@@ -75,12 +72,12 @@ public class CompactFragment extends Fragment {
         EMClient.getInstance().contactManager().aysncAddContact("wus6", "justForTest", new EMCallBack() {
             @Override
             public void onSuccess() {
-                Log.e("CYLogger","发送成功");
+                Log.e("qiaoxi","发送成功");
             }
 
             @Override
             public void onError(int i, String s) {
-                Log.e("CYLogger",s);
+                Log.e("qiaoxi",s);
 
             }
 

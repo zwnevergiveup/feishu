@@ -1,4 +1,4 @@
-package com.example.chuanyu.activity.login;
+package com.example.qiaoxi.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.chuanyu.activity.BaseActivity;
-import com.example.chuanyu.R;
-import com.example.chuanyu.activity.main.MainActivity;
+import com.example.qiaoxi.activity.BaseActivity;
+import com.example.qiaoxi.R;
+import com.example.qiaoxi.activity.main.MainActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 

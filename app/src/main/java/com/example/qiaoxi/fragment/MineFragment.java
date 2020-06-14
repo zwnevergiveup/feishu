@@ -1,4 +1,4 @@
-package com.example.chuanyu.fragment;
+package com.example.qiaoxi.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.chuanyu.R;
-import com.example.chuanyu.activity.login.LoginActivity;
+import com.example.qiaoxi.R;
+import com.example.qiaoxi.activity.login.LoginActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -24,7 +24,7 @@ import java.util.Objects;
 public class MineFragment extends Fragment {
 
     private MineViewModel mineViewModel;
-    private String TAGS = "CYLogger";
+    private String TAGS = "qiaoxi";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

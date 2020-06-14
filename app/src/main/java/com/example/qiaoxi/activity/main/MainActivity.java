@@ -1,4 +1,4 @@
-package com.example.chuanyu.activity.main;
+package com.example.qiaoxi.activity.main;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,8 +11,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.chuanyu.R;
-import com.example.chuanyu.activity.BaseActivity;
+import com.example.qiaoxi.R;
+import com.example.qiaoxi.activity.BaseActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity {

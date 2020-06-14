@@ -1,19 +1,21 @@
-package com.example.chuanyu.fragment;
+package com.example.qiaoxi.fragment;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ConversationsViewModel extends ViewModel {
+import com.hyphenate.chat.EMClient;
+
+public class MineViewModel extends ViewModel {
+
     private MutableLiveData<String> mText;
 
-    public ConversationsViewModel() {
+    public MineViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue(EMClient.getInstance().getCurrentUser());
     }
 
     public LiveData<String> getText() {
         return mText;
     }
-
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.chuanyu">
+    package="com.example.qiaoxi">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,9 +19,9 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".application.CYApplication"
+        android:name="com.example.qiaoxi.application.CYApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/chuanyu_icon"
+        android:icon="@mipmap/qiaoxi_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -67,16 +67,16 @@
             </intent-filter>
         </activity>
         <!-- 登陆 -->
-        <activity android:name=".activity.login.LoginActivity"
+        <activity android:name="com.example.qiaoxi.activity.login.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
         </activity>
         <!-- 首页 -->
         <activity
-            android:name=".activity.main.MainActivity"
+            android:name="com.example.qiaoxi.activity.main.MainActivity"
             android:label="@string/title_activity_main">
         </activity>
 <!--        聊天页面-->
-        <activity android:name=".activity.conversation.CurrentConversationActivity">
+        <activity android:name="com.example.qiaoxi.activity.conversation.CurrentConversationsActivity">
 
         </activity>
     </application>

@@ -1,4 +1,4 @@
-package com.example.chuanyu.fragment;
+package com.example.qiaoxi.fragment;
 
 import android.util.Log;
 
@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.hyphenate.EMContactListener;
-import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class CompactViewModel extends ViewModel {
 //
 //            @Override
 //            public void onError(int i, String s) {
-//                Log.e("CYLogger",s);
+//                Log.e("qiaoxi",s);
 //            }
 //        });
 
@@ -52,28 +51,28 @@ public class CompactViewModel extends ViewModel {
             @Override
             public void onContactAdded(String s) {
                 mContactList.getValue().add(s);
-                Log.e("CYLogger","has onContactAdded");
+                Log.e("qiaoxi","has onContactAdded");
             }
 
             @Override
             public void onContactDeleted(String s) {
-                Log.e("CYLogger","has onContactDeleted");
+                Log.e("qiaoxi","has onContactDeleted");
             }
 
             @Override
             public void onContactInvited(String s, String s1) {
-                Log.e("CYLogger","has agreed");
+                Log.e("qiaoxi","has agreed");
             }
 
             @Override
             public void onFriendRequestAccepted(String s) {
-                Log.e("CYLogger","onFriendRequestAccepted");
+                Log.e("qiaoxi","onFriendRequestAccepted");
 
             }
 
             @Override
             public void onFriendRequestDeclined(String s) {
-                Log.e("CYLogger","onFriendRequestDeclined");
+                Log.e("qiaoxi","onFriendRequestDeclined");
 
             }
         });

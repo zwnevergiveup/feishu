@@ -1,4 +1,4 @@
-package com.example.chuanyu;
+package com.example.qiaoxi;
 
 import org.junit.Test;
 

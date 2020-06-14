@@ -1,4 +1,4 @@
-package com.example.chuanyu.fragment;
+package com.example.qiaoxi.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.chuanyu.R;
+import com.example.qiaoxi.R;
 
 public class ConversationsFragment extends Fragment {
 

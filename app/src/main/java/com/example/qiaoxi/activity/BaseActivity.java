@@ -1,7 +1,7 @@
-package com.example.chuanyu.activity;
+package com.example.qiaoxi.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
-    public String TAGS = "CYLogger";
+    public String TAGS = "qiaoxi";
 }

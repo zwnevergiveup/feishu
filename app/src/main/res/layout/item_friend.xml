@@ -9,7 +9,7 @@
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/chuanyu_icon"
+        android:src="@mipmap/qiaoxi_icon"
         android:layout_marginStart="20dp"
         android:id="@+id/item_friend_iv"
         />
