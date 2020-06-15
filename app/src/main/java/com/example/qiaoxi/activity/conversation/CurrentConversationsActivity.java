@@ -37,19 +37,21 @@ public class CurrentConversationsActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        withWho = getIntent().getStringExtra("title");
         setupDataBind();
         setupView();
     }
 
     public void setupDataBind() {
         CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this).get(CurrentConversationsViewModel.class);
+        currentConversationsViewModel.conversationName = withWho;
+        currentConversationsViewModel.loopReceiveConversation();
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
     }
 
     public void setupView() {
-        withWho = getIntent().getStringExtra("title");
         ((TextView)findViewById(R.id.current_conversation_title)).setText(withWho);
 
         mRecycler = findViewById(R.id.current_conversation_recycler);

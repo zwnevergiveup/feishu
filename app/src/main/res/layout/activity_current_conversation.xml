@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@{viewModel.str}"
+            android:text="@{String.valueOf(viewModel.mEMMessageList.size())}"
             android:textSize="22sp"
             android:textColor="#000000"
             android:gravity="center"
