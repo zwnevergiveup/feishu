@@ -39,16 +39,27 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void setupView() {
+
+    }
+
+    @Override
+    protected void setupDataBinding() {
+
+    }
+
+    @Override
+    protected void setupEvent() {
+
+    }
+
+    @Override
     public void onBackPressed() {
         isExit++ ;
-        Log.e(TAGS,"" + isExit);
-
         if (isExit > 1) {
-            Log.e(TAGS,"exit");
             finish();
             System.exit(0);
         }
-//        super.onBackPressed();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

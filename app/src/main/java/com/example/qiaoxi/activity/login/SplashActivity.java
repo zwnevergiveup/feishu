@@ -3,7 +3,10 @@ package com.example.qiaoxi.activity.login;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -15,9 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SplashActivity extends BaseActivity {
+
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e(TAGS,"有点意思");
         requestPermission();
         turnToLogin();
     }
@@ -38,5 +43,19 @@ public class SplashActivity extends BaseActivity {
             startActivity(new Intent(SplashActivity.this,LoginActivity.class));
         }
         finish();
+    }
+    @Override
+    protected void setupView() {
+
+    }
+
+    @Override
+    protected void setupDataBinding() {
+
+    }
+
+    @Override
+    protected void setupEvent() {
+
     }
 }

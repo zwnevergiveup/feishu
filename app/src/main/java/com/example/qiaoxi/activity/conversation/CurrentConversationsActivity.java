@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -37,12 +38,10 @@ public class CurrentConversationsActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        withWho = getIntent().getStringExtra("title");
-        setupDataBind();
-        setupView();
     }
 
-    public void setupDataBind() {
+    protected void setupDataBinding() {
+        withWho = getIntent().getStringExtra("title");
         CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this).get(CurrentConversationsViewModel.class);
         currentConversationsViewModel.conversationName = withWho;
         currentConversationsViewModel.loopReceiveConversation();
@@ -51,7 +50,7 @@ public class CurrentConversationsActivity extends BaseActivity {
         binding.setViewModel(currentConversationsViewModel);
     }
 
-    public void setupView() {
+    protected void setupView() {
         ((TextView)findViewById(R.id.current_conversation_title)).setText(withWho);
 
         mRecycler = findViewById(R.id.current_conversation_recycler);
@@ -63,6 +62,10 @@ public class CurrentConversationsActivity extends BaseActivity {
 
         editText = findViewById(R.id.current_conversation_send_text);
         btn = findViewById(R.id.current_conversation_send_btn);
+    }
+
+    @Override
+    protected void setupEvent() {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,11 +77,13 @@ public class CurrentConversationsActivity extends BaseActivity {
             }
         });
     }
-
-    public void sendMessage( String text,String userName) {
+    public void sendMessage(String text, String userName) {
+        String me = EMClient.getInstance().getCurrentUser();
+        if (me ==null || me.isEmpty()) {
+            Toast.makeText(this,"登录过期用户",Toast.LENGTH_LONG).show();
+        }
         Log.e(TAGS,userName);
         EMMessage a = EMMessage.createTxtSendMessage(text,userName);
         EMClient.getInstance().chatManager().sendMessage(a);
-//        TextView tv = findViewById(R.id.main_tv);
     }
 }

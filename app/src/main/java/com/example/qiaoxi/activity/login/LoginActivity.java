@@ -26,9 +26,20 @@ public class LoginActivity extends BaseActivity {
         accountName = findViewById(R.id.input_account);
         accountSecret = findViewById(R.id.input_secret);
     }
+    @Override
+    protected void setupView() {
 
+    }
 
+    @Override
+    protected void setupDataBinding() {
 
+    }
+
+    @Override
+    protected void setupEvent() {
+
+    }
 
     public void loginOrRegister(View view) {
         String name = accountName.getText().toString().trim();
