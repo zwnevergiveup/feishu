@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +49,13 @@ public class CurrentConversationsActivity extends BaseActivity {
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
+
+        currentConversationsViewModel.conversationName.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+            }
+        });
+
     }
 
     protected void setupView() {

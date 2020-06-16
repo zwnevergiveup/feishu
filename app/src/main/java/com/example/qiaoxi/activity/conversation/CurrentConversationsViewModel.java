@@ -35,7 +35,7 @@ public class CurrentConversationsViewModel extends ViewModel {
     }
     public void loopReceiveConversation() {
         conversation = EMClient.getInstance().chatManager().getConversation(conversationName.getValue(), EMConversation.EMConversationType.Chat,true);
-        mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
+        mDisposable = Flowable.interval(3, 5,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
                 temp = conversation.getAllMessages();
@@ -44,6 +44,7 @@ public class CurrentConversationsViewModel extends ViewModel {
         }).subscribeOn(Schedulers.single()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
+                conversationName.setValue(""+aLong);
                 mEMMessageList.setValue(temp);
 //                if (emMessage != null && (!emMessage.getFrom().equals( EMClient.getInstance().getCurrentUser()))) {
 //                    if (lastMessage == null) {
