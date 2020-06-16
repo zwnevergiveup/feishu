@@ -43,7 +43,7 @@ public class CurrentConversationsActivity extends BaseActivity {
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
         CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this).get(CurrentConversationsViewModel.class);
-        currentConversationsViewModel.conversationName = withWho;
+        currentConversationsViewModel.conversationName.setValue(withWho);
         currentConversationsViewModel.loopReceiveConversation();
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
@@ -51,8 +51,6 @@ public class CurrentConversationsActivity extends BaseActivity {
     }
 
     protected void setupView() {
-        ((TextView)findViewById(R.id.current_conversation_title)).setText(withWho);
-
         mRecycler = findViewById(R.id.current_conversation_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecycler.setLayoutManager(layoutManager);

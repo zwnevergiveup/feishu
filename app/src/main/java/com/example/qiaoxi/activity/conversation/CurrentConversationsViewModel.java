@@ -27,16 +27,14 @@ public class CurrentConversationsViewModel extends ViewModel {
     private Disposable mDisposable;
     private EMMessage emMessage;
     private List<EMMessage> temp = new ArrayList<>();
-    public String conversationName = "default";
+    public MutableLiveData<String> conversationName = new MutableLiveData<>();
     public final MutableLiveData<List<EMMessage>> mEMMessageList = new MutableLiveData<>();
-
 
     public CurrentConversationsViewModel() {
         mEMMessageList.setValue(new ArrayList<>());
     }
-
     public void loopReceiveConversation() {
-        conversation = EMClient.getInstance().chatManager().getConversation(conversationName, EMConversation.EMConversationType.Chat,true);
+        conversation = EMClient.getInstance().chatManager().getConversation(conversationName.getValue(), EMConversation.EMConversationType.Chat,true);
         mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
