@@ -10,9 +10,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,8 +46,7 @@ public class CurrentConversationsActivity extends BaseActivity {
 
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
-        CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this).get(CurrentConversationsViewModel.class);
-        currentConversationsViewModel.conversationName.setValue(withWho);
+        CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this, new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
         currentConversationsViewModel.loopReceiveConversation();
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
