@@ -29,12 +29,12 @@ public class CurrentConversationsViewModel extends ViewModel {
     private Disposable mDisposable;
     private EMMessage emMessage;
     private List<EMMessage> temp = new ArrayList<>();
-    public MutableLiveData<String> conversationName = new MutableLiveData<>();
+    public String conversationName;
     public final MutableLiveData<List<EMMessage>> mEMMessageList = new MutableLiveData<>();
 
     public CurrentConversationsViewModel(String titleName) {
         mEMMessageList.setValue(new ArrayList<>());
-        conversationName.setValue(titleName);
+        conversationName = titleName;
     }
     public static class Factory implements ViewModelProvider.Factory {
         private String mTitle;
@@ -50,17 +50,15 @@ public class CurrentConversationsViewModel extends ViewModel {
     }
 
     public void loopReceiveConversation() {
-        conversation = EMClient.getInstance().chatManager().getConversation(conversationName.getValue(), EMConversation.EMConversationType.Chat,true);
-        mDisposable = Flowable.interval(3, 5,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
+        conversation = EMClient.getInstance().chatManager().getConversation(conversationName, EMConversation.EMConversationType.Chat,true);
+        mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
                 temp = conversation.getAllMessages();
-
             }
         }).subscribeOn(Schedulers.single()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                conversationName.setValue(""+aLong);
                 mEMMessageList.setValue(temp);
 //                if (emMessage != null && (!emMessage.getFrom().equals( EMClient.getInstance().getCurrentUser()))) {
 //                    if (lastMessage == null) {

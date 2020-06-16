@@ -19,23 +19,27 @@ import java.util.List;
 
 public class SplashActivity extends BaseActivity {
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e(TAGS,"有点意思");
-        requestPermission();
-        turnToLogin();
+    protected void onResume() {
+        super.onResume();
+        if (requestPermission()){
+            turnToLogin();
+        }
     }
 
-    private void requestPermission() {
+    private boolean requestPermission() {
         List<String> permissionList = new ArrayList<>();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
         if (!permissionList.isEmpty()) {
             ActivityCompat.requestPermissions(this,permissionList.toArray(new String[0]),1);
+            return false;
         }
+        return true;
     }
+
     private void turnToLogin() {
         if (EMClient.getInstance().isLoggedInBefore()) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -45,17 +49,11 @@ public class SplashActivity extends BaseActivity {
         finish();
     }
     @Override
-    protected void setupView() {
-
-    }
+    protected void setupView() { }
 
     @Override
-    protected void setupDataBinding() {
-
-    }
+    protected void setupDataBinding() { }
 
     @Override
-    protected void setupEvent() {
-
-    }
+    protected void setupEvent() { }
 }

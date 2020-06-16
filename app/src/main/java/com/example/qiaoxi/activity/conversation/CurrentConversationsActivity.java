@@ -29,6 +29,7 @@ import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CurrentConversationsActivity extends BaseActivity {
 
@@ -38,12 +39,6 @@ public class CurrentConversationsActivity extends BaseActivity {
     private List<String> emMessageTextList =new ArrayList<>();
     private String withWho;
 
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
         CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this, new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
@@ -52,9 +47,12 @@ public class CurrentConversationsActivity extends BaseActivity {
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
 
-        currentConversationsViewModel.conversationName.observe(this, new Observer<String>() {
+        currentConversationsViewModel.mEMMessageList.observe(this, new Observer<List<EMMessage>>() {
             @Override
-            public void onChanged(String s) {
+            public void onChanged(List<EMMessage> emMessages) {
+//                emMessageTextList.clear();
+//                emMessages.stream().map(n -> n.getBody().toString()).collect(Collectors.toList());
+                Log.e(TAGS,"onChanged");
             }
         });
 
