@@ -15,25 +15,23 @@
         android:layout_height="match_parent"
         tools:context=".activity.conversation.CurrentConversationsActivity">
 
-
-        <TextView
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@{viewModel.conversationName}"
-            android:textSize="22sp"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:id="@+id/current_conversation_title"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="60dp"
+            android:id="@+id/current_conversation_toolbar"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@{viewModel.conversationName}"
+            android:gravity="center"
+            android:background="#90EE90"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:id="@+id/current_conversation_recycler"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/current_conversation_title" />
+            app:layout_constraintTop_toBottomOf="@id/current_conversation_toolbar" />
 
         <EditText
             android:id="@+id/current_conversation_send_text"
