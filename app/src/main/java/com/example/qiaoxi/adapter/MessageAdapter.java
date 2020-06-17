@@ -7,21 +7,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMTextMessageBody;
+
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-    private List<String> emMessageTextList;
+    private List<EMMessage> emMessageList;
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView messageText;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             messageText = view.findViewById(R.id.message_tv);
         }
     }
 
-    public void setEmMessageList(List<String> emMessageList) {
-        this.emMessageTextList = emMessageList;
+    public void setEmMessageList(List<EMMessage> emMessageList) {
+        this.emMessageList = emMessageList;
     }
 
     @NonNull
@@ -33,12 +36,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String emMessage = emMessageTextList.get(position);
-        holder.messageText.setText( emMessage);
+        EMMessage emMessage = emMessageList.get(position);
+
+        holder.messageText.setText( ((EMTextMessageBody)emMessage.getBody()).getMessage());
     }
 
     @Override
     public int getItemCount() {
-        return emMessageTextList.size();
+        return emMessageList.size();
     }
 }

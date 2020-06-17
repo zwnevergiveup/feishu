@@ -3,6 +3,7 @@ package com.example.qiaoxi.activity.conversation;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,18 +23,15 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CurrentConversationsViewModel extends ViewModel {
+public final class CurrentConversationsViewModel extends ViewModel {
 
-    private EMMessage lastMessage;
+    private EMMessage temp;
     public EMConversation conversation;
     private Disposable mDisposable;
-    private EMMessage emMessage;
-    private List<EMMessage> temp = new ArrayList<>();
+    public MutableLiveData<EMMessage> lastMessage = new MutableLiveData<>();
     public String conversationName;
-    public final MutableLiveData<List<EMMessage>> mEMMessageList = new MutableLiveData<>();
 
     public CurrentConversationsViewModel(String titleName) {
-        mEMMessageList.setValue(new ArrayList<>());
         conversationName = titleName;
     }
     public static class Factory implements ViewModelProvider.Factory {
@@ -54,26 +52,18 @@ public class CurrentConversationsViewModel extends ViewModel {
         mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                temp = conversation.getAllMessages();
+                temp = conversation.getLastMessage();
             }
         }).subscribeOn(Schedulers.single()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                mEMMessageList.setValue(temp);
-//                if (emMessage != null && (!emMessage.getFrom().equals( EMClient.getInstance().getCurrentUser()))) {
-//                    if (lastMessage == null) {
-//                        lastMessage = emMessage;
-////                        EMTextMessageBody textBody = (EMTextMessageBody) emMessage.getBody();
-//                        mEMMessageList.getValue().add(emMessage);
-//                    }else {
-//                        if (emMessage != null  && (!emMessage.getMsgId().equals(lastMessage.getMsgId()))) {
-//                            lastMessage = emMessage;
-//                            EMTextMessageBody textBody = (EMTextMessageBody) emMessage.getBody();
-//                            mEMMessageList.getValue().add(emMessage);
-//                        }
-//                    }
-//                }
-
+                if (temp != null) {
+                    if (lastMessage.getValue() == null ) {
+                        lastMessage.setValue(temp);
+                    }else if (!lastMessage.getValue().getMsgId().equals(temp.getMsgId())) {
+                        lastMessage.setValue(temp);
+                    }
+                }
             }
         });
     }

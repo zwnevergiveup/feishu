@@ -31,12 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CurrentConversationsActivity extends BaseActivity {
+public final class CurrentConversationsActivity extends BaseActivity {
 
     private RecyclerView mRecycler;
     private EditText editText;
     private Button btn;
-    private List<String> emMessageTextList =new ArrayList<>();
+    private List<EMMessage> emMessageList =new ArrayList<>();
     private String withWho;
 
     protected void setupDataBinding() {
@@ -47,12 +47,11 @@ public class CurrentConversationsActivity extends BaseActivity {
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
 
-        currentConversationsViewModel.mEMMessageList.observe(this, new Observer<List<EMMessage>>() {
+        currentConversationsViewModel.lastMessage.observe(this, new Observer<EMMessage>() {
             @Override
-            public void onChanged(List<EMMessage> emMessages) {
-//                emMessageTextList.clear();
-//                emMessages.stream().map(n -> n.getBody().toString()).collect(Collectors.toList());
-                Log.e(TAGS,"onChanged");
+            public void onChanged(EMMessage emMessage) {
+                emMessageList.add(emMessage);
+                mRecycler.getAdapter().notifyDataSetChanged();
             }
         });
 
@@ -63,7 +62,7 @@ public class CurrentConversationsActivity extends BaseActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecycler.setLayoutManager(layoutManager);
         MessageAdapter messageAdapter = new MessageAdapter();
-        messageAdapter.setEmMessageList(emMessageTextList);
+        messageAdapter.setEmMessageList(emMessageList);
         mRecycler.setAdapter(messageAdapter);
 
         editText = findViewById(R.id.current_conversation_send_text);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="40dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -9,9 +9,11 @@
         android:layout_height="match_parent"
         android:id="@+id/message_tv"
         android:text="测试消息"
+        android:textSize="22sp"
         android:gravity="center_vertical"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
