@@ -45,6 +45,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) { }
         });
+        startService(new Intent(this, ForegroundService.class));
     }
 
     @Override
@@ -68,7 +69,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        startService(new Intent(this, ForegroundService.class));
     }
 
     @Override
