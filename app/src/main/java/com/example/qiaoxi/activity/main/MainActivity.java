@@ -1,5 +1,6 @@
 package com.example.qiaoxi.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.BaseActivity;
 import com.example.qiaoxi.databinding.ActivityMainBinding;
+import com.example.qiaoxi.service.ForegroundService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -61,6 +63,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void setupEvent() {
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        startService(new Intent(this, ForegroundService.class));
     }
 
     @Override

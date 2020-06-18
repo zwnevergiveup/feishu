@@ -16,6 +16,7 @@ import com.hyphenate.chat.EMClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class SplashActivity extends BaseActivity {
 
@@ -29,12 +30,31 @@ public class SplashActivity extends BaseActivity {
     }
 
     private boolean requestPermission() {
+        List<String> need = new ArrayList<>();
         List<String> permissionList = new ArrayList<>();
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
+        need.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        need.add(Manifest.permission.FOREGROUND_SERVICE);
+        need.forEach(new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                if (ContextCompat.checkSelfPermission(SplashActivity.this,s) !=PackageManager.PERMISSION_GRANTED){
+                    permissionList.add(s);
+                }
+            }
+        });
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        }
+
         if (!permissionList.isEmpty()) {
-            ActivityCompat.requestPermissions(this,permissionList.toArray(new String[0]),1);
+            String[] arr = new String[permissionList.size()];
+            permissionList.toArray(arr);
+            permissionList.forEach(new Consumer<String>() {
+                @Override
+                public void accept(String s) {
+                    ActivityCompat.requestPermissions(SplashActivity.this,arr,1);
+                }
+            });
             return false;
         }
         return true;
