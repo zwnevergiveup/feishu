@@ -1,14 +1,18 @@
-package com.example.qiaoxi.helper;
+package com.example.qiaoxi.helper.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHelper extends SQLiteOpenHelper {
+import androidx.room.Room;
+
+public final class DBOpenHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "qiaoxi.db";
     public static final int DB_VERSION = 1;
 
-    public DBHelper(Context context) {
+
+
+    public DBOpenHelper(Context context) {
         super(context,DB_NAME,null,DB_VERSION);
     }
 
@@ -21,4 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+
+
 }

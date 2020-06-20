@@ -1,4 +1,4 @@
-package com.example.qiaoxi.helper;
+package com.example.qiaoxi.helper.json;
 
 import com.google.gson.Gson;
 

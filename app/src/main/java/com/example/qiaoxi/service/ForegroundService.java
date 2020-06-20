@@ -13,6 +13,8 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.main.MainActivity;
+import com.example.qiaoxi.helper.db.AppDatabase;
+import com.example.qiaoxi.helper.db.DBHelper;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
@@ -56,46 +58,48 @@ public class ForegroundService extends BaseService {
         startForeground(1,notification);
     }
 
-private void setMessageListen(){
-    EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
-        @Override
-        public void onMessageReceived(List<EMMessage> list) {
-            EMMessage newMessage = list.get(0);
-            Log.e("qiaoxi",newMessage.getBody().toString());
-        }
+    private void setMessageListen(){
+        EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
+            @Override
+            public void onMessageReceived(List<EMMessage> list) {
+                EMMessage newMessage = list.get(0);
+                Log.e("qiaoxi",newMessage.getBody().toString());
+            }
 
-        @Override
-        public void onCmdMessageReceived(List<EMMessage> list) {
+            @Override
+            public void onCmdMessageReceived(List<EMMessage> list) {
 
-        }
+            }
 
-        @Override
-        public void onMessageRead(List<EMMessage> list) {
+            @Override
+            public void onMessageRead(List<EMMessage> list) {
 
-        }
+            }
 
-        @Override
-        public void onMessageDelivered(List<EMMessage> list) {
+            @Override
+            public void onMessageDelivered(List<EMMessage> list) {
 
-        }
+            }
 
-        @Override
-        public void onMessageRecalled(List<EMMessage> list) {
+            @Override
+            public void onMessageRecalled(List<EMMessage> list) {
 
-        }
+            }
 
-        @Override
-        public void onMessageChanged(EMMessage emMessage, Object o) {
+            @Override
+            public void onMessageChanged(EMMessage emMessage, Object o) {
 
-        }
-    });
-}
+            }
+        });
+    }
+
+    public void setDatabase() {
+        DBHelper.getInstance().getAppDatabase(getApplicationContext(),"justForTest");
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         stopForeground(true);
     }
-
-
 }
