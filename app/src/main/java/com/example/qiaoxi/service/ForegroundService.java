@@ -6,9 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Binder;
 import android.os.Build;
+import android.os.IBinder;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.example.qiaoxi.R;
@@ -29,6 +32,7 @@ import io.reactivex.ObservableOnSubscribe;
 
 public class ForegroundService extends BaseService {
     public static final int NOTICE_ID = 100;
+    private AppDatabase db;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -70,7 +74,7 @@ public class ForegroundService extends BaseService {
             @Override
             public void onMessageReceived(List<EMMessage> list) {
                 EMMessage newMessage = list.get(0);
-                Log.e("qiaoxi",newMessage.getBody().toString());
+                db.msgModelDao().insertAll(new MsgModel(newMessage));
             }
 
             @Override
@@ -101,15 +105,7 @@ public class ForegroundService extends BaseService {
     }
 
     public void setDatabase() {
-        AppDatabase db = DBHelper.getInstance().getAppDatabase(getApplicationContext(),"justForTest");
-        MsgModel msgModel = new MsgModel();
-        db.msgModelDao().insertAll(msgModel);
-        db.msgModelDao().getAll().forEach(new Consumer<MsgModel>() {
-            @Override
-            public void accept(MsgModel msgModel) {
-                Log.e("qiaoxi",msgModel.content);
-            }
-        });
+        db = DBHelper.getInstance().getAppDatabase(getApplicationContext(),"messageDB");
     }
 
     @Override

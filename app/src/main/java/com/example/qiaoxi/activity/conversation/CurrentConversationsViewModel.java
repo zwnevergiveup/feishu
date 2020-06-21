@@ -1,5 +1,6 @@
 package com.example.qiaoxi.activity.conversation;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.qiaoxi.helper.db.AppDatabase;
+import com.example.qiaoxi.helper.db.DBHelper;
+import com.example.qiaoxi.model.MsgModel;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
@@ -25,25 +29,32 @@ import io.reactivex.schedulers.Schedulers;
 
 public final class CurrentConversationsViewModel extends ViewModel {
 
-    private EMMessage temp;
+    private List<MsgModel> temp = new ArrayList<>();
+    public MutableLiveData<List<MsgModel>> msgModels = new MutableLiveData<>();
     public EMConversation conversation;
     private Disposable mDisposable;
     public MutableLiveData<EMMessage> lastMessage = new MutableLiveData<>();
     public String conversationName;
+    private Context mContext;
+    private AppDatabase db;
 
-    public CurrentConversationsViewModel(String titleName) {
+    public CurrentConversationsViewModel(String titleName, Context context) {
         conversationName = titleName;
+        mContext = context;
+        db = DBHelper.getInstance().getAppDatabase(context,"messageDB");
     }
     public static class Factory implements ViewModelProvider.Factory {
         private String mTitle;
-        public Factory(String title) {
+        private Context mContext;
+        public Factory(String title, Context context) {
             mTitle = title;
+            mContext = context;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new CurrentConversationsViewModel(mTitle);
+            return (T) new CurrentConversationsViewModel(mTitle, mContext);
         }
     }
 
@@ -52,18 +63,12 @@ public final class CurrentConversationsViewModel extends ViewModel {
         mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                temp = conversation.getLastMessage();
+                temp = db.msgModelDao().loadMsgByName(conversationName);
             }
         }).subscribeOn(Schedulers.single()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) throws Exception {
-                if (temp != null) {
-                    if (lastMessage.getValue() == null ) {
-                        lastMessage.setValue(temp);
-                    }else if (!lastMessage.getValue().getMsgId().equals(temp.getMsgId())) {
-                        lastMessage.setValue(temp);
-                    }
-                }
+                msgModels.setValue(temp);
             }
         });
     }

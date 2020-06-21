@@ -1,6 +1,11 @@
 package com.example.qiaoxi.activity.conversation;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +29,8 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.BaseActivity;
 import com.example.qiaoxi.adapter.MessageAdapter;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
+import com.example.qiaoxi.model.MsgModel;
+import com.example.qiaoxi.service.ForegroundService;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
@@ -36,21 +43,22 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private RecyclerView mRecycler;
     private EditText editText;
     private Button btn;
-    private List<EMMessage> emMessageList =new ArrayList<>();
+    private List<MsgModel> emMessageList =new ArrayList<>();
     private String withWho;
 
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
-        CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this, new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
+        CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this, new CurrentConversationsViewModel.Factory(withWho, getApplicationContext())).get(CurrentConversationsViewModel.class);
         currentConversationsViewModel.loopReceiveConversation();
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
 
-        currentConversationsViewModel.lastMessage.observe(this, new Observer<EMMessage>() {
+        currentConversationsViewModel.msgModels.observe(this, new Observer<List<MsgModel>>() {
             @Override
-            public void onChanged(EMMessage emMessage) {
-                emMessageList.add(emMessage);
+            public void onChanged(List<MsgModel> msgModels) {
+                emMessageList.clear();
+                emMessageList.addAll(msgModels);
                 mRecycler.getAdapter().notifyDataSetChanged();
             }
         });

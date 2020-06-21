@@ -7,13 +7,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.model.MsgModel;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-    private List<EMMessage> emMessageList;
+    private List<MsgModel> msgModels;
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView messageText;
 
@@ -23,8 +24,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
-    public void setEmMessageList(List<EMMessage> emMessageList) {
-        this.emMessageList = emMessageList;
+    public void setEmMessageList(List<MsgModel> emMessageList) {
+        this.msgModels = emMessageList;
     }
 
     @NonNull
@@ -36,13 +37,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        EMMessage emMessage = emMessageList.get(position);
+        MsgModel msgModel = msgModels.get(position);
 
-        holder.messageText.setText( ((EMTextMessageBody)emMessage.getBody()).getMessage());
+        holder.messageText.setText( msgModel.content);
     }
 
     @Override
     public int getItemCount() {
-        return emMessageList.size();
+        return msgModels.size();
     }
 }
