@@ -15,11 +15,17 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.main.MainActivity;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
+import com.example.qiaoxi.model.MsgModel;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
+import java.util.function.Consumer;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 public class ForegroundService extends BaseService {
     public static final int NOTICE_ID = 100;
@@ -27,6 +33,7 @@ public class ForegroundService extends BaseService {
     public void onCreate() {
         super.onCreate();
         setMessageListen();
+        setDatabase();
     }
 
     @Override
@@ -94,7 +101,15 @@ public class ForegroundService extends BaseService {
     }
 
     public void setDatabase() {
-        DBHelper.getInstance().getAppDatabase(getApplicationContext(),"justForTest");
+        AppDatabase db = DBHelper.getInstance().getAppDatabase(getApplicationContext(),"justForTest");
+        MsgModel msgModel = new MsgModel();
+        db.msgModelDao().insertAll(msgModel);
+        db.msgModelDao().getAll().forEach(new Consumer<MsgModel>() {
+            @Override
+            public void accept(MsgModel msgModel) {
+                Log.e("qiaoxi",msgModel.content);
+            }
+        });
     }
 
     @Override

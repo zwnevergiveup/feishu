@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.qiaoxi.model.MsgModel;
 
-@Database(entities = {MsgModel.class}, version = 1)
+@Database(entities = {MsgModel.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract  MsgModelDao msgModelDao();
 }

@@ -19,7 +19,10 @@ public class DBHelper {
 
     public AppDatabase getAppDatabase(Context context, String databaseName) {
         if (appDatabase == null) {
-            appDatabase =  Room.databaseBuilder(context,AppDatabase.class,databaseName).build();
+            String path = context.getExternalFilesDir(null).getAbsolutePath() + "/" + databaseName;
+            appDatabase =  Room.databaseBuilder(context,AppDatabase.class,path)
+                    .allowMainThreadQueries()
+                    .build();
         }
         return appDatabase;
     }

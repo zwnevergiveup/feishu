@@ -1,5 +1,6 @@
 package com.example.qiaoxi.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,6 +11,7 @@ import com.hyphenate.chat.EMTextMessageBody;
 @Entity
 public class MsgModel {
     @PrimaryKey
+    @NonNull
     public String id;
 
     @ColumnInfo(name = "send_time")
@@ -30,5 +32,13 @@ public class MsgModel {
         send = msg.getFrom();
         receive = msg.getTo();
         content = ((EMTextMessageBody)msg.getBody()).getMessage();
+    }
+
+    public MsgModel() {
+        id = "default";
+        sendTime = 0;
+        send = "default";
+        receive = "default";
+        content = "default";
     }
 }
