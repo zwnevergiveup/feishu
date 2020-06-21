@@ -4,11 +4,14 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -33,11 +36,14 @@ import io.reactivex.ObservableOnSubscribe;
 public class ForegroundService extends BaseService {
     public static final int NOTICE_ID = 100;
     private AppDatabase db;
+    private Vibrator mVibrator;
     @Override
     public void onCreate() {
         super.onCreate();
         setMessageListen();
         setDatabase();
+        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mVibrator.cancel();
     }
 
     @Override

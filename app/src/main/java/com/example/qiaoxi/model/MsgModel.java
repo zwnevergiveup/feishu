@@ -33,5 +33,7 @@ public class MsgModel {
         receive = msg.getTo();
         content = ((EMTextMessageBody)msg.getBody()).getMessage();
     }
-    public MsgModel(){}
+    public MsgModel(){
+        id = "default";
+    }
 }
