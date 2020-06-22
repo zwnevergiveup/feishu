@@ -24,7 +24,7 @@
         android:layout_marginBottom="80dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:background="#90EE90"
+        android:background="@color/main_green"
         android:text="@string/add_new_friend"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

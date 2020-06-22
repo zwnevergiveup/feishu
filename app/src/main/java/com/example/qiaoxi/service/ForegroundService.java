@@ -7,14 +7,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.os.Binder;
 import android.os.Build;
-import android.os.Handler;
-import android.os.IBinder;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.example.qiaoxi.R;
@@ -27,11 +24,6 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
-import java.util.function.Consumer;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 
 public class ForegroundService extends BaseService {
     public static final int NOTICE_ID = 100;
@@ -43,7 +35,6 @@ public class ForegroundService extends BaseService {
         setMessageListen();
         setDatabase();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        mVibrator.cancel();
     }
 
     @Override
@@ -81,6 +72,7 @@ public class ForegroundService extends BaseService {
             public void onMessageReceived(List<EMMessage> list) {
                 EMMessage newMessage = list.get(0);
                 db.msgModelDao().insertAll(new MsgModel(newMessage));
+                mVibrator.vibrate(300);
             }
 
             @Override

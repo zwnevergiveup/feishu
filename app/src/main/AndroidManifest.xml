@@ -81,7 +81,7 @@
         </activity>
 <!--        聊天页面-->
         <activity android:name="com.example.qiaoxi.activity.conversation.CurrentConversationsActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
     </application>

@@ -22,7 +22,7 @@
         android:layout_marginStart="50dp"
         android:text="测试"
         android:gravity="center"
-        android:textColor="#000000"
+        android:textColor="@color/pure_black"
         android:textSize="22sp"
         />
 
