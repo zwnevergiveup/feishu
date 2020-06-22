@@ -42,6 +42,8 @@ public final class CurrentConversationsViewModel extends ViewModel {
         conversationName = titleName;
         mContext = context;
         db = DBHelper.getInstance().getAppDatabase(context,"messageDB");
+        temp = db.msgModelDao().loadMsgByName(conversationName);
+        msgModels.setValue(temp);
     }
     public static class Factory implements ViewModelProvider.Factory {
         private String mTitle;
@@ -56,20 +58,5 @@ public final class CurrentConversationsViewModel extends ViewModel {
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             return (T) new CurrentConversationsViewModel(mTitle, mContext);
         }
-    }
-
-    public void loopReceiveConversation() {
-        conversation = EMClient.getInstance().chatManager().getConversation(conversationName, EMConversation.EMConversationType.Chat,true);
-        mDisposable = Flowable.interval(3, 1,TimeUnit.SECONDS).doOnNext(new Consumer<Long>() {
-            @Override
-            public void accept(Long aLong) throws Exception {
-                temp = db.msgModelDao().loadMsgByName(conversationName);
-            }
-        }).subscribeOn(Schedulers.single()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(Long aLong) throws Exception {
-                msgModels.setValue(temp);
-            }
-        });
     }
 }

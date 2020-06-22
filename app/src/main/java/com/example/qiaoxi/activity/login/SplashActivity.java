@@ -61,7 +61,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void turnToLogin() {
-        if (EMClient.getInstance().isLoggedInBefore()) {
+        if (EMClient.getInstance().isConnected()) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
         }else {
             startActivity(new Intent(SplashActivity.this,LoginActivity.class));

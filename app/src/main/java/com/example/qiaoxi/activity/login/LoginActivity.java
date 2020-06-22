@@ -13,6 +13,7 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.main.MainActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 public class LoginActivity extends BaseActivity {
 
@@ -45,9 +46,13 @@ public class LoginActivity extends BaseActivity {
         String name = accountName.getText().toString().trim();
         String secret = accountSecret.getText().toString().trim();
         if(TextUtils.isEmpty(name) || TextUtils.isEmpty(secret)){
-            Toast.makeText(this,"请输入用户名和密码",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getText(R.string.input_name_secret),Toast.LENGTH_LONG).show();
         }
-
+//         try {
+//             EMClient.getInstance().kickAllDevices(name, secret);
+//         }catch (HyphenateException ex) {
+//             Log.e(TAGS,ex.toString());
+//         }
         EMClient.getInstance().login(name, secret, new EMCallBack() {
             @Override
             public void onSuccess() {
@@ -60,28 +65,6 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onError(int i, String s) {
                 Log.e(TAGS,s);
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            EMClient.getInstance().createAccount(accountName.getText().toString(),accountSecret.getText().toString());
-//                            runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    loginOrRegister(findViewById(R.id.login));
-//                                }
-//                            });
-//                        }catch (HyphenateException e) {
-//                            Log.e(TAGS,e.toString());
-//                            runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    Toast.makeText(LoginActivity.this,"请检查网络连接",Toast.LENGTH_LONG).show();
-//                                }
-//                            });
-//                        }
-//                    }
-//                }).start();
             }
 
             @Override

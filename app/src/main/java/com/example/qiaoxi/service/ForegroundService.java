@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Binder;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -15,6 +16,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.activity.conversation.CurrentConversationsActivity;
 import com.example.qiaoxi.activity.main.MainActivity;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
@@ -22,6 +24,7 @@ import com.example.qiaoxi.model.MsgModel;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMTextMessageBody;
 
 import java.util.List;
 
@@ -29,6 +32,10 @@ public class ForegroundService extends BaseService {
     public static final int NOTICE_ID = 100;
     private AppDatabase db;
     private Vibrator mVibrator;
+    private NotificationChannel notificationChannel;
+    private NotificationManager notificationManager;
+    private String CHANNEL_ID = "xxx";
+    private String CHANNEL_NAME = "zzz";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -45,23 +52,24 @@ public class ForegroundService extends BaseService {
     }
 
     private void setForeground() {
-        String CHANNEL_ID = "xxx";
-        String CHANNEL_NAME = "zzz";
-        NotificationChannel notificationChannel = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel = new NotificationChannel(CHANNEL_ID,CHANNEL_NAME,NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(notificationChannel);
         }
+    }
+
+    private void setNotification(String title, String content) {
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
-        Notification notification = new NotificationCompat.Builder(this,CHANNEL_ID)
-                .setContentTitle("悄息")
-                .setContentText("")
+        Notification notification = new NotificationCompat.Builder(this,"xxx")
+                .setContentTitle(title)
+                .setContentText(content)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.qiaoxi_icon))
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(pendingIntent).build();
+        notification.defaults = Notification.DEFAULT_SOUND;
         notification.flags = Notification.FLAG_AUTO_CANCEL;
         startForeground(1,notification);
     }
@@ -71,8 +79,16 @@ public class ForegroundService extends BaseService {
             @Override
             public void onMessageReceived(List<EMMessage> list) {
                 EMMessage newMessage = list.get(0);
-                db.msgModelDao().insertAll(new MsgModel(newMessage));
+                MsgModel msgModel = new MsgModel(newMessage);
+                db.msgModelDao().insertAll(msgModel);
                 mVibrator.vibrate(300);
+                setNotification(newMessage.getFrom(),((EMTextMessageBody)newMessage.getBody()).getMessage());
+
+                Intent it = new Intent();
+                it.setAction(CurrentConversationsActivity.FLAG);
+                it.putExtra("lastMessage",msgModel);
+                sendBroadcast(it);
+                Log.e("qiaoxi","send over");
             }
 
             @Override
@@ -111,4 +127,6 @@ public class ForegroundService extends BaseService {
         super.onDestroy();
         stopForeground(true);
     }
+
+
 }

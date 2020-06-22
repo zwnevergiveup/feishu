@@ -1,26 +1,20 @@
 package com.example.qiaoxi.activity.conversation;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.text.Layout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.BaseActivity;
 import com.example.qiaoxi.adapter.MessageAdapter;
+import com.example.qiaoxi.broadcast.MessageBroadcast;
+import com.example.qiaoxi.broadcast.OnUpdateUI;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.model.MsgModel;
 import com.example.qiaoxi.service.ForegroundService;
@@ -36,7 +32,6 @@ import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class CurrentConversationsActivity extends BaseActivity {
 
@@ -45,11 +40,31 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private Button btn;
     private List<MsgModel> emMessageList =new ArrayList<>();
     private String withWho;
+    MessageBroadcast broadcast;
+    public static String FLAG = "UPDATE";
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        broadcast = new MessageBroadcast();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(FLAG);
+        registerReceiver(broadcast,intentFilter);
+        broadcast.setOnUpdateUI(new OnUpdateUI() {
+            @Override
+            public void updateUI(MsgModel msg) {
+                emMessageList.add(msg);
+                mRecycler.getAdapter().notifyDataSetChanged();
+                mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
+            }
+        });
+    }
+
 
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
         CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this, new CurrentConversationsViewModel.Factory(withWho, getApplicationContext())).get(CurrentConversationsViewModel.class);
-        currentConversationsViewModel.loopReceiveConversation();
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
