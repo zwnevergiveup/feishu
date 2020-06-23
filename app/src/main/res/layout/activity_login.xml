@@ -20,12 +20,14 @@
         />
 
     <EditText
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/account_name"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="110dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="50dp"
         android:id="@+id/input_account"
         />
 
@@ -43,26 +45,31 @@
         />
 
     <EditText
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/input_account"
         app:layout_constraintStart_toEndOf="@id/account_secret"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="50dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="50dp"
         android:id="@+id/input_secret"
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/register_login"
         android:textSize="18sp"
-        android:textColor="@color/pure_black"
+        android:textColor="@color/pure_white"
         android:onClick="loginOrRegister"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_secret"
-        android:layout_marginTop="200dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/green_r5_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="100dp"
         android:id="@+id/login"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

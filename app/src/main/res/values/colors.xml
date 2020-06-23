@@ -7,5 +7,6 @@
 
     <color name="main_green">#90EE90</color>
     <color name="pure_black">#000000</color>
+    <color name="pure_white">#ffffff</color>
 
 </resources>

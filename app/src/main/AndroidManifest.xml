@@ -71,8 +71,7 @@
             </intent-filter>
         </activity>
         <!-- 登陆 -->
-        <activity android:name="com.example.qiaoxi.activity.login.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+        <activity android:name="com.example.qiaoxi.activity.login.LoginActivity">
         </activity>
         <!-- 首页 -->
         <activity
