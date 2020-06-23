@@ -21,13 +21,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:text="@string/logout"
+        android:background="@drawable/red_r5_btn"
+        android:textColor="@color/pure_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
         android:id="@+id/btn_logout"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
