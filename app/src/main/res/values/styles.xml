@@ -12,4 +12,10 @@
     <style name="AppTheme.Full" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
+
+<!--    启动页-->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:background">@drawable/geizibeijing</item>
+    </style>
 </resources>

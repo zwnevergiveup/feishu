@@ -63,10 +63,9 @@
         <!-- 启动 -->
         <activity
             android:name=".activity.login.SplashActivity"
-            android:theme="@style/AppTheme.Full">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
