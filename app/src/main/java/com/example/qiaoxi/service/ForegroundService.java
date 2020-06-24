@@ -75,7 +75,7 @@ public class ForegroundService extends BaseService {
     }
 
     private void setMessageListen(){
-        EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
+        EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {//not mainThread
             @Override
             public void onMessageReceived(List<EMMessage> list) {
                 EMMessage newMessage = list.get(0);
@@ -88,7 +88,6 @@ public class ForegroundService extends BaseService {
                 it.setAction(CurrentConversationsActivity.FLAG);
                 it.putExtra("lastMessage",msgModel);
                 sendBroadcast(it);
-                Log.e("qiaoxi","send over");
             }
 
             @Override
