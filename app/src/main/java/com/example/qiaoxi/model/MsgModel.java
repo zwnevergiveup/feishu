@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
-@Entity
+@Entity(tableName = "msgModels")
 public class MsgModel implements Parcelable {
     @PrimaryKey
     @NonNull

@@ -1,8 +1,12 @@
 package com.example.qiaoxi.activity.main;
 
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -29,6 +33,20 @@ import java.util.List;
 public class MainActivity extends BaseActivity {
 
     private int isExit = 0;
+    private ForegroundService.HandleBinder mBinder;
+    private ServiceConnection mConn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mBinder = (ForegroundService.HandleBinder)service;
+            BaseActivity.ob = (ForegroundService)(mBinder.getService());
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mBinder = null;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +63,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) { }
         });
-        startService(new Intent(this, ForegroundService.class));
+        bindService(new Intent(this,ForegroundService.class),mConn, Service.BIND_AUTO_CREATE);
     }
 
     @Override
-    protected void setupView() {
-
-    }
+    protected void setupView() { }
 
     @Override
     protected void setupDataBinding() {
@@ -69,6 +85,14 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mBinder != null) {
+            unbindService(mConn);
+        }
     }
 
     @Override

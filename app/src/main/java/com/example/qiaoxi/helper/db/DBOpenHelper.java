@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.room.Room;
-
 public final class DBOpenHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "qiaoxi.db";
     public static final int DB_VERSION = 1;

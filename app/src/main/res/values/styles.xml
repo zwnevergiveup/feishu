@@ -16,6 +16,6 @@
 <!--    启动页-->
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
-        <item name="android:background">@drawable/geizibeijing</item>
+        <item name="android:background">@mipmap/jingyu</item>
     </style>
 </resources>

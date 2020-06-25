@@ -12,14 +12,14 @@ import java.util.List;
 
 @Dao
 public interface MsgModelDao {
-    @Query("SELECT * FROM msgmodel")
+    @Query("SELECT * FROM msgmodels")
     List<MsgModel> getAll();
 
-    @Query("SELECT * FROM msgmodel WHERE id IN (:msgIds)")
+    @Query("SELECT * FROM msgmodels WHERE id IN (:msgIds)")
     List<MsgModel> loadAllByIds(String[] msgIds);
 
-    @Query("SELECT * FROM msgmodel WHERE send_name LIKE :name ")
-    List<MsgModel> loadMsgByName(String name);
+    @Query("SELECT * FROM msgmodels WHERE send_name LIKE :name AND receive_name LIKE :currentName")
+    List<MsgModel> loadMsgByName(String name,String currentName);
 
     @Insert
     void insertAll(MsgModel... msgModels);

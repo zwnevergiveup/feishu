@@ -1,19 +1,28 @@
 package com.example.qiaoxi.service;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Handler;
+import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.conversation.CurrentConversationsActivity;
@@ -28,7 +37,7 @@ import com.hyphenate.chat.EMTextMessageBody;
 
 import java.util.List;
 
-public class ForegroundService extends BaseService {
+public class ForegroundService extends BaseService implements ObserverLiveData {
     public static final int NOTICE_ID = 100;
     private AppDatabase db;
     private Vibrator mVibrator;
@@ -36,19 +45,15 @@ public class ForegroundService extends BaseService {
     private NotificationManager notificationManager;
     private String CHANNEL_ID = "xxx";
     private String CHANNEL_NAME = "zzz";
+    private MutableLiveData<MsgModel> msgModelLiveData = new MutableLiveData<>();
+    private Handler mHandler = new Handler();
     @Override
     public void onCreate() {
         super.onCreate();
         setMessageListen();
         setDatabase();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e(TAG,"onStartCommand");
         setForeground();
-        return START_STICKY;
     }
 
     private void setForeground() {
@@ -83,11 +88,12 @@ public class ForegroundService extends BaseService {
                 db.msgModelDao().insertAll(msgModel);
                 mVibrator.vibrate(300);
                 setNotification(newMessage.getFrom(),((EMTextMessageBody)newMessage.getBody()).getMessage());
-
-                Intent it = new Intent();
-                it.setAction(CurrentConversationsActivity.FLAG);
-                it.putExtra("lastMessage",msgModel);
-                sendBroadcast(it);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        msgModelLiveData.setValue(msgModel);
+                    }
+                });
             }
 
             @Override
@@ -118,7 +124,19 @@ public class ForegroundService extends BaseService {
     }
 
     public void setDatabase() {
-        db = DBHelper.getInstance().getAppDatabase(getApplicationContext(),"messageDB");
+        db = DBHelper.getInstance().getAppDatabase(getApplicationContext(),"QX_DB");
+    }
+
+    public class HandleBinder extends Binder {
+        public Service getService(){
+            return ForegroundService.this;
+        }
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return new HandleBinder();
     }
 
     @Override
@@ -127,5 +145,8 @@ public class ForegroundService extends BaseService {
         stopForeground(true);
     }
 
-
+    @Override
+    public void bind(AppCompatActivity activity, Observer observer) {
+        msgModelLiveData.observe(activity , observer);
+    }
 }

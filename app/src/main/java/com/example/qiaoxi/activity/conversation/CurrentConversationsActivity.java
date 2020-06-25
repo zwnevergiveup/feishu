@@ -1,18 +1,11 @@
 package com.example.qiaoxi.activity.conversation;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -22,11 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.BaseActivity;
 import com.example.qiaoxi.adapter.MessageAdapter;
-import com.example.qiaoxi.broadcast.MessageBroadcast;
-import com.example.qiaoxi.broadcast.OnUpdateUI;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.model.MsgModel;
-import com.example.qiaoxi.service.ForegroundService;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
@@ -40,26 +30,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private Button btn;
     private List<MsgModel> emMessageList =new ArrayList<>();
     private String withWho;
-    MessageBroadcast broadcast;
     public static String FLAG = "UPDATE";
-
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        broadcast = new MessageBroadcast();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(FLAG);
-        registerReceiver(broadcast,intentFilter);
-        broadcast.setOnUpdateUI(new OnUpdateUI() {
-            @Override
-            public void updateUI(MsgModel msg) {
-                emMessageList.add(msg);
-                mRecycler.getAdapter().notifyDataSetChanged();
-                mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
-            }
-        });
-    }
 
 
     protected void setupDataBinding() {
@@ -68,16 +39,27 @@ public final class CurrentConversationsActivity extends BaseActivity {
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
-
         currentConversationsViewModel.msgModels.observe(this, new Observer<List<MsgModel>>() {
             @Override
             public void onChanged(List<MsgModel> msgModels) {
                 emMessageList.clear();
                 emMessageList.addAll(msgModels);
                 mRecycler.getAdapter().notifyDataSetChanged();
+                mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
             }
         });
 
+
+        BaseActivity.ob.bind(this,new Observer<MsgModel>() {
+            @Override
+            public void onChanged(MsgModel msgModel) {
+                if (msgModel.send.equals(withWho)) {
+                    emMessageList.add(msgModel);
+                    mRecycler.getAdapter().notifyDataSetChanged();
+                    mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
+                }
+            }
+        });
     }
 
     protected void setupView() {
@@ -108,7 +90,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
     public void sendMessage(String text, String userName) {
         String me = EMClient.getInstance().getCurrentUser();
         if (me ==null || me.isEmpty()) {
-            Toast.makeText(this,"登录过期用户",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"请重新登录",Toast.LENGTH_LONG).show();
         }
         Log.e(TAGS,userName);
         EMMessage a = EMMessage.createTxtSendMessage(text,userName);

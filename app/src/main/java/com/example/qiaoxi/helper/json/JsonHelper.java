@@ -24,4 +24,9 @@ public class JsonHelper {
         Gson gson = new Gson();
         return gson.fromJson(objStr,type);
     }
+
+    public <T> String toJson(T t) {
+        Gson gson = new Gson();
+        return gson.toJson(t);
+    }
 }

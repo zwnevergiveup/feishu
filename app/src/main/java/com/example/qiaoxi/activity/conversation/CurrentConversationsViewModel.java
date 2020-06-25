@@ -1,10 +1,8 @@
 package com.example.qiaoxi.activity.conversation;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,34 +13,21 @@ import com.example.qiaoxi.model.MsgModel;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMTextMessageBody;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public final class CurrentConversationsViewModel extends ViewModel {
-
-    private List<MsgModel> temp = new ArrayList<>();
     public MutableLiveData<List<MsgModel>> msgModels = new MutableLiveData<>();
-    public EMConversation conversation;
     private Disposable mDisposable;
-    public MutableLiveData<EMMessage> lastMessage = new MutableLiveData<>();
     public String conversationName;
-    private Context mContext;
-    private AppDatabase db;
 
     public CurrentConversationsViewModel(String titleName, Context context) {
         conversationName = titleName;
-        mContext = context;
-        db = DBHelper.getInstance().getAppDatabase(context,"messageDB");
-        temp = db.msgModelDao().loadMsgByName(conversationName);
+        AppDatabase db = DBHelper.getInstance().getAppDatabase(context,"QX_DB");
+        List<MsgModel> temp = db.msgModelDao().loadMsgByName(conversationName, EMClient.getInstance().getCurrentUser());
         msgModels.setValue(temp);
     }
     public static class Factory implements ViewModelProvider.Factory {
