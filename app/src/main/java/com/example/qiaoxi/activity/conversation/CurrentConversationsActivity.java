@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
-        CurrentConversationsViewModel currentConversationsViewModel = ViewModelProviders.of(this, new CurrentConversationsViewModel.Factory(withWho, getApplicationContext())).get(CurrentConversationsViewModel.class);
+        CurrentConversationsViewModel currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho,getApplicationContext())).get(CurrentConversationsViewModel.class);
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);

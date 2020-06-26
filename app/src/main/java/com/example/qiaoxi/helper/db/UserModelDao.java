@@ -4,6 +4,7 @@ package com.example.qiaoxi.helper.db;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -15,7 +16,7 @@ public interface UserModelDao {
     @Query("SELECT * FROM usermodels WHERE userId LIKE :currentName ")
     UserModel getCurrentUserModel(String currentName);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(UserModel userModel);
 
     @Update

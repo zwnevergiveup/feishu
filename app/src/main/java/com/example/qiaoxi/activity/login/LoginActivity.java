@@ -6,30 +6,56 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.qiaoxi.activity.BaseActivity;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.main.MainActivity;
+import com.example.qiaoxi.databinding.ActivityLoginBinding;
+import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
+import com.example.qiaoxi.model.ResultModel;
+import com.example.qiaoxi.model.UserModel;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 
 public class LoginActivity extends BaseActivity {
 
-    private EditText accountName;
-    private EditText accountSecret;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        accountName = findViewById(R.id.input_account);
-        accountSecret = findViewById(R.id.input_secret);
-    }
     @Override
     protected void setupView() {
+        LoginViewModel loginViewModel = new ViewModelProvider(this,new LoginViewModel.Factory(getApplicationContext())).get(LoginViewModel.class);
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        binding.setLifecycleOwner(this);
+        binding.setViewmodel(loginViewModel);
 
+        TextView t = findViewById(R.id.account_name);
+        loginViewModel.result.observe(this, new Observer<ResultModel>() {
+            @Override
+            public void onChanged(ResultModel resultModel) {
+                if (resultModel.status) {
+                    SPHelper.getInstance(getApplicationContext()).writeObject(resultModel.reason,"lastLoginName");
+                    Log.e(TAGS,"write lastLoginName: "+ resultModel.reason);
+                    EMClient.getInstance().groupManager().loadAllGroups();
+                    EMClient.getInstance().chatManager().loadAllConversations();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(),resultModel.reason,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        loginViewModel.userModelLiveData.observe(this, new Observer<UserModel>() {
+            @Override
+            public void onChanged(UserModel userModel) {
+
+            }
+        });
     }
 
     @Override
@@ -42,37 +68,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    public void loginOrRegister(View view) {
-        String name = accountName.getText().toString().trim();
-        String secret = accountSecret.getText().toString().trim();
-        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(secret)){
-            Toast.makeText(this,getText(R.string.input_name_secret),Toast.LENGTH_LONG).show();
-        }
-//         try {
-//             EMClient.getInstance().kickAllDevices(name, secret);
-//         }catch (HyphenateException ex) {
-//             Log.e(TAGS,ex.toString());
-//         }
-        EMClient.getInstance().login(name, secret, new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                Log.e(TAGS,s);
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-                Log.e(TAGS,"登陆中 " + i);
-            }
-        });
-    }
 
 }
 

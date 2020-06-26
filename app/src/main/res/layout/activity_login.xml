@@ -1,77 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/langhua"
-    android:padding="0dp"
-    tools:context=".activity.login.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="@string/account_name"
-        android:textSize="18sp"
-        android:textColor="@color/pure_black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="30dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/input_account"
-        android:id="@+id/account_name"
-        />
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.qiaoxi.activity.login.LoginViewModel" />
+    </data>
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/account_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="110dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="50dp"
-        android:id="@+id/input_account"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/langhua"
+        android:padding="0dp"
+        tools:context=".activity.login.LoginActivity">
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="@string/account_secret"
-        android:textSize="18sp"
-        android:textColor="@color/pure_black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/login"
-        android:layout_marginStart="30dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/input_secret"
-        android:id="@+id/account_secret"
-        />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="80dp"
+            android:src="@mipmap/jingyu"
+            android:foreground="@drawable/image_border"
+            />
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/input_account"
-        app:layout_constraintStart_toEndOf="@id/account_secret"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="50dp"
-        android:id="@+id/input_secret"
-        />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/account_name"
+            android:textSize="18sp"
+            android:textColor="@color/pure_black"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="30dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/input_account"
+            android:visibility="@{viewmodel.nameEditVisible}"
+            android:id="@+id/account_name" />
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/register_login"
-        android:textSize="18sp"
-        android:textColor="@color/pure_white"
-        android:onClick="loginOrRegister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/green_r5_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="100dp"
-        android:id="@+id/login"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/account_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="50dp"
+            android:hint="@string/input_acount_remind"
+            android:visibility="@{viewmodel.nameEditVisible}"
+            android:text="@={viewmodel.userName}"
+            android:id="@+id/input_account" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/account_secret"
+            android:textSize="18sp"
+            android:textColor="@color/pure_black"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="30dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/input_secret"
+            android:id="@+id/account_secret" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/account_secret"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="170dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="50dp"
+            android:inputType="textPassword"
+            android:hint="@string/input_passwd_remind"
+            android:text="@={viewmodel.userPassword}"
+            android:id="@+id/input_secret" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/register_login"
+            android:textSize="18sp"
+            android:textColor="@color/pure_white"
+            android:onClick="@{() -> viewmodel.login()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/green_r5_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="100dp"
+            android:id="@+id/login" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
