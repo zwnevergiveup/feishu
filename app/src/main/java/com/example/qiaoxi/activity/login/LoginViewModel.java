@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
-import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
 import com.example.qiaoxi.model.ResultModel;
 import com.example.qiaoxi.model.UserModel;

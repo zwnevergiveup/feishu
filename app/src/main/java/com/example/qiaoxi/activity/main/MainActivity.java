@@ -7,15 +7,11 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.lifecycle.ViewModelStore;
-import androidx.lifecycle.ViewModelStores;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,15 +19,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.BaseActivity;
-import com.example.qiaoxi.activity.login.LoginActivity;
 import com.example.qiaoxi.databinding.ActivityMainBinding;
 import com.example.qiaoxi.service.ForegroundService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.hyphenate.EMMessageListener;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-
-import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
@@ -74,7 +64,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void setupDataBinding() {
-        MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);

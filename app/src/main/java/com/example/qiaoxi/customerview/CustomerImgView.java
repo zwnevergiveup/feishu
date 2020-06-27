@@ -4,56 +4,90 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-import java.util.jar.Attributes;
+import com.example.qiaoxi.R;
 
 public class CustomerImgView extends AppCompatImageView {
-    private Path circlePath = new Path();
-    private Paint paint = new Paint();
     private int img_resourceID = 0;
-    private Bitmap mBitmap;
+    private Path mPath = new Path();
+    private float width,height;
 
 
     public CustomerImgView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context,attributeSet,defStyle);
-        init();
     }
     public CustomerImgView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         img_resourceID = attributeSet.getAttributeResourceValue("http://schemas.android.com/apk/res/android","src",0);
-        init();
     }
     public CustomerImgView(Context context) {
         super(context);
-        init();
     }
 
-    void init(){
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setStrokeWidth(3);
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(),img_resourceID);
-        mBitmap = Bitmap.createScaledBitmap(bmp,450,450,true);
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        width = getWidth();
+        height = getHeight();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(mBitmap,0,0,paint);
-        circlePath.addCircle(150f, 150f, 150f, Path.Direction.CCW);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        canvas.drawBitmap(mBitmap,200,200,paint);
-//        paint.setXfermode(null);
-//        canvas.restore();
+        super.onDraw(canvas);
+        Bitmap rect = getRectBitmap();
+        Bitmap resBitmap = getResourceBitmap();
+
+        setLayerType(LAYER_TYPE_HARDWARE,null);
+        Paint paint = new Paint();
+        canvas.drawARGB(0,0,0,0);
+        canvas.drawBitmap(rect, 0, 0, paint);
+
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
+        canvas.drawBitmap(resBitmap,10,10,paint);
+
+    }
+    private Bitmap getResourceBitmap() {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled= true;
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),img_resourceID,options).copy(Bitmap.Config.ARGB_8888,true);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int newWidth = (int)this.width - 20;
+        int newHeight = (int)this.height- 20;
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+        return resizedBitmap;
+    }
+
+    private Bitmap getCircleBitmap() {
+        Bitmap circle = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(circle);
+        c.drawARGB(0, 0, 0, 0);
+        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
+        p.setColor(getResources().getColor(R.color.main_green));
+        c.drawCircle(width / 2 , height / 2, width / 2, p);
+        return circle;
+    }
+    private Bitmap getRectBitmap() {
+        Bitmap rect = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(rect);
+        c.drawARGB(0, 0, 0, 0);
+        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
+        p.setColor(getResources().getColor(R.color.main_green));
+        c.drawRect(0,0,width,height,p);
+        return rect;
     }
 }

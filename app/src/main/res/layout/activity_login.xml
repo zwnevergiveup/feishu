@@ -20,59 +20,39 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
+            android:src="@mipmap/jingyu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="80dp"
-            android:src="@mipmap/jingyu"
             android:visibility="@{viewmodel.lastUserIconVisible}"
             />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/account_name"
-            android:textSize="18sp"
-            android:textColor="@color/pure_black"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="30dp"
-            app:layout_constraintBaseline_toBaselineOf="@id/input_account"
-            android:visibility="@{viewmodel.nameEditVisible}"
-            android:id="@+id/account_name" />
+
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/account_name"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="110dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
             android:hint="@string/input_acount_remind"
             android:visibility="@{viewmodel.nameEditVisible}"
             android:text="@={viewmodel.userName}"
             android:id="@+id/input_account" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/account_secret"
-            android:textSize="18sp"
-            android:textColor="@color/pure_black"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="30dp"
-            app:layout_constraintBaseline_toBaselineOf="@id/input_secret"
-            android:id="@+id/account_secret" />
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/account_secret"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="200dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginTop="230dp"
+            android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
             android:inputType="textPassword"
             android:hint="@string/input_passwd_remind"

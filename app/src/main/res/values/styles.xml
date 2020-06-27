@@ -7,6 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="AppThemeNoAlpha" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#00000000</item>
+        <item name="colorPrimaryDark">#00000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
 <!--    全屏-->
     <style name="AppTheme.Full" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -15,6 +21,8 @@
 
 <!--    启动页-->
     <style name="SplashTheme" parent="AppTheme">
+        <item name="colorPrimary">#00000000</item>
+        <item name="colorPrimaryDark">#00000000</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:background">@mipmap/jingyu</item>
     </style>

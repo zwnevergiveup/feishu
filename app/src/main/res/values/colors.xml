@@ -10,5 +10,6 @@
     <color name="pure_white">#ffffff</color>
     <color name="pure_red">#ff0000</color>
     <color name="light_gray">#d3d3d3</color>
+    <color name="alpha0">#00000000</color>
 
 </resources>
