@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,23 +69,7 @@ public class CompactFragment extends Fragment {
     }
 
     private void addContact(){
-        if (EMClient.getInstance().getCurrentUser().equals("wus6")) return;
-        EMClient.getInstance().contactManager().aysncAddContact("wus6", "justForTest", new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                Log.e("qiaoxi","发送成功");
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                Log.e("qiaoxi",s);
-
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-
-            }
-        });
+        // 跳转到添加好友的页面
+        Toast.makeText(this.getActivity(),"功能暂未开发，请期待",Toast.LENGTH_SHORT).show();
     }
 }

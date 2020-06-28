@@ -38,6 +38,7 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel( Context context) {
         Log.e("qiaoxi","init loginViewModel");
+        logout();
         db = DBHelper.getInstance().getAppDatabase(context, "QX_DB");
         String a = (String)SPHelper.getInstance(context).readObject("lastLoginName",new TypeToken<String>(){}.getType());
         if (a != null) {
@@ -103,6 +104,25 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onProgress(int i, String s) {
+            }
+        });
+    }
+
+    public void logout(){
+        EMClient.getInstance().logout(true, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                Log.e("qiaoxi","logout success");
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Log.e("qiaoxi","logout error");
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
             }
         });
     }

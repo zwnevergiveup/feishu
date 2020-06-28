@@ -64,6 +64,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
     }
 
     protected void setupView() {
+        getWindow().setNavigationBarColor(getColor(R.color.rice_yellow));
         mRecycler = findViewById(R.id.current_conversation_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecycler.setLayoutManager(layoutManager);

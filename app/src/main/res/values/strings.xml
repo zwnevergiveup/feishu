@@ -14,4 +14,5 @@
     <string name="input_name_secret">请输入用户名和密码</string>
     <string name="input_acount_remind">请输入账号</string>
     <string name="input_passwd_remind">请输入密码</string>
+    <string name="please_enter_message">请输入消息</string>
 </resources>

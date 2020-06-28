@@ -11,5 +11,8 @@
     <color name="pure_red">#ff0000</color>
     <color name="light_gray">#d3d3d3</color>
     <color name="alpha0">#00000000</color>
+    <color name="rice_yellow">#F5F5F5</color>
+    <color name="graph_white">#FFFAF0</color>
+    <color name="danhui_0">#FAFAFA</color>
 
 </resources>
