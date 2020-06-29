@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/ic_launcher_round"
+        android:id="@+id/icon_conversation"
+        android:scaleType="fitXY"
+        />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        
         android:id="@+id/message_tv"
         android:text="测试消息"
         android:textSize="22sp"
         android:gravity="center_vertical"
         android:textColor="@color/pure_black"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/edit_style"
+        app:layout_constraintStart_toEndOf="@id/icon_conversation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="20dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
