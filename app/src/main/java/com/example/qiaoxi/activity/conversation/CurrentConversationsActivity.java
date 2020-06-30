@@ -96,6 +96,10 @@ public final class CurrentConversationsActivity extends BaseActivity {
         }
         Log.e(TAGS,userName);
         EMMessage a = EMMessage.createTxtSendMessage(text,userName);
+        MsgModel msgModel = new MsgModel(a);
+        emMessageList.add(msgModel);
+        mRecycler.getAdapter().notifyDataSetChanged();
+        mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
         EMClient.getInstance().chatManager().sendMessage(a);
     }
 }

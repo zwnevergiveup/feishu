@@ -3,11 +3,13 @@ package com.example.qiaoxi.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.model.MsgModel;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 
@@ -16,11 +18,17 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
     private List<MsgModel> msgModels;
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView messageText;
+        TextView messageText_left;
+        TextView messageText_right;
+        ImageView icon_left;
+        ImageView icon_right;
 
         private ViewHolder(View view) {
             super(view);
-            messageText = view.findViewById(R.id.message_tv);
+            messageText_left = view.findViewById(R.id.message_tv_left);
+            messageText_right = view.findViewById(R.id.message_tv_right);
+            icon_left = view.findViewById(R.id.icon_conversation_left);
+            icon_right = view.findViewById(R.id.icon_conversation_right);
         }
     }
 
@@ -38,8 +46,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MsgModel msgModel = msgModels.get(position);
-
-        holder.messageText.setText( msgModel.content);
+        if (msgModel.send.equals(EMClient.getInstance().getCurrentUser())){
+            holder.messageText_right.setText( msgModel.content);
+            holder.messageText_left.setVisibility(View.GONE);
+            holder.icon_left.setVisibility(View.GONE);
+        }else {
+            holder.messageText_left.setText( msgModel.content);
+            holder.messageText_right.setVisibility(View.GONE);
+            holder.icon_right.setVisibility(View.GONE);
+        }
     }
 
     @Override
