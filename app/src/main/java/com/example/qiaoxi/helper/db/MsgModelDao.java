@@ -18,7 +18,7 @@ public interface MsgModelDao {
     @Query("SELECT * FROM msgmodels WHERE id IN (:msgIds)")
     List<MsgModel> loadAllByIds(String[] msgIds);
 
-    @Query("SELECT * FROM msgmodels WHERE send_name LIKE :name AND receive_name LIKE :currentName")
+    @Query("SELECT * FROM msgmodels WHERE (send_name LIKE :name OR receive_name LIKE :name) AND (send_name LIKE :currentName OR receive_name LIKE :currentName ) ")
     List<MsgModel> loadMsgByName(String name,String currentName);
 
     @Insert

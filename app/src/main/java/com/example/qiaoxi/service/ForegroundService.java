@@ -1,6 +1,5 @@
 package com.example.qiaoxi.service;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,19 +12,15 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.activity.conversation.CurrentConversationsActivity;
 import com.example.qiaoxi.activity.main.MainActivity;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
@@ -41,10 +36,6 @@ public class ForegroundService extends BaseService implements ObserverLiveData {
     public static final int NOTICE_ID = 100;
     private AppDatabase db;
     private Vibrator mVibrator;
-    private NotificationChannel notificationChannel;
-    private NotificationManager notificationManager;
-    private String CHANNEL_ID = "xxx";
-    private String CHANNEL_NAME = "zzz";
     private MutableLiveData<MsgModel> msgModelLiveData = new MutableLiveData<>();
     private Handler mHandler = new Handler();
     @Override
@@ -58,8 +49,10 @@ public class ForegroundService extends BaseService implements ObserverLiveData {
 
     private void setForeground() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel = new NotificationChannel(CHANNEL_ID,CHANNEL_NAME,NotificationManager.IMPORTANCE_HIGH);
-            notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            String CHANNEL_ID = "xxx";
+            String CHANNEL_NAME = "zzz";
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(notificationChannel);
         }
     }

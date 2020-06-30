@@ -11,24 +11,22 @@ import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.model.MsgModel;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.disposables.Disposable;
-
 public final class CurrentConversationsViewModel extends ViewModel {
-    public MutableLiveData<List<MsgModel>> msgModels = new MutableLiveData<>();
-    private Disposable mDisposable;
     public String conversationName;
+    public MutableLiveData<String> editText = new MutableLiveData<>();
+    public MutableLiveData<MsgModel> msgModelMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<MsgModel>> lastMessages = new MutableLiveData<>();
+    private AppDatabase db;
 
     public CurrentConversationsViewModel(String titleName, Context context) {
         conversationName = titleName;
-        AppDatabase db = DBHelper.getInstance().getAppDatabase(context,"QX_DB");
+        db = DBHelper.getInstance().getAppDatabase(context,"QX_DB");
         List<MsgModel> temp = db.msgModelDao().loadMsgByName(conversationName, EMClient.getInstance().getCurrentUser());
-        msgModels.setValue(temp);
+        lastMessages.setValue(temp);
     }
     public static class Factory implements ViewModelProvider.Factory {
         private String mTitle;
@@ -42,6 +40,17 @@ public final class CurrentConversationsViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             return (T) new CurrentConversationsViewModel(mTitle, mContext);
+        }
+    }
+
+    public void sendMessage() {
+        if (editText.getValue() != null && !editText.getValue().equals("")){
+            EMMessage a = EMMessage.createTxtSendMessage(editText.getValue(),conversationName);
+            EMClient.getInstance().chatManager().sendMessage(a);
+            MsgModel msg = new MsgModel(a);
+            db.msgModelDao().insertAll(msg);
+            msgModelMutableLiveData.setValue(msg);
+            editText.setValue("");
         }
     }
 }

@@ -45,6 +45,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.messageText_right.setVisibility(View.VISIBLE);
+        holder.messageText_left.setVisibility(View.VISIBLE);
+        holder.icon_left.setVisibility(View.VISIBLE);
+        holder.icon_right.setVisibility(View.VISIBLE);
         MsgModel msgModel = msgModels.get(position);
         if (msgModel.send.equals(EMClient.getInstance().getCurrentUser())){
             holder.messageText_right.setText( msgModel.content);
