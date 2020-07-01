@@ -4,15 +4,16 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-
+    <color name="alpha0">#00000000</color>
     <color name="main_green">#90EE90</color>
     <color name="pure_black">#000000</color>
     <color name="pure_white">#ffffff</color>
     <color name="pure_red">#ff0000</color>
     <color name="light_gray">#d3d3d3</color>
-    <color name="alpha0">#00000000</color>
-    <color name="rice_yellow">#F5F5F5</color>
+    <color name="rice_yellow">#FAFAFA</color>
     <color name="graph_white">#FFFAF0</color>
-    <color name="danhui_0">#FAFAFA</color>
+    <color name="danhui_0">#EAEAEA</color>
+    <color name="background_gray">#F4F5F6</color>
+
 
 </resources>

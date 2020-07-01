@@ -22,20 +22,36 @@
             android:id="@+id/current_conversation_toolbar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:title="@{viewModel.conversationName}"
-            android:gravity="center"
-            android:background="@color/danhui_0"
-            />
+            android:background="@color/background_gray"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{viewModel.conversationName}"
+                android:textSize="20sp"
+                android:textColor="@color/pure_black"
+                />
+        </androidx.appcompat.widget.Toolbar>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/danhui_0"
+            android:id="@+id/toolbar_gap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/current_conversation_toolbar"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/danhui_0"
+            android:background="@color/background_gray"
 
             android:id="@+id/current_conversation_recycler"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/input_group"
-            app:layout_constraintTop_toBottomOf="@id/current_conversation_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_gap" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="70dp"
