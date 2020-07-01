@@ -43,12 +43,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         holder.friendName.setText(name);
         View item = holder.itemView;
         if (mOnFriendItemClickListener != null) {
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    mOnFriendItemClickListener.onClick(holder.itemView, pos);
-                }
+            item.setOnClickListener(v -> {
+                int pos = holder.getLayoutPosition();
+                mOnFriendItemClickListener.onClick(holder.itemView, pos);
             });
         }
     }

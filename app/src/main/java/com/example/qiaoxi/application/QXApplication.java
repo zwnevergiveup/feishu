@@ -7,7 +7,9 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
 public class QXApplication extends Application {
-    private static Context mContext;
+    private  static Context mContext;
+    public static String currentUser;
+
 
     @Override
     public void onCreate() {
@@ -22,8 +24,7 @@ public class QXApplication extends Application {
         EMClient.getInstance().init(mContext,options);
         EMClient.getInstance().setDebugMode(true);
     }
-
-    public static Context getInstance() {
+    public static Context getContext(){
         return mContext;
     }
 }

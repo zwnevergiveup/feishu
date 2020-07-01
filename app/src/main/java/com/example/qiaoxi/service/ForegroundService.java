@@ -37,7 +37,6 @@ public class ForegroundService extends BaseService implements ObserverLiveData {
     private AppDatabase db;
     private Vibrator mVibrator;
     private MutableLiveData<MsgModel> msgModelLiveData = new MutableLiveData<>();
-    private Handler mHandler = new Handler();
     @Override
     public void onCreate() {
         super.onCreate();
@@ -81,12 +80,7 @@ public class ForegroundService extends BaseService implements ObserverLiveData {
                 db.msgModelDao().insertAll(msgModel);
                 mVibrator.vibrate(300);
                 setNotification(newMessage.getFrom(),((EMTextMessageBody)newMessage.getBody()).getMessage());
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        msgModelLiveData.setValue(msgModel);
-                    }
-                });
+                msgModelLiveData.postValue(msgModel);
             }
 
             @Override

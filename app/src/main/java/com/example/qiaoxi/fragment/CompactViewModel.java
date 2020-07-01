@@ -25,22 +25,6 @@ public class CompactViewModel extends ViewModel {
         a.add("wus6");
         String user = EMClient.getInstance().getCurrentUser();
         mContactList.getValue().addAll(a.stream().filter(p -> !user.equals(p)).collect(Collectors.<String>toList()));
-
-//        listenContact();
-//        EMClient.getInstance().contactManager().aysncGetAllContactsFromServer(new EMValueCallBack<List<String>>() {
-//            @Override
-//            public void onSuccess(List<String> strings) {
-//                mContactList.getValue().clear();
-//                mContactList.getValue().addAll(strings);
-//            }
-//
-//            @Override
-//            public void onError(int i, String s) {
-//                Log.e("qiaoxi",s);
-//            }
-//        });
-
-
     }
 
     public LiveData<List<String>> getContactList() {

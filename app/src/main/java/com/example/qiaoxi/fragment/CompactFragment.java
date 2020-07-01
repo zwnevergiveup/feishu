@@ -40,29 +40,18 @@ public class CompactFragment extends Fragment {
         mRecycler.setLayoutManager(new LinearLayoutManager(root.getContext()));
         FriendAdapter adapter = new FriendAdapter();
         adapter.setFriends(mContactList);
-        adapter.setOnFriendItemClickListener(new FriendAdapter.onFriendItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                String str = ((TextView)view.findViewById(R.id.item_friend_Name)).getText().toString();
-                Intent intent = new Intent(getActivity(), CurrentConversationsActivity.class);
-                intent.putExtra("title",str);
-                getActivity().startActivity(intent);
-            }
+        adapter.setOnFriendItemClickListener((view, position) -> {
+            String str = ((TextView)view.findViewById(R.id.item_friend_Name)).getText().toString();
+            Intent intent = new Intent(getActivity(), CurrentConversationsActivity.class);
+            intent.putExtra("title",str);
+            getActivity().startActivity(intent);
         });
         mRecycler.setAdapter(adapter);
-        root.findViewById(R.id.btn_new_friend).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addContact();
-            }
-        });
-        compactViewModel.getContactList().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
-            @Override
-            public void onChanged(@Nullable List<String> s) {
-                mContactList.clear();
-                mContactList.addAll(s);
-                mRecycler.getAdapter().notifyDataSetChanged();
-            }
+        root.findViewById(R.id.btn_new_friend).setOnClickListener(v -> addContact());
+        compactViewModel.getContactList().observe(getViewLifecycleOwner(), s -> {
+            mContactList.clear();
+            mContactList.addAll(s);
+            mRecycler.getAdapter().notifyDataSetChanged();
         });
 
         return root;

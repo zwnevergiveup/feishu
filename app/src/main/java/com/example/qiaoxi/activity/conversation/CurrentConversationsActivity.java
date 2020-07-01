@@ -26,7 +26,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
-        currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho,getApplicationContext())).get(CurrentConversationsViewModel.class);
+        currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding.setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);

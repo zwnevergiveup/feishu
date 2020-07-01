@@ -17,4 +17,14 @@ public class ConversationModel {
 
     @ColumnInfo(name = "compact_man")
     public String compactMan;
+
+    @ColumnInfo(name = "last_message")
+    public String lastMessage;
+
+    public ConversationModel(String currentName, String compactMan, String lastMessage) {
+        this.currentName = currentName;
+        this.compactMan = compactMan;
+        this.lastMessage = lastMessage;
+        this.conversationKey = currentName+compactMan;
+    }
 }

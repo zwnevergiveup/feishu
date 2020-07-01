@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
@@ -33,7 +34,6 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<Integer> lastUserIconVisible = new MutableLiveData<>();
     public MutableLiveData<Integer> nameEditVisible = new MutableLiveData<>();
 
-    private Handler mHandler = new Handler();
     private AppDatabase db;
 
     public LoginViewModel( Context context) {
@@ -78,12 +78,8 @@ public class LoginViewModel extends ViewModel {
         EMClient.getInstance().login(name, secret, new EMCallBack() {
             @Override
             public void onSuccess() {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        result.setValue(new ResultModel(true,name));
-                    }
-                });
+                QXApplication.currentUser = name;
+                result.postValue(new ResultModel(true,name));
                 try{
                     List<String> friends = EMClient.getInstance().contactManager().getAllContactsFromServer();
                     db.userModelDao().insert(new UserModel(name,friends,""));
@@ -94,12 +90,7 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onError(int i, String s) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        result.setValue(new ResultModel(false,s));
-                    }
-                });
+                result.postValue(new ResultModel(false,s));
             }
 
             @Override
