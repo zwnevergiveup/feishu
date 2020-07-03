@@ -1,5 +1,7 @@
 package com.example.qiaoxi.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.qiaoxi.application.QXApplication;
@@ -48,6 +50,7 @@ public class DataRepository  implements MessageDataDelegate {
     public synchronized void processNewMessage(MsgModel msgModel) {
         this.msgModel.postValue(msgModel);
         write2DB(msgModel);
+        Log.e("qiaoxi",msgModel.content);
     }
 
     public synchronized void write2DB(UserModel userModel) {

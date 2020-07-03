@@ -26,19 +26,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends BaseActivity {
 
     private int isExit = 0;
-    private ForegroundService.HandleBinder mBinder;
-    private ServiceConnection mConn = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mBinder = (ForegroundService.HandleBinder)service;
-            BaseActivity.ob = (ForegroundService)(mBinder.getService());
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mBinder = null;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +39,8 @@ public class MainActivity extends BaseActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
-        navView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) { }
-        });
-        bindService(new Intent(this,ForegroundService.class),mConn, Service.BIND_AUTO_CREATE);
+        navView.setOnNavigationItemReselectedListener(item -> { });
+        startService(new Intent(this,ForegroundService.class));
     }
 
     @Override
@@ -71,22 +55,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void setupEvent() {
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mBinder != null) {
-            unbindService(mConn);
-        }
-    }
+    protected void setupEvent() { }
 
     @Override
     public void onBackPressed() {

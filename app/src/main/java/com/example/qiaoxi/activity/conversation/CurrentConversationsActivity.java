@@ -57,13 +57,5 @@ public final class CurrentConversationsActivity extends BaseActivity {
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
         });
-
-        BaseActivity.ob.bind(this, (Observer<MsgModel>) msgModel -> {
-            if (msgModel.send.equals(withWho)) {
-                emMessageList.add(msgModel);
-                mRecycler.getAdapter().notifyDataSetChanged();
-                mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
-            }
-        });
     }
 }

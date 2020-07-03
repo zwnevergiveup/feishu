@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.main.MainActivity;
+import com.example.qiaoxi.datasource.message.MessageListenDataSource;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.model.MsgModel;
@@ -32,17 +33,18 @@ import com.hyphenate.chat.EMTextMessageBody;
 
 import java.util.List;
 
-public class ForegroundService extends BaseService implements ObserverLiveData {
+public class ForegroundService extends BaseService  {
     public static final int NOTICE_ID = 100;
-    private AppDatabase db;
     private Vibrator mVibrator;
-    private MutableLiveData<MsgModel> msgModelLiveData = new MutableLiveData<>();
+    private MessageListenDataSource  messageListenDataSource;
+
+
+
     @Override
     public void onCreate() {
         super.onCreate();
-        setMessageListen();
-        setDatabase();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        messageListenDataSource = new MessageListenDataSource();
         setForeground();
     }
 
@@ -71,49 +73,6 @@ public class ForegroundService extends BaseService implements ObserverLiveData {
         startForeground(1,notification);
     }
 
-    private void setMessageListen(){
-        EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {//not mainThread
-            @Override
-            public void onMessageReceived(List<EMMessage> list) {
-                EMMessage newMessage = list.get(0);
-                MsgModel msgModel = new MsgModel(newMessage);
-                db.msgModelDao().insertAll(msgModel);
-                mVibrator.vibrate(300);
-                setNotification(newMessage.getFrom(),((EMTextMessageBody)newMessage.getBody()).getMessage());
-                msgModelLiveData.postValue(msgModel);
-            }
-
-            @Override
-            public void onCmdMessageReceived(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageRead(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageDelivered(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageRecalled(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageChanged(EMMessage emMessage, Object o) {
-
-            }
-        });
-    }
-
-    public void setDatabase() {
-        db = DBHelper.getInstance().getAppDatabase(getApplicationContext(),"QX_DB");
-    }
-
     public class HandleBinder extends Binder {
         public Service getService(){
             return ForegroundService.this;
@@ -130,10 +89,5 @@ public class ForegroundService extends BaseService implements ObserverLiveData {
     public void onDestroy() {
         super.onDestroy();
         stopForeground(true);
-    }
-
-    @Override
-    public void bind(AppCompatActivity activity, Observer observer) {
-        msgModelLiveData.observe(activity , observer);
     }
 }
