@@ -1,8 +1,13 @@
 package com.example.qiaoxi.repository;
 
+import android.app.Activity;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.datasource.message.MessageDataDelegate;
@@ -19,16 +24,14 @@ public class DataRepository  implements MessageDataDelegate {
     public static volatile DataRepository instance = null;
 
     private AppDatabase db;
-    public MutableLiveData<UserModel> userModel;
-    public MutableLiveData<MsgModel> msgModel;
-    public MutableLiveData<ConversationModel> conversationModel;
-    private MessageListenDataSource msgDataSource;
+
+    private ListenRepositoryData mMsgModelListener;
+    private ListenRepositoryData mUserModelListener;
+    private ListenRepositoryData mConversationModelListener;
+
 
     private DataRepository() {
         db = DBHelper.getInstance().getAppDatabase(QXApplication.getContext(),"QX_DB");
-        userModel = new MutableLiveData<>();
-        msgModel = new MutableLiveData<>();
-        conversationModel = new MutableLiveData<>();
     }
 
     public static DataRepository getInstance() {
@@ -42,15 +45,11 @@ public class DataRepository  implements MessageDataDelegate {
         return instance;
     }
 
-    public void initDataSource(){
-        msgDataSource = new MessageListenDataSource();
-    }
-
 
     public synchronized void processNewMessage(MsgModel msgModel) {
-        this.msgModel.postValue(msgModel);
-        write2DB(msgModel);
-        Log.e("qiaoxi",msgModel.content);
+        mMsgModelListener.sendNewMsgModel(msgModel);
+//        write2DB(msgModel);
+        Log.e("qiaoxi","repository" + msgModel.content);
     }
 
     public synchronized void write2DB(UserModel userModel) {
@@ -70,4 +69,9 @@ public class DataRepository  implements MessageDataDelegate {
     public List<MsgModel> readFromDB(String compact) {
         return db.msgModelDao().loadMsgByName(compact,QXApplication.currentUser);
     }
+
+    public void setListenRepositoryData(ListenRepositoryData listener) {
+        this.mMsgModelListener = listener;
+    }
+
 }

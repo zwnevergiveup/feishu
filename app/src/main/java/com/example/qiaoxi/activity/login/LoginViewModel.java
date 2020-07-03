@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.qiaoxi.activity.BaseViewModel;
 import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends BaseViewModel {
     String mCurrentUserName;
     public MutableLiveData<UserModel> userModelLiveData = new MutableLiveData<>();
     public MutableLiveData<String> userName = new MutableLiveData<>();

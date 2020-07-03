@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.qiaoxi.activity.BaseViewModel;
 import com.hyphenate.chat.EMClient;
 
-public class MineViewModel extends ViewModel {
+public class MineViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mText;
 

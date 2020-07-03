@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
         navView.setOnNavigationItemReselectedListener(item -> { });
-        startService(new Intent(this,ForegroundService.class));
+
     }
 
     @Override

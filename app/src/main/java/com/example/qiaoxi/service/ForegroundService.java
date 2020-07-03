@@ -38,14 +38,13 @@ public class ForegroundService extends BaseService  {
     private Vibrator mVibrator;
     private MessageListenDataSource  messageListenDataSource;
 
-
-
     @Override
     public void onCreate() {
         super.onCreate();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         messageListenDataSource = new MessageListenDataSource();
         setForeground();
+        setNotification("测试","测试内容");
     }
 
     private void setForeground() {
@@ -71,18 +70,6 @@ public class ForegroundService extends BaseService  {
         notification.defaults = Notification.DEFAULT_SOUND;
         notification.flags = Notification.FLAG_AUTO_CANCEL;
         startForeground(1,notification);
-    }
-
-    public class HandleBinder extends Binder {
-        public Service getService(){
-            return ForegroundService.this;
-        }
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return new HandleBinder();
     }
 
     @Override

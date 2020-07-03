@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.qiaoxi.activity.BaseViewModel;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CompactViewModel extends ViewModel {
+public class CompactViewModel extends BaseViewModel {
 
     private MutableLiveData<List<String>> mContactList;
 

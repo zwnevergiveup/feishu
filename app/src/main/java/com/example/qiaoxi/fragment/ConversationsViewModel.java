@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.qiaoxi.activity.BaseViewModel;
 import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
@@ -12,7 +13,7 @@ import com.example.qiaoxi.model.ConversationModel;
 
 import java.util.List;
 
-public class ConversationsViewModel extends ViewModel {
+public class ConversationsViewModel extends BaseViewModel {
 
     private AppDatabase db;
     public MutableLiveData<List<ConversationModel>> conversations = new MutableLiveData<>();

@@ -1,6 +1,5 @@
 package com.example.qiaoxi.activity.conversation;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -8,17 +7,20 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.qiaoxi.activity.BaseViewModel;
 import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.model.ConversationModel;
 import com.example.qiaoxi.model.MsgModel;
+import com.example.qiaoxi.repository.DataRepository;
+import com.example.qiaoxi.repository.ListenRepositoryData;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
 
-public final class CurrentConversationsViewModel extends ViewModel {
+public final class CurrentConversationsViewModel extends BaseViewModel implements ListenRepositoryData<MsgModel> {
     public String conversationName;
     public MutableLiveData<String> editText = new MutableLiveData<>();
     public MutableLiveData<MsgModel> msgModelMutableLiveData = new MutableLiveData<>();
@@ -30,6 +32,9 @@ public final class CurrentConversationsViewModel extends ViewModel {
         db = DBHelper.getInstance().getAppDatabase(QXApplication.getContext(),"QX_DB");
         List<MsgModel> temp = db.msgModelDao().loadMsgByName(conversationName, QXApplication.currentUser);
         lastMessages.setValue(temp);
+        //viewModel 注册repository
+        DataRepository repository = DataRepository.getInstance();
+        repository.setListenRepositoryData(this);
 
     }
     public static class Factory implements ViewModelProvider.Factory {
@@ -64,5 +69,10 @@ public final class CurrentConversationsViewModel extends ViewModel {
             db.conversationModelDao().insert(new ConversationModel(QXApplication.currentUser,conversationName,msg.send + "："+msg.content));
         }
         super.onCleared();
+    }
+
+    @Override
+    public void sendNewMsgModel(MsgModel msgModel) {
+        Log.e("qiaoxi","from repository"+msgModel.content);
     }
 }
