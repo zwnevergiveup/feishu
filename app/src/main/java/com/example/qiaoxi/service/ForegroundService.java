@@ -36,13 +36,11 @@ import java.util.List;
 public class ForegroundService extends BaseService  {
     public static final int NOTICE_ID = 100;
     private Vibrator mVibrator;
-    private MessageListenDataSource  messageListenDataSource;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        messageListenDataSource = new MessageListenDataSource();
         setForeground();
         setNotification("测试","测试内容");
     }

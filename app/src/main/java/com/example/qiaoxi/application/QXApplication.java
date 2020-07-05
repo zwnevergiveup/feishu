@@ -26,7 +26,6 @@ public class QXApplication extends Application {
         EMClient.getInstance().init(mContext,options);
         EMClient.getInstance().setDebugMode(true);
         DataRepository repository = DataRepository.getInstance();
-        new MessageListenDataSource();
 
     }
     public static Context getContext(){

@@ -12,8 +12,8 @@ import java.util.List;
 
 public class MessageListenDataSource {
     private DataRepository repository;
-    public MessageListenDataSource() {
-        repository = DataRepository.getInstance();
+    public MessageListenDataSource(DataRepository repository) {
+        this.repository = repository;
         setupMessageListen();
     }
 

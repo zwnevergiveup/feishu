@@ -1,13 +1,6 @@
 package com.example.qiaoxi.repository;
 
-import android.app.Activity;
 import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.datasource.message.MessageDataDelegate;
@@ -32,6 +25,7 @@ public class DataRepository  implements MessageDataDelegate {
 
     private DataRepository() {
         db = DBHelper.getInstance().getAppDatabase(QXApplication.getContext(),"QX_DB");
+        new MessageListenDataSource(this);
     }
 
     public static DataRepository getInstance() {
