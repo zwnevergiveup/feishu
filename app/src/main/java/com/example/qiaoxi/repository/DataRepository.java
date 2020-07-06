@@ -12,15 +12,16 @@ import com.example.qiaoxi.model.MsgModel;
 import com.example.qiaoxi.model.UserModel;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class DataRepository  implements MessageDataDelegate {
     public static volatile DataRepository instance = null;
 
     private AppDatabase db;
 
-    private ListenRepositoryData mMsgModelListener;
-    private ListenRepositoryData mUserModelListener;
-    private ListenRepositoryData mConversationModelListener;
+    private List<ListenRepositoryData> mMsgListeners;
+    private List<ListenRepositoryData> mUserListeners;
+    private List<ListenRepositoryData> mConversationListeners;
 
 
     private DataRepository() {
@@ -39,11 +40,9 @@ public class DataRepository  implements MessageDataDelegate {
         return instance;
     }
 
-
     public synchronized void processNewMessage(MsgModel msgModel) {
-        mMsgModelListener.sendNewMsgModel(msgModel);
-//        write2DB(msgModel);
-        Log.e("qiaoxi","repository" + msgModel.content);
+        mMsgListeners.forEach(listenRepositoryData -> listenRepositoryData.sendNewMsgModel(msgModel));
+        write2DB(msgModel);
     }
 
     public synchronized void write2DB(UserModel userModel) {
@@ -65,7 +64,8 @@ public class DataRepository  implements MessageDataDelegate {
     }
 
     public void setListenRepositoryData(ListenRepositoryData listener) {
-        this.mMsgModelListener = listener;
+        this.mMsgListeners.add(listener);
     }
+
 
 }
