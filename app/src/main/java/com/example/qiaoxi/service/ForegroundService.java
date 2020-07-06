@@ -46,13 +46,7 @@ public class ForegroundService extends BaseService  {
     }
 
     private void setForeground() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String CHANNEL_ID = "xxx";
-            String CHANNEL_NAME = "zzz";
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
+
     }
 
     private void setNotification(String title, String content) {
