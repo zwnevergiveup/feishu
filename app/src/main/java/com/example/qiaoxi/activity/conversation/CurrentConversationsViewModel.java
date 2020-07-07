@@ -61,6 +61,6 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     @Override
     public void sendNewMsgModel(MsgModel msgModel) {
-        msgModelMutableLiveData.setValue(msgModel);
+        msgModelMutableLiveData.postValue(msgModel);
     }
 }

@@ -56,6 +56,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
             emMessageList.add(msgModel);
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
+            createNormalNotification(withWho,msgModel.content);
         });
     }
 }

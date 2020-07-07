@@ -11,17 +11,17 @@ import com.example.qiaoxi.model.ConversationModel;
 import com.example.qiaoxi.model.MsgModel;
 import com.example.qiaoxi.model.UserModel;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class DataRepository  implements MessageDataDelegate {
     public static volatile DataRepository instance = null;
 
     private AppDatabase db;
 
-    private List<ListenRepositoryData> mMsgListeners;
-    private List<ListenRepositoryData> mUserListeners;
-    private List<ListenRepositoryData> mConversationListeners;
+    private List<ListenRepositoryData> mMsgListeners = new ArrayList<>();
+    private List<ListenRepositoryData> mUserListeners = new ArrayList<>();
+    private List<ListenRepositoryData> mConversationListeners = new ArrayList<>();
 
 
     private DataRepository() {
