@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.activity.BaseActivity;
 import com.example.qiaoxi.adapter.MessageAdapter;
+import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.model.MsgModel;
 
@@ -56,7 +57,9 @@ public final class CurrentConversationsActivity extends BaseActivity {
             emMessageList.add(msgModel);
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
-            createNormalNotification(withWho,msgModel.content);
+            if (!msgModel.send.equals(QXApplication.currentUser)) {
+                createNormalNotification(withWho,msgModel.content);
+            }
         });
     }
 }

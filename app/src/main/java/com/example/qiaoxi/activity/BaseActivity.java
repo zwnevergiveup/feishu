@@ -42,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .setContentTitle(title)
                 .setContentText(text)
                 .setContentIntent(pendingIntent)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setAutoCancel(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String description = "sss";
