@@ -1,5 +1,9 @@
 package com.example.qiaoxi.activity.conversation;
 
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,12 +28,24 @@ public final class CurrentConversationsActivity extends BaseActivity {
     public static String FLAG = "UPDATE";
     private CurrentConversationsViewModel currentConversationsViewModel;
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e(TAGS,"oncreate......");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAGS,"onresume......");
+
+    }
 
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
         currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
-        binding.setLifecycleOwner(this);
+        binding. setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
 
     }
@@ -58,7 +74,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
             if (!msgModel.send.equals(QXApplication.currentUser)) {
-                createNormalNotification(withWho,msgModel.content);
+                createConversationNotification(withWho,msgModel.content);
             }
         });
     }

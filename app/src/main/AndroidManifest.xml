@@ -79,7 +79,7 @@
         </activity>
 <!--        聊天页面-->
         <activity android:name="com.example.qiaoxi.activity.conversation.CurrentConversationsActivity"
-            android:parentActivityName=".activity.main.MainActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
 
         </activity>

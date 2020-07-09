@@ -32,11 +32,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void setupDataBinding();
     protected abstract void setupEvent();
 
-    public void createNormalNotification( String title, String text){
+    public void createConversationNotification( String title, String text){
         Intent intent = new Intent(this,this.getClass());
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntentWithParentStack(intent);
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        intent.putExtra("title",title);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "QX")
                 .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .setContentTitle(title)
