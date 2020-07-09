@@ -3,8 +3,10 @@ package com.example.qiaoxi.repository;
 import android.util.Log;
 
 import com.example.qiaoxi.application.QXApplication;
+import com.example.qiaoxi.datasource.conversation.ConversationModelDelegate;
 import com.example.qiaoxi.datasource.message.MessageDataDelegate;
 import com.example.qiaoxi.datasource.message.MessageListenDataSource;
+import com.example.qiaoxi.fragment.ConversationsViewModel;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.model.ConversationModel;
@@ -14,7 +16,7 @@ import com.example.qiaoxi.model.UserModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataRepository  implements MessageDataDelegate {
+public class DataRepository  implements MessageDataDelegate, ConversationModelDelegate {
     public static volatile DataRepository instance = null;
 
     private AppDatabase db;
@@ -59,13 +61,17 @@ public class DataRepository  implements MessageDataDelegate {
     }
 
     @Override
-    public List<MsgModel> readFromDB(String compact) {
+    public List<MsgModel> readMsgFromDB(String compact) {
         return db.msgModelDao().loadMsgByName(compact,QXApplication.currentUser);
+    }
+
+    @Override
+    public List<ConversationModel> readConversationsFromDB(String current) {
+        return db.conversationModelDao().getCurrentUserConversations(current);
     }
 
     public void setListenRepositoryData(ListenRepositoryData listener) {
         this.mMsgListeners.add(listener);
     }
-
 
 }

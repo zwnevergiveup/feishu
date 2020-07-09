@@ -5,8 +5,10 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity(tableName = "conversations")
+@TypeConverters(MsgConvertor.class)
 public class ConversationModel {
     @PrimaryKey
     @NonNull
@@ -19,9 +21,9 @@ public class ConversationModel {
     public String compactMan;
 
     @ColumnInfo(name = "last_message")
-    public String lastMessage;
+    public MsgModel lastMessage;
 
-    public ConversationModel(String currentName, String compactMan, String lastMessage) {
+    public ConversationModel(String currentName, String compactMan, MsgModel lastMessage) {
         this.currentName = currentName;
         this.compactMan = compactMan;
         this.lastMessage = lastMessage;

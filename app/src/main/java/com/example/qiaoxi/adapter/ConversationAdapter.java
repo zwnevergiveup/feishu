@@ -45,7 +45,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ConversationModel model = models.get(position);
-        holder.lastMessage.setText(model.lastMessage);
+        holder.lastMessage.setText(model.lastMessage.content);
         holder.title.setText(model.compactMan);
         View item = holder.itemView;
         if (mOnConversationItemClickListener != null) {

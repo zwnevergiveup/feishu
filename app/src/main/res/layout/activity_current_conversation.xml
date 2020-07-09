@@ -24,6 +24,13 @@
             app:layout_constraintStart_toStartOf="parent"
             android:background="@color/background_gray"
             >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/back_arrow"
+                android:onClick="onBackClicked"
+                />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -32,6 +39,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/pure_black"
                 />
+
         </androidx.appcompat.widget.Toolbar>
 
         <View

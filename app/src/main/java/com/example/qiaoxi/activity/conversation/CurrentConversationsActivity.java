@@ -1,11 +1,8 @@
 package com.example.qiaoxi.activity.conversation;
 
-import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,18 +25,6 @@ public final class CurrentConversationsActivity extends BaseActivity {
     public static String FLAG = "UPDATE";
     private CurrentConversationsViewModel currentConversationsViewModel;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e(TAGS,"oncreate......");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e(TAGS,"onresume......");
-
-    }
 
     protected void setupDataBinding() {
         withWho = getIntent().getStringExtra("title");
@@ -47,7 +32,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding. setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
-
+        getLifecycle().addObserver(currentConversationsViewModel);
     }
 
     protected void setupView() {
@@ -69,7 +54,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
         });
 
-        currentConversationsViewModel.msgModelMutableLiveData.observe(this,(Observer<MsgModel>) msgModel -> {
+        currentConversationsViewModel.msgModelMutableLiveData.observe(this, msgModel -> {
             emMessageList.add(msgModel);
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
@@ -77,5 +62,9 @@ public final class CurrentConversationsActivity extends BaseActivity {
                 createConversationNotification(withWho,msgModel.content);
             }
         });
+    }
+
+    public void onBackClicked(View view) {
+        finish();
     }
 }

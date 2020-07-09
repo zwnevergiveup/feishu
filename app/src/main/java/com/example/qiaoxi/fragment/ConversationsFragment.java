@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,11 +36,11 @@ public class ConversationsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         conversationsViewModel = ViewModelProviders.of(this).get(ConversationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_conversations, container, false);
+        getLifecycle().addObserver(conversationsViewModel);
         mRecycler = root.findViewById(R.id.conversations_recycler);
         mRecycler.setLayoutManager(new LinearLayoutManager(root.getContext()));
         setRecycler();
         setEvent();
-        conversationsViewModel.loadConversations();
         return root;
     }
     public void setRecycler(){
@@ -55,7 +56,8 @@ public class ConversationsFragment extends Fragment {
     }
 
     private void setEvent() {
-        conversationsViewModel.conversations.observe(this.getActivity(), conversationModels -> {
+
+        conversationsViewModel.conversations.observe(getViewLifecycleOwner(), conversationModels -> {
             Log.e("qiaoxi","received models: "+ conversationModels.size());
             mConversationModels.clear();
             mConversationModels.addAll(conversationModels);
@@ -63,4 +65,5 @@ public class ConversationsFragment extends Fragment {
             mRecycler.scrollToPosition(0);
         });
     }
+
 }
