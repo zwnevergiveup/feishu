@@ -43,8 +43,14 @@ public class DataRepository  implements MessageDataDelegate, ConversationModelDe
     }
 
     public synchronized void processNewMessage(MsgModel msgModel) {
-        mMsgListeners.forEach(listenRepositoryData -> listenRepositoryData.sendNewMsgModel(msgModel));
         write2DB(msgModel);
+        mMsgListeners.forEach(listenRepositoryData -> listenRepositoryData.sendNewModel(msgModel));
+        processNewConversation(new ConversationModel(msgModel.receive,msgModel.send,msgModel));
+    }
+
+    public synchronized void processNewConversation(ConversationModel conversationModel) {
+        write2DB(conversationModel);
+        mConversationListeners.forEach(listenRepositoryData -> listenRepositoryData.sendNewModel(conversationModel));
     }
 
     public synchronized void write2DB(UserModel userModel) {
@@ -70,8 +76,28 @@ public class DataRepository  implements MessageDataDelegate, ConversationModelDe
         return db.conversationModelDao().getCurrentUserConversations(current);
     }
 
-    public void setListenRepositoryData(ListenRepositoryData listener) {
+    public void registerMsgListener(ListenRepositoryData<MsgModel> listener) {
         this.mMsgListeners.add(listener);
+    }
+
+    public void registerConversationListener(ListenRepositoryData<ConversationModel> listener) {
+        this.mConversationListeners.add(listener);
+    }
+
+    public void registerUserListener(ListenRepositoryData<UserModel> listener) {
+        this.mUserListeners.add(listener);
+    }
+
+    public void unregisterMsgListener(ListenRepositoryData<MsgModel> listener) {
+        this.mMsgListeners.remove(listener);
+    }
+
+    public void unregisterConversationListener(ListenRepositoryData<ConversationModel> listener) {
+        this.mConversationListeners.remove(listener);
+    }
+
+    public void unregisterUserListener(ListenRepositoryData<UserModel> listener) {
+        this.mUserListeners.remove(listener);
     }
 
 }

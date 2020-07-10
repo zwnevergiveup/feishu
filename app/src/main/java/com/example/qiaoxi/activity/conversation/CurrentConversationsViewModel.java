@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qiaoxi.activity.BaseViewModel;
-import com.example.qiaoxi.application.QXApplication;
-import com.example.qiaoxi.model.ConversationModel;
 import com.example.qiaoxi.model.MsgModel;
-import com.example.qiaoxi.model.UserModel;
 import com.example.qiaoxi.repository.DataRepository;
 import com.example.qiaoxi.repository.ListenRepositoryData;
 import com.hyphenate.chat.EMClient;
@@ -26,13 +23,7 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     public CurrentConversationsViewModel(String titleName) {
         conversationName = titleName;
-        //viewModel 注册repository
-        DataRepository repository = DataRepository.getInstance();
-        repository.setListenRepositoryData(this);
-        List<MsgModel> list = repository.readMsgFromDB(conversationName);
-        if (list != null && list.size() > 0) {
-            lastMessages.setValue(list);
-        }
+
     }
     public static class Factory implements ViewModelProvider.Factory {
         private String mTitle;
@@ -44,6 +35,16 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             return (T) new CurrentConversationsViewModel(mTitle);
+        }
+    }
+
+    @Override
+    public void onResume(@NonNull LifecycleOwner owner) {
+        DataRepository repository = DataRepository.getInstance();
+        repository.registerMsgListener(this);
+        List<MsgModel> list = repository.readMsgFromDB(conversationName);
+        if (list != null && list.size() > 0) {
+            lastMessages.setValue(list);
         }
     }
 
@@ -60,17 +61,17 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     private void insertMsgModel(MsgModel msgModel) {
         DataRepository repository = DataRepository.getInstance();
-        repository.write2DB(msgModel);
+        repository.processNewMessage(msgModel);
     }
 
     @Override
-    public void sendNewMsgModel(MsgModel msgModel) {
+    public void sendNewModel(MsgModel msgModel) {
         msgModelMutableLiveData.postValue(msgModel);
     }
 
     @Override
     public void onPause(@NonNull LifecycleOwner owner) {
         DataRepository repository = DataRepository.getInstance();
-        repository.write2DB(new ConversationModel(QXApplication.currentUser,conversationName,msgModelMutableLiveData.getValue()));
+        repository.unregisterMsgListener(this);
     }
 }

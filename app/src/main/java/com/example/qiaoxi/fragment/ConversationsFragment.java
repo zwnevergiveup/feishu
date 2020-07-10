@@ -56,7 +56,6 @@ public class ConversationsFragment extends Fragment {
     }
 
     private void setEvent() {
-
         conversationsViewModel.conversations.observe(getViewLifecycleOwner(), conversationModels -> {
             Log.e("qiaoxi","received models: "+ conversationModels.size());
             mConversationModels.clear();
@@ -64,6 +63,7 @@ public class ConversationsFragment extends Fragment {
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(0);
         });
+
     }
 
 }
