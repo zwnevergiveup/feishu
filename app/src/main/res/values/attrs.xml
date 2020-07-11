@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="QXToolbar">
+        <attr name="leftButton_src" format="reference"/>
+        <attr name="title" format="string"/>
+        <attr name="rightButton_src" format="reference"/>
+        <attr name="background_color" format="color"/>
+        <attr name="titleTextColor" format="color"/>
+    </declare-styleable>
+</resources>

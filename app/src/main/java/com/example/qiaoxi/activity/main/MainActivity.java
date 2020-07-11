@@ -1,15 +1,8 @@
 package com.example.qiaoxi.activity.main;
 
-import android.app.Service;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -18,9 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.activity.BaseActivity;
+import com.example.qiaoxi.activity.base.BaseActivity;
 import com.example.qiaoxi.databinding.ActivityMainBinding;
-import com.example.qiaoxi.service.ForegroundService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity {

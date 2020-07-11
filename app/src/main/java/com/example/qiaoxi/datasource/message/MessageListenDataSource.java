@@ -2,6 +2,7 @@ package com.example.qiaoxi.datasource.message;
 
 import android.util.Log;
 
+import com.example.qiaoxi.model.ConversationModel;
 import com.example.qiaoxi.model.MsgModel;
 import com.example.qiaoxi.repository.DataRepository;
 import com.hyphenate.EMMessageListener;
@@ -27,6 +28,7 @@ public class MessageListenDataSource {
                 EMMessage newMessage = list.get(0);
                 MsgModel msgModel = new MsgModel(newMessage);
                 repository.processNewMessage(msgModel);
+                repository.processNewConversation(new ConversationModel(msgModel.receive,msgModel.send,msgModel));
             }
 
             @Override

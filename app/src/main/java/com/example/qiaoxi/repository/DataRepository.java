@@ -45,7 +45,6 @@ public class DataRepository  implements MessageDataDelegate, ConversationModelDe
     public synchronized void processNewMessage(MsgModel msgModel) {
         write2DB(msgModel);
         mMsgListeners.forEach(listenRepositoryData -> listenRepositoryData.sendNewModel(msgModel));
-        processNewConversation(new ConversationModel(msgModel.receive,msgModel.send,msgModel));
     }
 
     public synchronized void processNewConversation(ConversationModel conversationModel) {

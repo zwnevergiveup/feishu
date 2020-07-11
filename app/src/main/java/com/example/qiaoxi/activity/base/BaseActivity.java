@@ -1,4 +1,4 @@
-package com.example.qiaoxi.activity;
+package com.example.qiaoxi.activity.base;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

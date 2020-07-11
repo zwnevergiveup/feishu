@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.activity.BaseActivity;
+import com.example.qiaoxi.activity.base.BaseActivity;
 import com.example.qiaoxi.adapter.MessageAdapter;
 import com.example.qiaoxi.application.QXApplication;
+import com.example.qiaoxi.customerview.QXToolbar;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.model.MsgModel;
 
@@ -43,10 +44,20 @@ public final class CurrentConversationsActivity extends BaseActivity {
         MessageAdapter messageAdapter = new MessageAdapter();
         messageAdapter.setEmMessageList(emMessageList);
         mRecycler.setAdapter(messageAdapter);
+
+        QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
+        toolbar.setTitleText(withWho,getResources().getColor(R.color.pure_black));
     }
 
     @Override
     protected void setupEvent() {
+        QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
+        toolbar.mLeftIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         currentConversationsViewModel.lastMessages.observe(this, msgModels -> {
             emMessageList.clear();
             emMessageList.addAll(msgModels);

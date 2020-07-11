@@ -16,31 +16,17 @@
         android:background="@color/pure_white"
         tools:context=".activity.conversation.CurrentConversationsActivity">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.example.qiaoxi.customerview.QXToolbar
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:id="@+id/current_conversation_toolbar"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@color/background_gray"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftButton_src="@mipmap/back_arrow"
+            app:titleTextColor="@color/pure_black"
+            app:background_color="@color/background_gray"
             >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="60dp"
-                android:src="@mipmap/back_arrow"
-                android:onClick="onBackClicked"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@{viewModel.conversationName}"
-                android:textSize="20sp"
-                android:textColor="@color/pure_black"
-                />
-
-        </androidx.appcompat.widget.Toolbar>
+        </com.example.qiaoxi.customerview.QXToolbar>
 
         <View
             android:layout_width="match_parent"

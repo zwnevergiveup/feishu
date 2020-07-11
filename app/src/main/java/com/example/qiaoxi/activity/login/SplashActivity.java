@@ -3,14 +3,11 @@ package com.example.qiaoxi.activity.login;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.qiaoxi.activity.BaseActivity;
+import com.example.qiaoxi.activity.base.BaseActivity;
 import com.example.qiaoxi.activity.main.MainActivity;
 import com.hyphenate.chat.EMClient;
 

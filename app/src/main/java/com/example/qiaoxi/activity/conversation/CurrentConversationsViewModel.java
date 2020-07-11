@@ -6,7 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.qiaoxi.activity.BaseViewModel;
+import com.example.qiaoxi.activity.base.BaseViewModel;
+import com.example.qiaoxi.model.ConversationModel;
 import com.example.qiaoxi.model.MsgModel;
 import com.example.qiaoxi.repository.DataRepository;
 import com.example.qiaoxi.repository.ListenRepositoryData;
@@ -53,7 +54,6 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
             EMMessage a = EMMessage.createTxtSendMessage(editText.getValue(),conversationName);
             EMClient.getInstance().chatManager().sendMessage(a);
             MsgModel msg = new MsgModel(a);
-            msgModelMutableLiveData.setValue(msg);
             editText.setValue("");
             insertMsgModel(msg);
         }
@@ -62,6 +62,7 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
     private void insertMsgModel(MsgModel msgModel) {
         DataRepository repository = DataRepository.getInstance();
         repository.processNewMessage(msgModel);
+        repository.processNewConversation(new ConversationModel(msgModel.send,msgModel.receive,msgModel));
     }
 
     @Override

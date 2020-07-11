@@ -4,11 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.qiaoxi.activity.BaseViewModel;
+import com.example.qiaoxi.activity.base.BaseViewModel;
 import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.model.ConversationModel;
-import com.example.qiaoxi.model.MsgModel;
-import com.example.qiaoxi.model.UserModel;
 import com.example.qiaoxi.repository.DataRepository;
 import com.example.qiaoxi.repository.ListenRepositoryData;
 

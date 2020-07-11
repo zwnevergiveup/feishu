@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.activity.BaseActivity;
+import com.example.qiaoxi.activity.base.BaseActivity;
 import com.example.qiaoxi.activity.main.MainActivity;
 import com.example.qiaoxi.databinding.ActivityLoginBinding;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;

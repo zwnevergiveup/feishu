@@ -1,4 +1,4 @@
-package com.example.qiaoxi.activity;
+package com.example.qiaoxi.activity.base;
 
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.ViewModel;

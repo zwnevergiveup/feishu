@@ -1,7 +1,6 @@
 package com.example.qiaoxi.activity.login;
 
 import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -10,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.qiaoxi.activity.BaseViewModel;
+import com.example.qiaoxi.activity.base.BaseViewModel;
 import com.example.qiaoxi.application.QXApplication;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;

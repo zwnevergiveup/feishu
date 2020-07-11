@@ -4,9 +4,8 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.qiaoxi.activity.BaseViewModel;
+import com.example.qiaoxi.activity.base.BaseViewModel;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
 
