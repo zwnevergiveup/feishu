@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_conversation"
-        android:name="com.example.qiaoxi.fragment.ConversationsFragment"
+        android:name="com.example.qiaoxi.view.fragment.ConversationsFragment"
         android:label="@string/conversation"
         tools:layout="@layout/fragment_conversations" />
 
     <fragment
         android:id="@+id/navigation_compact"
-        android:name="com.example.qiaoxi.fragment.CompactFragment"
+        android:name="com.example.qiaoxi.view.fragment.CompactFragment"
         android:label="@string/compact"
         tools:layout="@layout/fragment_compact" />
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.example.qiaoxi.fragment.MineFragment"
+        android:name="com.example.qiaoxi.view.fragment.MineFragment"
         android:label="@string/mine"
         tools:layout="@layout/fragment_mine" />
 

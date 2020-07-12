@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.qiaoxi.model.MsgModel;
+import com.example.qiaoxi.data.model.MsgModel;
 
 import java.util.List;
 

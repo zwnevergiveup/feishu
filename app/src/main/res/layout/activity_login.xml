@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.qiaoxi.activity.login.LoginViewModel" />
+            type="com.example.qiaoxi.dataprocess.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,9 +14,9 @@
         android:layout_height="match_parent"
         android:background="@mipmap/langhua"
         android:padding="0dp"
-        tools:context=".activity.login.LoginActivity">
+        tools:context=".view.activity.LoginActivity">
 
-        <com.example.qiaoxi.customerview.CustomerImgView
+        <com.example.qiaoxi.view.customerview.CustomerImgView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"

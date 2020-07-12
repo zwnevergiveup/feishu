@@ -6,7 +6,7 @@
     <data>
         <variable
             name = "viewModel"
-            type = "com.example.qiaoxi.activity.conversation.CurrentConversationsViewModel"/>
+            type = "com.example.qiaoxi.dataprocess.CurrentConversationsViewModel"/>
 
         </data>
 
@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pure_white"
-        tools:context=".activity.conversation.CurrentConversationsActivity">
+        tools:context=".view.activity.CurrentConversationsActivity">
 
-        <com.example.qiaoxi.customerview.QXToolbar
+        <com.example.qiaoxi.view.customerview.QXToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/current_conversation_toolbar"
@@ -26,7 +26,7 @@
             app:titleTextColor="@color/pure_black"
             app:background_color="@color/background_gray"
             >
-        </com.example.qiaoxi.customerview.QXToolbar>
+        </com.example.qiaoxi.view.customerview.QXToolbar>
 
         <View
             android:layout_width="match_parent"
@@ -41,7 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/background_gray"
-
             android:id="@+id/current_conversation_recycler"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/input_group"

@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.qiaoxi.model.ConversationModel;
+import com.example.qiaoxi.data.model.ConversationModel;
 
 import java.util.List;
 
