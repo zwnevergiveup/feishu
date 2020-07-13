@@ -52,5 +52,10 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //animation
+    implementation "com.airbnb.android:lottie:2.8.0"
+
+
 //    api 'com.hyphenate:hyphenate-sdk-lite:3.6.7'
 }

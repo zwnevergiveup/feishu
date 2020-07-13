@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -42,24 +43,28 @@ public class CustomerImgView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        Bitmap rect = getRectBitmap();
-        Bitmap resBitmap = getResourceBitmap();
-
-        setLayerType(LAYER_TYPE_HARDWARE,null);
         Paint paint = new Paint();
-        canvas.drawARGB(0,0,0,0);
-        canvas.drawBitmap(rect, 0, 0, paint);
+        //去锯齿
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLUE);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
+        Path path1 = new Path();
+        path1.moveTo(width / 2, 0);
+        path1.lineTo(0, height);
+        path1.lineTo(width, height);
+        path1.close();
+        canvas.clipPath(path1);
+        canvas.drawPath(path1,paint);
+        super.onDraw(canvas);
 
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-        canvas.drawBitmap(resBitmap,10,10,paint);
-
+//        canvas.drawPath(path1,paint);
     }
     private Bitmap getResourceBitmap() {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled= true;
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),img_resourceID,options).copy(Bitmap.Config.ARGB_8888,true);
+        Bitmap bitmap = Bitmap.createBitmap(64,64, Bitmap.Config.ARGB_8888);//BitmapFactory.decodeResource(getResources(),img_resourceID,options).copy(Bitmap.Config.ARGB_8888,true);
+        bitmap.eraseColor(Color.parseColor("#000000"));
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         int newWidth = (int)this.width - 20;
