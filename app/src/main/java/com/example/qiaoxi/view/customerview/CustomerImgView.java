@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
@@ -48,14 +50,13 @@ public class CustomerImgView extends AppCompatImageView {
         paint.setAntiAlias(true);
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(10);
-        Path path1 = new Path();
-        path1.moveTo(width / 2, 0);
-        path1.lineTo(0, height);
-        path1.lineTo(width, height);
-        path1.close();
-        canvas.clipPath(path1);
-        canvas.drawPath(path1,paint);
+        paint.setStrokeWidth(20);
+        Shader shader = new LinearGradient(0,0,width,height,Color.parseColor("#E91E63"),Color.parseColor("#2196F3"),Shader.TileMode.CLAMP);
+        paint.setShader(shader);
+        Path path = new Path();
+        path.addCircle(width / 2, height / 2 , height /2, Path.Direction.CW);
+        canvas.clipPath(path);
+        canvas.drawPath(path,paint);
         super.onDraw(canvas);
 
 //        canvas.drawPath(path1,paint);
