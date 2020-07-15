@@ -1,13 +1,16 @@
 package com.example.qiaoxi.view.activity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.dataprocess.LoginViewModel;
 import com.example.qiaoxi.databinding.ActivityLoginBinding;
@@ -20,7 +23,29 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void setupView() {
+        LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.login_anim);
+        animationView.playAnimation();
+        animationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animationView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 
     @Override

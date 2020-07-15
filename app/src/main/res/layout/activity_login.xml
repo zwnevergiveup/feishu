@@ -28,7 +28,14 @@
             android:visibility="@{viewmodel.lastUserIconVisible}"
             />
 
-
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:lottie_fileName="data.json"
+            android:id="@+id/login_anim"
+            />
 
         <EditText
             android:layout_width="0dp"
