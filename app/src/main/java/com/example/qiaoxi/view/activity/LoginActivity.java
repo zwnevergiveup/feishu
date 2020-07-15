@@ -28,7 +28,6 @@ public class LoginActivity extends BaseActivity {
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-
             }
 
             @Override
