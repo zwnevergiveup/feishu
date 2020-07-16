@@ -101,6 +101,11 @@ public class LoginViewModel extends BaseViewModel {
         });
     }
 
+    public void changeAccount() {
+        lastUserIconVisible.setValue(View.GONE);
+        nameEditVisible.setValue(View.VISIBLE);
+    }
+
     public void logout(){
         EMClient.getInstance().logout(true, new EMCallBack() {
             @Override

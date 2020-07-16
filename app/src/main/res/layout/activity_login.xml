@@ -12,8 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/langhua"
-        android:padding="0dp"
+        android:fitsSystemWindows="true"
         tools:context=".view.activity.LoginActivity">
 
         <com.example.qiaoxi.view.customerview.CustomerImgView
@@ -28,14 +27,14 @@
             android:visibility="@{viewmodel.lastUserIconVisible}"
             />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:lottie_fileName="data.json"
-            android:id="@+id/login_anim"
-            />
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:lottie_fileName="data.json"-->
+<!--            android:id="@+id/login_anim"-->
+<!--            />-->
 
         <EditText
             android:layout_width="0dp"
@@ -86,5 +85,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="100dp"
             android:id="@+id/login" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/login_change_account"
+            android:text="@string/change_account"
+            android:layout_marginTop="15dp"
+            android:visibility="@{viewmodel.lastUserIconVisible}"
+            android:onClick="@{() -> viewmodel.changeAccount()}"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

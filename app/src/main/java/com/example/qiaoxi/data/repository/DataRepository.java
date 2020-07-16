@@ -76,6 +76,11 @@ public class DataRepository  implements MessageDataDelegate, ConversationModelDe
     }
 
     @Override
+    public List<MsgModel> findMsgFromDB(String send, String receive) {
+        return db.msgModelDao().find(send,receive);
+    }
+
+    @Override
     public List<ConversationModel> readConversationsFromDB(String current) {
         return db.conversationModelDao().getCurrentUserConversations(current);
     }

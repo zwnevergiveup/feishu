@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:background_color="@color/background_gray"
+    android:fitsSystemWindows="true"
     tools:context=".view.fragment.ConversationsFragment">
 
     <com.example.qiaoxi.view.customerview.QXToolbar

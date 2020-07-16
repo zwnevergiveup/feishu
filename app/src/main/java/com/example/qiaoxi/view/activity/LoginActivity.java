@@ -23,28 +23,28 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void setupView() {
-        LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.login_anim);
-        animationView.playAnimation();
-        animationView.addAnimatorListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                animationView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
+//        LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.login_anim);
+//        animationView.playAnimation();
+//        animationView.addAnimatorListener(new Animator.AnimatorListener() {
+//            @Override
+//            public void onAnimationStart(Animator animation) {
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                animationView.setVisibility(View.GONE);
+//            }
+//
+//            @Override
+//            public void onAnimationCancel(Animator animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animator animation) {
+//
+//            }
+//        });
     }
 
     @Override

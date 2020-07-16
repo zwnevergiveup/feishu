@@ -10,6 +10,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class MessageListenDataSource {
     private DataRepository repository;
@@ -23,12 +24,11 @@ public class MessageListenDataSource {
         EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {//not mainThread
             @Override
             public void onMessageReceived(List<EMMessage> list) {
-                Log.e("qiaoxi","received huanxin");
-
-                EMMessage newMessage = list.get(0);
-                MsgModel msgModel = new MsgModel(newMessage);
-                repository.processNewMessage(msgModel);
-                repository.processNewConversation(new ConversationModel(msgModel.receive,msgModel.send,msgModel));
+                list.forEach(emMessage -> {
+                    MsgModel msgModel = new MsgModel(emMessage);
+                    repository.processNewMessage(msgModel);
+                    repository.processNewConversation(new ConversationModel(msgModel.receive,msgModel.send,msgModel));
+                });
             }
 
             @Override

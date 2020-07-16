@@ -21,6 +21,9 @@ public interface MsgModelDao {
     @Query("SELECT * FROM msgmodels WHERE (send_name LIKE :name OR receive_name LIKE :name) AND (send_name LIKE :currentName OR receive_name LIKE :currentName ) ")
     List<MsgModel> loadMsgByName(String name,String currentName);
 
+    @Query("SELECT * FROM msgModels WHERE send_name LIKE :send AND receive_name LIKE :receive")
+    List<MsgModel> find(String send, String receive);
+
     @Insert
     void insertAll(MsgModel... msgModels);
 
