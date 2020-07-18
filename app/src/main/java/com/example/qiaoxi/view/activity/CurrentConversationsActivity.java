@@ -1,6 +1,8 @@
 package com.example.qiaoxi.view.activity;
 
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -52,12 +54,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
     @Override
     protected void setupEvent() {
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
-        toolbar.mLeftIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.mLeftIcon.setOnClickListener(v -> finish());
         currentConversationsViewModel.lastMessages.observe(this, msgModels -> {
             emMessageList.clear();
             emMessageList.addAll(msgModels);

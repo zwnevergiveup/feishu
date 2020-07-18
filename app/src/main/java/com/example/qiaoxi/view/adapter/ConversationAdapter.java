@@ -1,5 +1,6 @@
 package com.example.qiaoxi.view.adapter;
 
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 int pos = holder.getLayoutPosition();
                 mOnConversationItemClickListener.onClick(holder.itemView,pos);
             });
+            
         }
     }
 

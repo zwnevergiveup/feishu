@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.dataprocess.MineViewModel;
 import com.example.qiaoxi.view.activity.LoginActivity;
+import com.example.qiaoxi.view.activity.TestActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -53,7 +54,7 @@ public class MineFragment extends Fragment {
             @Override
             public void onSuccess() {
                 Log.e(TAGS,"logout success");
-                Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(),LoginActivity.class));
+                getActivity().startActivity(new Intent(getActivity(),LoginActivity.class));
                 getActivity().finish();
             }
 

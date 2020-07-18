@@ -36,38 +36,50 @@
 <!--            android:id="@+id/login_anim"-->
 <!--            />-->
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="150dp"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
-            android:hint="@string/input_acount_remind"
             android:visibility="@{viewmodel.nameEditVisible}"
-            android:text="@={viewmodel.userName}"
-            android:paddingStart="10dp"
-            android:background="@drawable/edit_style"
-            android:id="@+id/input_account" />
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/input_acount_remind"
+                android:text="@={viewmodel.userName}"
+                android:paddingStart="10dp"
+                android:id="@+id/input_account" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="230dp"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
-            android:inputType="textPassword"
-            android:paddingStart="10dp"
-            android:background="@drawable/edit_style"
             android:hint="@string/input_passwd_remind"
-            android:text="@={viewmodel.userPassword}"
-            android:id="@+id/input_secret" />
+
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textPassword"
+                android:paddingStart="10dp"
+                android:text="@={viewmodel.userPassword}"
+                android:id="@+id/input_secret" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <Button
             android:layout_width="0dp"

@@ -33,7 +33,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="55dp"
         />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="35dp"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/conversation_more_btn"
+        android:src="@mipmap/add"
+        app:borderWidth="0dp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/conversations_btn_group"
+        android:padding="10dp"
+        android:background="@color/alpha0"
+        >
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@mipmap/add"
+            android:scaleType="center"
+            android:backgroundTint="@color/main_green"
+            android:id="@+id/conversation_close_btn"
+            app:borderWidth="0dp"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/conversation_close_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@mipmap/search"
+            android:scaleType="center"
+            android:backgroundTint="@color/main_green"
+            android:id="@+id/conversation_search_btn"
+            app:borderWidth="0dp"
+            android:layout_marginEnd="20dp"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/conversation_search_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@mipmap/search"
+            android:scaleType="center"
+            android:backgroundTint="@color/main_green"
+            android:id="@+id/conversation_clean_btn"
+            app:borderWidth="0dp"
+            android:layout_marginEnd="20dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

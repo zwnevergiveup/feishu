@@ -29,7 +29,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         ViewPager vp = findViewById(R.id.nav_view_page);
 

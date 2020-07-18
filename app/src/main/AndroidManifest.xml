@@ -78,9 +78,11 @@
 <!--        聊天页面-->
         <activity android:name=".view.activity.CurrentConversationsActivity"
             android:launchMode="singleTask"
+            android:theme="@style/AppThemeSwipe"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
+
     </application>
 
 </manifest>
