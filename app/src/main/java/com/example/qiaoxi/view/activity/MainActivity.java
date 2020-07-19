@@ -1,75 +1,54 @@
 package com.example.qiaoxi.view.activity;
 
+import android.animation.Animator;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager.widget.ViewPager;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.dataprocess.MainViewModel;
+import com.example.qiaoxi.data.model.ConversationModel;
 import com.example.qiaoxi.databinding.ActivityMainBinding;
-import com.example.qiaoxi.view.adapter.MainActivityViewPagerAdapter;
-import com.example.qiaoxi.view.fragment.CompactFragment;
-import com.example.qiaoxi.view.fragment.ConversationsFragment;
-import com.example.qiaoxi.view.fragment.MineFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.qiaoxi.dataprocess.ConversationsViewModel;
+import com.example.qiaoxi.view.adapter.ConversationAdapter;
+import com.example.qiaoxi.view.customerview.QXToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
     private int isExit = 0;
+    private RecyclerView mRecycler;
+    private List<ConversationModel> mConversationModels = new ArrayList<>();
+    private ConversationsViewModel conversationsViewModel;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        ViewPager vp = findViewById(R.id.nav_view_page);
+        mRecycler = findViewById(R.id.conversations_recycler);
+        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        setRecycler();
+        QXToolbar toolbar = findViewById(R.id.conversations_toolbar);
+        toolbar.setTitleText("悄息", getResources().getColor(R.color.pure_black));
+        constraintLayout = findViewById(R.id.conversations_btn_group);
+        constraintLayout.bringToFront();
+        FloatingActionButton btn = findViewById(R.id.conversation_more_btn);
+        btn.setOnClickListener(v -> startAnimation(constraintLayout));
 
-        MainActivityViewPagerAdapter adapter = new MainActivityViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ConversationsFragment());
-        adapter.addFragment(new CompactFragment());
-        adapter.addFragment(new MineFragment());
-        vp.setAdapter(adapter);
-
-        navView.setOnNavigationItemReselectedListener(item -> { });
-        navView.setOnNavigationItemSelectedListener(item -> {
-            int itemID = item.getItemId();
-            switch (itemID) {
-                case R.id.navigation_conversation:
-                    vp.setCurrentItem(0);
-                    break;
-                case R.id.navigation_compact:
-                    vp.setCurrentItem(1);
-                    break;
-                case R.id.navigation_mine:
-                    vp.setCurrentItem(2);
-                    break;
-            }
-            return true;
-        });
-        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                navView.getMenu().getItem(position).setChecked(true);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
+        findViewById(R.id.conversation_search_btn).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CompactActivity.class)));
     }
 
     @Override
@@ -77,14 +56,23 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void setupDataBinding() {
-        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        conversationsViewModel = ViewModelProviders.of(this).get(ConversationsViewModel.class);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setLifecycleOwner(this);
-        binding.setViewModel(viewModel);
+        binding.setViewModel(conversationsViewModel);
+        getLifecycle().addObserver(conversationsViewModel);
     }
 
     @Override
-    protected void setupEvent() { }
+    protected void setupEvent() {
+        conversationsViewModel.conversations.observe(this, conversationModels -> {
+            Log.e("qiaoxi","received models: "+ conversationModels.size());
+            mConversationModels.clear();
+            mConversationModels.addAll(conversationModels);
+            mRecycler.getAdapter().notifyDataSetChanged();
+            mRecycler.scrollToPosition(0);
+        });
+    }
 
     @Override
     public void onBackPressed() {
@@ -93,11 +81,59 @@ public class MainActivity extends BaseActivity {
             finish();
             System.exit(0);
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isExit = 0;
-            }
-        }, 1000);
+        new Handler().postDelayed(() -> isExit = 0, 1000);
+    }
+    private void setRecycler(){
+        ConversationAdapter adapter = new ConversationAdapter();
+        adapter.setConversationModels(mConversationModels);
+        adapter.setOnConversationItemClickListener((view, position) -> {
+            String str = ((TextView)view.findViewById(R.id.conversation_title)).getText().toString();
+            Intent intent = new Intent(this, CurrentConversationsActivity.class);
+            intent.putExtra("title",str);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        });
+        mRecycler.setAdapter(adapter);
+    }
+
+    private void startAnimation(View view) {
+        int cx = view.getMeasuredWidth() / 2;
+        int cy = view.getMeasuredHeight() / 2;
+        float radius = (float)Math.hypot(cx,cy);
+        Animator animator;
+        if(view.getVisibility() == View.VISIBLE) {
+            animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, radius, 0f);
+            animator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    view.setVisibility(View.INVISIBLE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            animator.start();
+        } else if (view.getVisibility() == View.INVISIBLE) {
+            animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, radius);
+            view.setVisibility(View.VISIBLE);
+            animator.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        constraintLayout.setVisibility(View.INVISIBLE);
     }
 }

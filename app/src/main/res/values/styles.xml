@@ -14,6 +14,9 @@
         <item name="colorPrimaryDark">#00000000</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowSwipeToDismiss">true</item>
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/transition1
+        </item>
 
     </style>
 

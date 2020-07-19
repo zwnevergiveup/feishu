@@ -1,39 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
-            name="viewModel"
-            type="com.example.qiaoxi.dataprocess.MainViewModel" />
+            name = "viewModel"
+            type = "com.example.qiaoxi.dataprocess.ConversationsViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/bottom_nav_menu" />
+        <com.example.qiaoxi.view.customerview.QXToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/conversations_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.viewpager.widget.ViewPager
+        </com.example.qiaoxi.view.customerview.QXToolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/danhui_0"
+            android:id="@+id/toolbar_gap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/conversations_toolbar" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/nav_view"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/nav_view_page"
-            />
+            android:id="@+id/conversations_recycler"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="30dp"
+            android:id="@+id/conversation_more_btn"
+            android:src="@mipmap/add"
+            app:borderWidth="0dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/conversations_btn_group"
+            android:background="#aa000000"
+            android:visibility="invisible">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@mipmap/add"
+                android:scaleType="center"
+                android:backgroundTint="@color/main_green"
+                android:id="@+id/conversation_close_btn"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="80dp"
+                app:borderWidth="0dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/conversation_close_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@mipmap/search"
+                android:scaleType="center"
+                android:backgroundTint="@color/main_green"
+                android:id="@+id/conversation_search_btn"
+                app:borderWidth="0dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="80dp"
+
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/conversation_search_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@mipmap/search"
+                android:scaleType="center"
+                android:backgroundTint="@color/main_green"
+                android:id="@+id/conversation_clean_btn"
+                app:borderWidth="0dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="80dp"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
