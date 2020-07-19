@@ -3,11 +3,16 @@ package com.example.qiaoxi.view.activity;
 import android.animation.Animator;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -20,6 +25,7 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.ConversationModel;
 import com.example.qiaoxi.databinding.ActivityMainBinding;
 import com.example.qiaoxi.dataprocess.ConversationsViewModel;
+import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.adapter.ConversationAdapter;
 import com.example.qiaoxi.view.customerview.QXToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +40,7 @@ public class MainActivity extends BaseActivity {
     private List<ConversationModel> mConversationModels = new ArrayList<>();
     private ConversationsViewModel conversationsViewModel;
     private ConstraintLayout constraintLayout;
+    private FloatingActionButton btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +52,10 @@ public class MainActivity extends BaseActivity {
         toolbar.setTitleText("悄息", getResources().getColor(R.color.pure_black));
         constraintLayout = findViewById(R.id.conversations_btn_group);
         constraintLayout.bringToFront();
-        FloatingActionButton btn = findViewById(R.id.conversation_more_btn);
+        btn = findViewById(R.id.conversation_more_btn);
         btn.setOnClickListener(v -> startAnimation(constraintLayout));
 
-        findViewById(R.id.conversation_search_btn).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CompactActivity.class)));
+        findViewById(R.id.goto_compact).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CompactActivity.class)));
     }
 
     @Override
@@ -96,21 +103,20 @@ public class MainActivity extends BaseActivity {
     }
 
     private void startAnimation(View view) {
-        int cx = view.getMeasuredWidth() / 2;
-        int cy = view.getMeasuredHeight() / 2;
-        float radius = (float)Math.hypot(cx,cy);
+        float radius = view.getMeasuredHeight();
         Animator animator;
         if(view.getVisibility() == View.VISIBLE) {
-            animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, radius, 0f);
+
+            animator = ViewAnimationUtils.createCircularReveal(view,  (int) btn.getX() + 64, (int) btn.getY(), radius, 0f);
             animator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
-
                 }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     view.setVisibility(View.INVISIBLE);
+                    hiddenMoreClick();
                 }
 
                 @Override
@@ -125,15 +131,41 @@ public class MainActivity extends BaseActivity {
             });
             animator.start();
         } else if (view.getVisibility() == View.INVISIBLE) {
-            animator = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, radius);
+            showMoreClick();
+            animator = ViewAnimationUtils.createCircularReveal(view, (int) btn.getX() + 64, (int) btn.getY(), 0f, radius);
             view.setVisibility(View.VISIBLE);
             animator.start();
         }
+    }
+
+    private void showMoreClick() {
+        RotateAnimation rotateAnimation = new RotateAnimation(0f,45f, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        LinearInterpolator linearInterpolator = new LinearInterpolator();
+        rotateAnimation.setInterpolator(linearInterpolator);
+        rotateAnimation.setDuration(200);
+        rotateAnimation.setRepeatCount(0);
+        rotateAnimation.setFillAfter(true);
+        rotateAnimation.setStartOffset(0);
+        btn.setAnimation(rotateAnimation);
+        btn.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+    }
+
+    private void hiddenMoreClick() {
+        RotateAnimation rotateAnimation = new RotateAnimation(45f,0, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        LinearInterpolator linearInterpolator = new LinearInterpolator();
+        rotateAnimation.setInterpolator(linearInterpolator);
+        rotateAnimation.setDuration(200);
+        rotateAnimation.setRepeatCount(0);
+        rotateAnimation.setFillAfter(true);
+        rotateAnimation.setStartOffset(0);
+        btn.setAnimation(rotateAnimation);
+        btn.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.main_green)));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         constraintLayout.setVisibility(View.INVISIBLE);
+        btn.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.main_green)));
     }
 }

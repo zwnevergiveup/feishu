@@ -57,7 +57,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/conversations_btn_group"
-            android:background="#aa000000"
+            android:background="#33000000"
             android:visibility="invisible">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -68,39 +68,56 @@
                 android:src="@mipmap/add"
                 android:scaleType="center"
                 android:backgroundTint="@color/main_green"
-                android:id="@+id/conversation_close_btn"
+                android:id="@+id/just_anchor"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="80dp"
+                android:visibility="invisible"
                 app:borderWidth="0dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@id/conversation_close_btn"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@mipmap/search"
+                app:layout_constraintCircle="@id/just_anchor"
+                app:layout_constraintCircleRadius="80dp"
+                app:layout_constraintCircleAngle="335"
+                app:fabSize="mini"
+                android:src="@mipmap/compact_icon"
                 android:scaleType="center"
                 android:backgroundTint="@color/main_green"
-                android:id="@+id/conversation_search_btn"
+                android:id="@+id/goto_compact"
                 app:borderWidth="0dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="80dp"
-
                 />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@id/conversation_search_btn"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintCircle="@id/just_anchor"
+                app:layout_constraintCircleRadius="64dp"
+                app:layout_constraintCircleAngle="270"
+                app:fabSize="mini"
                 android:src="@mipmap/search"
+                android:scaleType="center"
+                android:backgroundTint="@color/main_green"
+                android:id="@+id/conversation_find_btn"
+                app:borderWidth="0dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="80dp"
+                />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintCircle="@id/just_anchor"
+                app:layout_constraintCircleRadius="80dp"
+                app:layout_constraintCircleAngle="205"
+                app:fabSize="mini"
+                android:src="@mipmap/clean_all"
                 android:scaleType="center"
                 android:backgroundTint="@color/main_green"
                 android:id="@+id/conversation_clean_btn"
                 app:borderWidth="0dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="80dp"
-
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
