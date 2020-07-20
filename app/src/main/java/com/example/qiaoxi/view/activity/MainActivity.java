@@ -15,8 +15,10 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +43,7 @@ public class MainActivity extends BaseActivity {
     private ConversationsViewModel conversationsViewModel;
     private ConstraintLayout constraintLayout;
     private FloatingActionButton btn;
+    private DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -62,6 +65,7 @@ public class MainActivity extends BaseActivity {
         toolbar.setTitleText("悄息", getResources().getColor(R.color.pure_black));
         btn = findViewById(R.id.conversation_more_btn);
         constraintLayout = findViewById(R.id.conversations_btn_group);
+        mDrawerLayout = findViewById(R.id.conversations_drawer);
     }
 
     @Override
@@ -85,6 +89,29 @@ public class MainActivity extends BaseActivity {
             mConversationModels.addAll(conversationModels);
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(0);
+        });
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                if (constraintLayout.getVisibility() == View.VISIBLE) {
+                    startAnimation(constraintLayout);
+                }
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
         });
     }
 

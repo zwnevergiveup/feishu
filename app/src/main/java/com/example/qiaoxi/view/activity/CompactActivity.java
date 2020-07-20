@@ -60,6 +60,9 @@ public class CompactActivity extends BaseActivity {
 
         QXToolbar toolbar = findViewById(R.id.friend_toolbar);
         toolbar.setTitleText("联系人",getResources().getColor(R.color.pure_black));
+        toolbar.mLeftIcon.setOnClickListener(v -> {
+            finish();
+        });
         findViewById(R.id.friend_add).setOnClickListener(v -> addContact());
     }
 

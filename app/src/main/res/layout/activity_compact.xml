@@ -19,6 +19,7 @@
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:leftButton_src="@mipmap/back_arrow"
             android:id="@+id/friend_toolbar">
 
         </com.example.qiaoxi.view.customerview.QXToolbar>
