@@ -42,27 +42,10 @@ public class MainActivity extends BaseActivity {
     private ConstraintLayout constraintLayout;
     private FloatingActionButton btn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mRecycler = findViewById(R.id.conversations_recycler);
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
-        setRecycler();
-        QXToolbar toolbar = findViewById(R.id.conversations_toolbar);
-        toolbar.setTitleText("悄息", getResources().getColor(R.color.pure_black));
-        constraintLayout = findViewById(R.id.conversations_btn_group);
-        constraintLayout.bringToFront();
-        btn = findViewById(R.id.conversation_more_btn);
-        btn.setOnClickListener(v -> startAnimation(constraintLayout));
-
-        findViewById(R.id.goto_compact).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CompactActivity.class)));
-    }
-
-    @Override
-    protected void setupView() { }
 
     @Override
     protected void setupDataBinding() {
+        getWindow().setNavigationBarColor(getColor(R.color.pure_black));
         conversationsViewModel = ViewModelProviders.of(this).get(ConversationsViewModel.class);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setLifecycleOwner(this);
@@ -71,7 +54,31 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void setupView() {
+        mRecycler = findViewById(R.id.conversations_recycler);
+        mRecycler.setLayoutManager(new LinearLayoutManager(this));
+        setRecycler();
+        QXToolbar toolbar = findViewById(R.id.conversations_toolbar);
+        toolbar.setTitleText("悄息", getResources().getColor(R.color.pure_black));
+        btn = findViewById(R.id.conversation_more_btn);
+        constraintLayout = findViewById(R.id.conversations_btn_group);
+    }
+
+    @Override
     protected void setupEvent() {
+        btn.setOnClickListener(v -> startAnimation(constraintLayout));
+
+        findViewById(R.id.goto_compact).setOnClickListener(v -> {
+            startAnimation(constraintLayout);
+            startActivity(new Intent(MainActivity.this, CompactActivity.class));
+        });
+        findViewById(R.id.conversation_clean_btn).setOnClickListener(v -> {
+            startAnimation(constraintLayout);
+        });
+        findViewById(R.id.conversation_find_btn).setOnClickListener(v -> {
+            startAnimation(constraintLayout);
+        });
+
         conversationsViewModel.conversations.observe(this, conversationModels -> {
             Log.e("qiaoxi","received models: "+ conversationModels.size());
             mConversationModels.clear();
@@ -165,7 +172,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        constraintLayout.setVisibility(View.INVISIBLE);
-        btn.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.main_green)));
+        startAnimation(constraintLayout);
     }
 }
