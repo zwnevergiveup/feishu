@@ -32,6 +32,8 @@ import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.adapter.ConversationAdapter;
 import com.example.qiaoxi.view.customerview.QXToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +118,9 @@ public class MainActivity extends BaseActivity {
             public void onDrawerStateChanged(int newState) {
 
             }
+        });
+        findViewById(R.id.btn_logout).setOnClickListener(v -> {
+            logout();
         });
     }
 
@@ -211,5 +216,26 @@ public class MainActivity extends BaseActivity {
         if (constraintLayout.getVisibility() == View.VISIBLE) {
             startAnimation(constraintLayout);
         }
+    }
+
+    private void logout() {
+        EMClient.getInstance().logout(true, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                Log.e(TAGS,"logout success");
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                finish();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Log.e(TAGS,"logout error "+ s);
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+                Log.e(TAGS,"logouting: "+i);
+            }
+        });
     }
 }
