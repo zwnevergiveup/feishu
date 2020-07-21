@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -82,6 +83,9 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.conversation_find_btn).setOnClickListener(v -> {
             startAnimation(constraintLayout);
         });
+        constraintLayout.setOnClickListener(v -> {
+            startAnimation(constraintLayout);
+        });
 
         conversationsViewModel.conversations.observe(this, conversationModels -> {
             Log.e("qiaoxi","received models: "+ conversationModels.size());
@@ -117,11 +121,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        if (constraintLayout.getVisibility() == View.VISIBLE) {
+            startAnimation(constraintLayout);
+            return;
+        }
         isExit++ ;
         if (isExit > 1) {
             finish();
             System.exit(0);
         }
+        Toast.makeText(this,"再按一次退出", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(() -> isExit = 0, 1000);
     }
     private void setRecycler(){
@@ -199,6 +208,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        startAnimation(constraintLayout);
+        if (constraintLayout.getVisibility() == View.VISIBLE) {
+            startAnimation(constraintLayout);
+        }
     }
 }
