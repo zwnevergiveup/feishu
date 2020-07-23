@@ -121,6 +121,7 @@ public class MainActivity extends BaseActivity {
         });
         findViewById(R.id.btn_logout).setOnClickListener(v -> {
             logout();
+
         });
     }
 
