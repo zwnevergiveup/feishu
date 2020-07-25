@@ -24,6 +24,8 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        maven{ url 'http://central.maven.org/maven2/'}
+        maven { url "https://jitpack.io" }
     }
 }
 

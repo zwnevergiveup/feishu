@@ -22,8 +22,27 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.bytes.ByteArrayDecoder;
+import io.netty.handler.codec.bytes.ByteArrayEncoder;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
+import io.netty.util.CharsetUtil;
 
 
 public class LoginViewModel extends BaseViewModel {
@@ -70,33 +89,61 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     public void login() {
-        if (userName.getValue() == null || userPassword.getValue() == null) {
-            result.setValue(new ResultModel(false,"请输入用户名和密码"));
-            return;
-        }
-        String name = userName.getValue().trim();
-        String secret = userPassword.getValue().trim();
-        EMClient.getInstance().login(name, secret, new EMCallBack() {
+//        if (userName.getValue() == null || userPassword.getValue() == null) {
+//            result.setValue(new ResultModel(false,"请输入用户名和密码"));
+//            return;
+//        }
+//        String name = userName.getValue().trim();
+//        String secret = userPassword.getValue().trim();
+//        EMClient.getInstance().login(name, secret, new EMCallBack() {
+//            @Override
+//            public void onSuccess() {
+//                QXApplication.currentUser = name;
+//                result.postValue(new ResultModel(true,name));
+//                List<String> friends = new ArrayList<>();
+//                if (name.equals("zhongwu")) {
+//                    friends.add("wus6");
+//                }else if (name.equals("wus6")) {
+//                    friends.add("zhongwu");
+//                }
+//                DataRepository.getInstance().write2DB(new UserModel(name,friends,""));
+//            }
+//
+//            @Override
+//            public void onError(int i, String s) {
+//                result.postValue(new ResultModel(false,s));
+//            }
+//
+//            @Override
+//            public void onProgress(int i, String s) {
+//            }
+//        });
+        //进行初始化
+        NioEventLoopGroup  nioEventLoopGroup = new NioEventLoopGroup(); //初始化线程组
+        Bootstrap bootstrap = new Bootstrap();
+        bootstrap.channel(NioSocketChannel.class).group(nioEventLoopGroup);
+        bootstrap.option(ChannelOption.TCP_NODELAY, true); //无阻塞
+        bootstrap.option(ChannelOption.SO_KEEPALIVE, true); //长连接
+        bootstrap.option(ChannelOption.SO_TIMEOUT, 3); //收发超时
+        bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
-            public void onSuccess() {
-                QXApplication.currentUser = name;
-                result.postValue(new ResultModel(true,name));
-                List<String> friends = new ArrayList<>();
-                if (name.equals("zhongwu")) {
-                    friends.add("wus6");
-                }else if (name.equals("wus6")) {
-                    friends.add("zhongwu");
+            protected void initChannel(SocketChannel ch) throws Exception {
+                ch.pipeline()
+                        .addLast(new ByteArrayDecoder())  //接收解码方式
+                        .addLast(new ByteArrayEncoder());  //发送编码方式
+            }
+        });
+
+//开始建立连接并监听返回
+        ChannelFuture channelFuture = bootstrap.connect(new InetSocketAddress("192.168.0.102", 5555));
+        channelFuture.addListener(new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture future) {
+                if (future.isSuccess()) {
+                    Log.e("qiaoxi", "connect success !");
+                } else {
+                    Log.e("qiaoix", "connect failed !");
                 }
-                DataRepository.getInstance().write2DB(new UserModel(name,friends,""));
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                result.postValue(new ResultModel(false,s));
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
             }
         });
     }
