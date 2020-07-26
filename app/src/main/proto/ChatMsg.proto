@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.example.qiaoxi.data.model;
+
+option optimize_for = SPEED;
+option java_outer_classname = "ChatMsg";
+
+message ChatMessage {
+    string uuid = 1;
+    string sender = 2;
+    string receive = 3;
+    string sendTime = 4;
+    string content = 5;
+    int32 state =6;
+}
