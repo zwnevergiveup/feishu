@@ -90,6 +90,9 @@ dependencies {
     implementation "com.airbnb.android:lottie:2.8.0"
 
     //netty
+    implementation group: 'io.netty', name: 'netty-all', version: '5.0.0.Alpha2'
+
+    //protobuf
     implementation 'com.google.protobuf:protobuf-javalite:3.8.0'
 }
 

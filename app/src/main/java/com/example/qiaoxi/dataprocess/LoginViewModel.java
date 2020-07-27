@@ -5,44 +5,35 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.qiaoxi.data.repository.DataRepository;
-import com.example.qiaoxi.widget.QXApplication;
+import com.example.qiaoxi.data.model.ChatMsg;
+import com.example.qiaoxi.data.model.ResultModel;
+import com.example.qiaoxi.data.model.UserModel;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
-import com.example.qiaoxi.data.model.ResultModel;
-import com.example.qiaoxi.data.model.UserModel;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.bytes.ByteArrayDecoder;
 import io.netty.handler.codec.bytes.ByteArrayEncoder;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
-import io.netty.handler.timeout.IdleStateHandler;
-import io.netty.util.CharsetUtil;
+import io.netty.handler.codec.http.HttpServerCodec;
 
 
 public class LoginViewModel extends BaseViewModel {
@@ -53,6 +44,7 @@ public class LoginViewModel extends BaseViewModel {
     public MutableLiveData<ResultModel> result = new MutableLiveData<>();
     public MutableLiveData<Integer> lastUserIconVisible = new MutableLiveData<>();
     public MutableLiveData<Integer> nameEditVisible = new MutableLiveData<>();
+    public ChannelFuture channelFuture;
 
     private AppDatabase db;
 
@@ -128,29 +120,52 @@ public class LoginViewModel extends BaseViewModel {
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline()
-                        .addLast(new ByteArrayDecoder())  //接收解码方式
-                        .addLast(new ByteArrayEncoder());  //发送编码方式
+
+                ch.pipeline().addLast(new ByteArrayEncoder())  //发送编码方式
+                    .addLast(new SimpleChannelInboundHandler<ChatMsg.ChatMessage>() {
+                        @Override
+                        protected void messageReceived(ChannelHandlerContext ctx, ChatMsg.ChatMessage msg) throws Exception {
+                            Log.e("qiaoxi",msg.getContent());
+                        }
+                    });
             }
         });
 
 //开始建立连接并监听返回
-        ChannelFuture channelFuture = bootstrap.connect(new InetSocketAddress("192.168.0.102", 5555));
+        channelFuture = bootstrap.connect(new InetSocketAddress("192.168.0.102", 5555));
         channelFuture.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture future) {
                 if (future.isSuccess()) {
                     Log.e("qiaoxi", "connect success !");
+
+
+
                 } else {
                     Log.e("qiaoix", "connect failed !");
                 }
             }
+
+
         });
+
+
+
     }
 
     public void changeAccount() {
-        lastUserIconVisible.setValue(View.GONE);
-        nameEditVisible.setValue(View.VISIBLE);
+//        lastUserIconVisible.setValue(View.GONE);
+//        nameEditVisible.setValue(View.VISIBLE);
+        ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
+        builder.setContent("hello this is client");
+        builder.setSender("Client");
+        builder.setReceive("server");
+        builder.setSendTime("202007272346");
+        builder.setState(0);
+        builder.setUuid("xxxxxxxx");
+        ChatMsg.ChatMessage msg = builder.build();
+        channelFuture.channel().writeAndFlush(msg);
+
     }
 
     public void logout(){
