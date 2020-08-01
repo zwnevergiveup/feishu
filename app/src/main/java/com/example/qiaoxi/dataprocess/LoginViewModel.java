@@ -126,6 +126,7 @@ public class LoginViewModel extends BaseViewModel {
                     ch.pipeline().addLast(new SimpleChannelInboundHandler<Object>() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                            
                             Log.e("qiaoxi","客户端连接服务器，开始发送数据……");
                             ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
                             builder.setContent("hello this is client");
