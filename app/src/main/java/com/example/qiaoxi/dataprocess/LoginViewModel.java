@@ -14,6 +14,7 @@ import com.example.qiaoxi.data.model.ResultModel;
 import com.example.qiaoxi.data.model.UserModel;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
+import com.example.qiaoxi.helper.retrofit.RetrofitHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.EMCallBack;
@@ -21,6 +22,7 @@ import com.hyphenate.chat.EMClient;
 
 import java.io.ByteArrayOutputStream;
 import java.net.InetSocketAddress;
+import java.util.HashMap;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -38,6 +40,10 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.bytes.ByteArrayDecoder;
 import io.netty.handler.codec.bytes.ByteArrayEncoder;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class LoginViewModel extends BaseViewModel {
@@ -116,49 +122,18 @@ public class LoginViewModel extends BaseViewModel {
 //        });
         try {
 
-
-            //进行初始化
-            NioEventLoopGroup nioEventLoopGroup = new NioEventLoopGroup(); //初始化线程组
-            Bootstrap bootstrap = new Bootstrap();
-            bootstrap.group(nioEventLoopGroup).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new SimpleChannelInboundHandler<Object>() {
-                        @Override
-                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            
-                            Log.e("qiaoxi","客户端连接服务器，开始发送数据……");
-                            ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
-                            builder.setContent("hello this is client");
-                            builder.setSender("Client");
-                            builder.setReceive("server");
-                            builder.setSendTime("202007272346");
-                            builder.setState(0);
-                            builder.setUuid("xxxxxxxx");
-                            ChatMsg.ChatMessage msg = builder.build();
-                            ByteArrayOutputStream output = new ByteArrayOutputStream();
-                            msg.writeTo(output);
-                            byte[] byteArray = output.toByteArray();
-                            ByteBuf firstMessage = Unpooled.buffer(byteArray.length);
-                            firstMessage.writeBytes(byteArray);
-//                            byte[] req = "QUERY TIME ORDER".getBytes();
-//                            ByteBuf firstMessage = Unpooled.buffer(req.length);
-//                            firstMessage.writeBytes(req);
-                            ctx.writeAndFlush(firstMessage);
-                        }
-
-                        @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                        }
-
-                        @Override
-                        protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
-
-                        }
-                    });
-//                    .addLast(new ChannelInboundHandlerAdapter() {
+//
+//            //进行初始化
+//            NioEventLoopGroup nioEventLoopGroup = new NioEventLoopGroup(); //初始化线程组
+//            Bootstrap bootstrap = new Bootstrap();
+//            bootstrap.group(nioEventLoopGroup).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
+//                @Override
+//                protected void initChannel(SocketChannel ch) throws Exception {
+//                    ch.pipeline().addLast(new SimpleChannelInboundHandler<Object>() {
 //                        @Override
 //                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//
+//                            Log.e("qiaoxi","客户端连接服务器，开始发送数据……");
 //                            ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
 //                            builder.setContent("hello this is client");
 //                            builder.setSender("Client");
@@ -167,31 +142,88 @@ public class LoginViewModel extends BaseViewModel {
 //                            builder.setState(0);
 //                            builder.setUuid("xxxxxxxx");
 //                            ChatMsg.ChatMessage msg = builder.build();
-//                            ctx.writeAndFlush("from client");
+//                            ByteArrayOutputStream output = new ByteArrayOutputStream();
+//                            msg.writeTo(output);
+//                            byte[] byteArray = output.toByteArray();
+//                            ByteBuf firstMessage = Unpooled.buffer(byteArray.length);
+//                            firstMessage.writeBytes(byteArray);
+////                            byte[] req = "QUERY TIME ORDER".getBytes();
+////                            ByteBuf firstMessage = Unpooled.buffer(req.length);
+////                            firstMessage.writeBytes(req);
+//                            ctx.writeAndFlush(firstMessage);
+//                        }
+//
+//                        @Override
+//                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+//                        }
+//
+//                        @Override
+//                        protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
+//
 //                        }
 //                    });
-                }
-            });
+////                    .addLast(new ChannelInboundHandlerAdapter() {
+////                        @Override
+////                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+////                            ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
+////                            builder.setContent("hello this is client");
+////                            builder.setSender("Client");
+////                            builder.setReceive("server");
+////                            builder.setSendTime("202007272346");
+////                            builder.setState(0);
+////                            builder.setUuid("xxxxxxxx");
+////                            ChatMsg.ChatMessage msg = builder.build();
+////                            ctx.writeAndFlush("from client");
+////                        }
+////                    });
+//                }
+//            });
+//
+//
+////开始建立连接并监听返回
+//            channelFuture = bootstrap.connect(new InetSocketAddress("192.168.0.103", 5555));
+//            channelFuture.addListener(new ChannelFutureListener() {
+//                @Override
+//                public void operationComplete(ChannelFuture future) {
+//                    if (future.isSuccess()) {
+//                        Log.e("qiaoxi", "connect success !");
+//
+//
+//                    } else {
+//                        Log.e("qiaoix", "connect failed !");
+//                    }
+//                }
+//
+//
+//            });
+//            channelFuture.channel().closeFuture().sync();
 
+            RetrofitHelper.getInstance().getServerApi()
+                    .logonWithInfo("zw","123456","17621595307")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<HashMap<String, Object>>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
 
-//开始建立连接并监听返回
-            channelFuture = bootstrap.connect(new InetSocketAddress("192.168.0.103", 5555));
-            channelFuture.addListener(new ChannelFutureListener() {
-                @Override
-                public void operationComplete(ChannelFuture future) {
-                    if (future.isSuccess()) {
-                        Log.e("qiaoxi", "connect success !");
+                        }
 
+                        @Override
+                        public void onNext(HashMap<String, Object> stringObjectHashMap) {
+                            Log.e("qiaoxi",stringObjectHashMap.get("status") + "");
+                        }
 
-                    } else {
-                        Log.e("qiaoix", "connect failed !");
-                    }
-                }
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e("qiaoxi","ssss");
 
+                        }
 
-            });
-            channelFuture.channel().closeFuture().sync();
+                        @Override
+                        public void onComplete() {
 
+                        }
+                    });
         }catch (Exception e) {
 
         }finally {

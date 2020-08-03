@@ -13,6 +13,7 @@ public class SPHelper {
     private SPHelper(Context context){
         mSP = context.getSharedPreferences("QX_SP", Context.MODE_PRIVATE);
     }
+
     private volatile static SPHelper instance = null;
     public static SPHelper getInstance(Context context){
         if (instance == null) {
