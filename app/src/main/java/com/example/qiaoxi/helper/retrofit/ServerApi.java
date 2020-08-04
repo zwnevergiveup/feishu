@@ -1,12 +1,13 @@
 package com.example.qiaoxi.helper.retrofit;
 
-import java.util.HashMap;
+import com.example.qiaoxi.data.model.network.LoginBean;
+import com.example.qiaoxi.data.model.network.LogonBean;
+
 import java.util.Map;
 
 
 import io.reactivex.Observable;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 public interface ServerApi {
 
@@ -15,7 +16,13 @@ public interface ServerApi {
      * @return
      */
     @POST("user/logon")
-    Observable<HashMap<String, Object>> logonWithInfo(@Query("userName") String userName, @Query("password") String password, @Query("phoneNumber") String phone);
+    Observable<Map<String, Object>> logonWithInfo(@Body LogonBean logonBean);
 
+    /**
+     * 登陆
+     * @return
+     */
+    @POST("user/login")
+    Observable<Map<String, Object>> loginWithPassword(@Body LoginBean loginBean);
 
 }

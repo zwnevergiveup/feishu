@@ -10,36 +10,23 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qiaoxi.data.model.ChatMsg;
+import com.example.qiaoxi.data.model.network.LoginBean;
+import com.example.qiaoxi.data.model.network.LogonBean;
+import com.example.qiaoxi.data.model.network.ResponseModel;
 import com.example.qiaoxi.data.model.ResultModel;
 import com.example.qiaoxi.data.model.UserModel;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.helper.retrofit.RetrofitHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
-import java.io.ByteArrayOutputStream;
-import java.net.InetSocketAddress;
-import java.util.HashMap;
+import java.util.Map;
 
-import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.bytes.ByteArrayDecoder;
-import io.netty.handler.codec.bytes.ByteArrayEncoder;
-import io.netty.handler.codec.http.HttpServerCodec;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -64,14 +51,10 @@ public class LoginViewModel extends BaseViewModel {
         db = DBHelper.getInstance().getAppDatabase(context, "QX_DB");
         String a = (String)SPHelper.getInstance(context).readObject("lastLoginName",new TypeToken<String>(){}.getType());
         if (a != null) {
-            UserModel userModel = db.userModelDao().getCurrentUserModel(a);
-            if (userModel != null) {
-                userModelLiveData.setValue(userModel);
-                userName.setValue(userModel.userId);
-                lastUserIconVisible.setValue(View.VISIBLE);
-                nameEditVisible.setValue(View.GONE);
-                return;
-            }
+            userName.setValue(a);
+            lastUserIconVisible.setValue(View.VISIBLE);
+            nameEditVisible.setValue(View.GONE);
+            return;
         }
         lastUserIconVisible.setValue(View.GONE);
         nameEditVisible.setValue(View.VISIBLE);
@@ -91,132 +74,36 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     public void login() {
-//        if (userName.getValue() == null || userPassword.getValue() == null) {
-//            result.setValue(new ResultModel(false,"请输入用户名和密码"));
-//            return;
-//        }
-//        String name = userName.getValue().trim();
-//        String secret = userPassword.getValue().trim();
-//        EMClient.getInstance().login(name, secret, new EMCallBack() {
-//            @Override
-//            public void onSuccess() {
-//                QXApplication.currentUser = name;
-//                result.postValue(new ResultModel(true,name));
-//                List<String> friends = new ArrayList<>();
-//                if (name.equals("zhongwu")) {
-//                    friends.add("wus6");
-//                }else if (name.equals("wus6")) {
-//                    friends.add("zhongwu");
-//                }
-//                DataRepository.getInstance().write2DB(new UserModel(name,friends,""));
-//            }
-//
-//            @Override
-//            public void onError(int i, String s) {
-//                result.postValue(new ResultModel(false,s));
-//            }
-//
-//            @Override
-//            public void onProgress(int i, String s) {
-//            }
-//        });
-        try {
-
-//
-//            //进行初始化
-//            NioEventLoopGroup nioEventLoopGroup = new NioEventLoopGroup(); //初始化线程组
-//            Bootstrap bootstrap = new Bootstrap();
-//            bootstrap.group(nioEventLoopGroup).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
-//                @Override
-//                protected void initChannel(SocketChannel ch) throws Exception {
-//                    ch.pipeline().addLast(new SimpleChannelInboundHandler<Object>() {
-//                        @Override
-//                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//
-//                            Log.e("qiaoxi","客户端连接服务器，开始发送数据……");
-//                            ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
-//                            builder.setContent("hello this is client");
-//                            builder.setSender("Client");
-//                            builder.setReceive("server");
-//                            builder.setSendTime("202007272346");
-//                            builder.setState(0);
-//                            builder.setUuid("xxxxxxxx");
-//                            ChatMsg.ChatMessage msg = builder.build();
-//                            ByteArrayOutputStream output = new ByteArrayOutputStream();
-//                            msg.writeTo(output);
-//                            byte[] byteArray = output.toByteArray();
-//                            ByteBuf firstMessage = Unpooled.buffer(byteArray.length);
-//                            firstMessage.writeBytes(byteArray);
-////                            byte[] req = "QUERY TIME ORDER".getBytes();
-////                            ByteBuf firstMessage = Unpooled.buffer(req.length);
-////                            firstMessage.writeBytes(req);
-//                            ctx.writeAndFlush(firstMessage);
-//                        }
-//
-//                        @Override
-//                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//                        }
-//
-//                        @Override
-//                        protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
-//
-//                        }
-//                    });
-////                    .addLast(new ChannelInboundHandlerAdapter() {
-////                        @Override
-////                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
-////                            ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
-////                            builder.setContent("hello this is client");
-////                            builder.setSender("Client");
-////                            builder.setReceive("server");
-////                            builder.setSendTime("202007272346");
-////                            builder.setState(0);
-////                            builder.setUuid("xxxxxxxx");
-////                            ChatMsg.ChatMessage msg = builder.build();
-////                            ctx.writeAndFlush("from client");
-////                        }
-////                    });
-//                }
-//            });
-//
-//
-////开始建立连接并监听返回
-//            channelFuture = bootstrap.connect(new InetSocketAddress("192.168.0.103", 5555));
-//            channelFuture.addListener(new ChannelFutureListener() {
-//                @Override
-//                public void operationComplete(ChannelFuture future) {
-//                    if (future.isSuccess()) {
-//                        Log.e("qiaoxi", "connect success !");
-//
-//
-//                    } else {
-//                        Log.e("qiaoix", "connect failed !");
-//                    }
-//                }
-//
-//
-//            });
-//            channelFuture.channel().closeFuture().sync();
-
+        if (userName.getValue() == null || userPassword.getValue() == null || userName.getValue().equals("") || userPassword.getValue().equals("")) {
+            result.setValue(new ResultModel(false, "请填写用户名和密码"));
+            return;
+        }
+        try{
             RetrofitHelper.getInstance().getServerApi()
-                    .logonWithInfo("zw","123456","17621595307")
+                    .loginWithPassword(new LoginBean(userName.getValue(), userPassword.getValue()))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<HashMap<String, Object>>() {
+                    .subscribe(new Observer<Map<String, Object>>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 
                         }
 
                         @Override
-                        public void onNext(HashMap<String, Object> stringObjectHashMap) {
-                            Log.e("qiaoxi",stringObjectHashMap.get("status") + "");
+                        public void onNext(Map<String, Object> map) {
+                            if (map.get("status") != null ) {
+                                Gson gson = new Gson();
+                                String json = gson.toJson(map.get("payload"));
+                                ResponseModel model = gson.fromJson(json, ResponseModel.class);
+                                if (model != null ) {
+                                    result.setValue(new ResultModel(model.status.equals("OK"),model.message));
+                                }
+                            }
                         }
 
                         @Override
                         public void onError(Throwable e) {
-                            Log.e("qiaoxi","ssss");
-
+                            result.setValue(new ResultModel(false, "登陆失败，请检查网络"));
                         }
 
                         @Override
@@ -224,27 +111,20 @@ public class LoginViewModel extends BaseViewModel {
 
                         }
                     });
+
         }catch (Exception e) {
-
-        }finally {
-
+            e.printStackTrace();
+            userName.setValue("");
+            userPassword.setValue("");
+            result.setValue(new ResultModel(false, "登陆失败，请重试"));
         }
 
     }
 
     public void changeAccount() {
-//        lastUserIconVisible.setValue(View.GONE);
-//        nameEditVisible.setValue(View.VISIBLE);
-        ChatMsg.ChatMessage.Builder builder = ChatMsg.ChatMessage.newBuilder();
-        builder.setContent("hello this is client");
-        builder.setSender("Client");
-        builder.setReceive("server");
-        builder.setSendTime("202007272346");
-        builder.setState(0);
-        builder.setUuid("xxxxxxxx");
-        ChatMsg.ChatMessage msg = builder.build();
-        channelFuture.channel().writeAndFlush(msg);
-
+        lastUserIconVisible.setValue(View.GONE);
+        nameEditVisible.setValue(View.VISIBLE);
+        userName.setValue("");
     }
 
     public void logout(){

@@ -58,10 +58,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onChanged(ResultModel resultModel) {
                 if (resultModel.status) {
-                    SPHelper.getInstance(getApplicationContext()).writeObject(resultModel.reason,"lastLoginName");
-                    Log.e(TAGS,"write lastLoginName: "+ resultModel.reason);
-                    EMClient.getInstance().groupManager().loadAllGroups();
-                    EMClient.getInstance().chatManager().loadAllConversations();
+                    SPHelper.getInstance(getApplicationContext()).writeObject(loginViewModel.userName.getValue(),"lastLoginName");
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }else {

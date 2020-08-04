@@ -29,12 +29,9 @@ public class SplashActivity extends BaseActivity {
         List<String> permissionList = new ArrayList<>();
         need.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         need.add(Manifest.permission.FOREGROUND_SERVICE);
-        need.forEach(new Consumer<String>() {
-            @Override
-            public void accept(String s) {
-                if (ContextCompat.checkSelfPermission(SplashActivity.this,s) !=PackageManager.PERMISSION_GRANTED){
-                    permissionList.add(s);
-                }
+        need.forEach(s -> {
+            if (ContextCompat.checkSelfPermission(SplashActivity.this,s) !=PackageManager.PERMISSION_GRANTED){
+                permissionList.add(s);
             }
         });
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -59,7 +56,7 @@ public class SplashActivity extends BaseActivity {
         if (EMClient.getInstance().isConnected()) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
         }else {
-            startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+            startActivity(new Intent(SplashActivity.this,ChooseLoginOrLogonActivity.class));
         }
         finish();
     }

@@ -84,7 +84,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/register_login"
+            android:text="@string/login"
             android:textSize="18sp"
             android:textColor="@color/pure_white"
 
@@ -96,6 +96,7 @@
             android:background="@drawable/green_r5_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="100dp"
+            android:transitionName="shared_login_btn"
             android:id="@+id/login" />
 
         <TextView
