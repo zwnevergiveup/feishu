@@ -13,7 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
+        android:background="#aa000000"
         tools:context=".view.activity.LoginActivity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/cat1"
+            android:id="@+id/choose_login_logon_bg"
+            android:transitionName="shared_view_bg"
+            />
 
         <com.example.qiaoxi.view.customerview.CustomerImgView
             android:layout_width="100dp"

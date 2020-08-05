@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/cat1"
+        android:id="@+id/choose_login_logon_bg"
+        android:transitionName="shared_view_bg"
+        />
     <Button
         android:layout_width="100dp"
         android:layout_height="50dp"
