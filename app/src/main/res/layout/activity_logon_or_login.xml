@@ -11,34 +11,37 @@
         android:id="@+id/choose_login_logon_bg"
         android:transitionName="shared_view_bg"
         />
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/main_green"
-        android:text="@string/logon"
-        android:textColor="@color/pure_white"
-        android:textSize="20sp"
-        android:id="@+id/choose_logon"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        />
 
     <Button
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/main_green"
+        android:background="@drawable/bg_btn"
         android:text="@string/login"
         android:textColor="@color/pure_white"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:id="@+id/choose_login"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="150dp"
         android:transitionName="shared_login_btn"
         android:onClick="chooseLogin"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/choose_login"
+        android:gravity="center"
+        android:text="@string/logon"
+        android:textColor="@color/pure_white"
+        android:textSize="13sp"
+        android:id="@+id/choose_logon"
+        android:layout_marginTop="0dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

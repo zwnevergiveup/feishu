@@ -17,7 +17,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             >
 
             <com.example.qiaoxi.view.customerview.QXToolbar
@@ -131,7 +130,6 @@
             android:layout_width="250dp"
             android:layout_height="match_parent"
             android:id="@+id/nav_view"
-            android:fitsSystemWindows="true"
             android:layout_gravity="start"
             android:background="@color/danhui_0"
             >

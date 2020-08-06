@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pure_white"
-        android:fitsSystemWindows="true"
         tools:context=".view.activity.CurrentConversationsActivity">
 
         <com.example.qiaoxi.view.customerview.QXToolbar

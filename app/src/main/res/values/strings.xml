@@ -3,7 +3,7 @@
     <string name="app_title">悄 息</string>
     <string name="account_name">账号:</string>
     <string name="account_secret">密码:</string>
-    <string name="login">登陆</string>
+    <string name="login">使用账号和密码登录</string>
     <string name="logout">退出登录</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="conversation">会话</string>
@@ -16,6 +16,6 @@
     <string name="input_passwd_remind">请输入密码</string>
     <string name="please_enter_message">请输入消息</string>
     <string name="change_account">切换账号</string>
-    <string name="logon">注册</string>
+    <string name="logon">没有账号？去注册</string>
 
 </resources>
