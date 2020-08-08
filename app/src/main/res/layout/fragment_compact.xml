@@ -15,22 +15,23 @@
 
         <com.example.qiaoxi.view.customerview.QXToolbar
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:leftButton_src="@mipmap/back_arrow"
-            android:id="@+id/friend_toolbar">
-
-        </com.example.qiaoxi.view.customerview.QXToolbar>
-
+            android:id="@+id/compact_toolbar"
+            app:title="@string/compact"
+            app:titleTextMarginStart="15"
+            app:titleTextColor="@color/pure_black"
+            app:rightButton_src="@mipmap/search"
+            />
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/danhui_0"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"
             android:id="@+id/toolbar_gap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/friend_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/compact_toolbar" />
 
 
         <androidx.recyclerview.widget.RecyclerView

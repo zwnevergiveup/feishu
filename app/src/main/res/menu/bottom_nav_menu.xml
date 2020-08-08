@@ -2,19 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_conversation"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/conversation" />
+        android:id="@+id/navigation_1"
+        android:icon="@mipmap/conversations"
+        android:title="" />
 
     <item
-        android:id="@+id/navigation_compact"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/compact" />
-
+        android:id="@+id/navigation_2"
+        android:icon="@mipmap/compact"
+        android:title="" />
+    <item
+        android:id="@+id/navigation_3"
+        android:icon="@mipmap/faxian"
+        android:title="" />
 
     <item
-        android:id="@+id/navigation_mine"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/mine" />
+        android:id="@+id/navigation_4"
+        android:icon="@mipmap/wode"
+        android:title="" />
 
 </menu>

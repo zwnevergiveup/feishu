@@ -3,19 +3,21 @@
     <string name="app_title">悄 息</string>
     <string name="account_name">账号:</string>
     <string name="account_secret">密码:</string>
-    <string name="login">使用账号和密码登录</string>
+    <string name="login">登录</string>
     <string name="logout">退出登录</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="conversation">会话</string>
     <string name="compact">联系人</string>
     <string name="mine">我的</string>
+    <string name="discover">发现</string>
     <string name="send">发送</string>
     <string name="add_new_friend">添加好友</string>
     <string name="input_name_secret">请输入用户名和密码</string>
-    <string name="input_acount_remind">请输入账号</string>
-    <string name="input_passwd_remind">请输入密码</string>
+    <string name="input_acount_remind">账号/Account number</string>
+    <string name="input_passwd_remind">密码/Password</string>
     <string name="please_enter_message">请输入消息</string>
     <string name="change_account">切换账号</string>
-    <string name="logon">没有账号？去注册</string>
+    <string name="logon"><![CDATA[还没有账号？<b><font color="#06BFA7">点击注册</font></b>]]></string>
+
 
 </resources>

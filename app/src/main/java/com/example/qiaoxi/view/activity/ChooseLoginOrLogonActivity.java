@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Pair;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -23,6 +25,8 @@ public class ChooseLoginOrLogonActivity extends BaseActivity{
         vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.choose_bg));
         vv.setOnCompletionListener(mp -> vv.start());
         vv.start();
+        TextView tv = findViewById(R.id.choose_logon);
+        tv.setText(Html.fromHtml(getString(R.string.logon)));
     }
 
     @Override
@@ -43,7 +47,7 @@ public class ChooseLoginOrLogonActivity extends BaseActivity{
         ActivityOptions options = ActivityOptions
                 .makeSceneTransitionAnimation(this, Pair.create(findViewById(R.id.choose_login), "shared_login_btn"));
         // start the new activity
-        startActivity(intent, options.toBundle());
+        startActivity(intent);
     }
 
     @Override

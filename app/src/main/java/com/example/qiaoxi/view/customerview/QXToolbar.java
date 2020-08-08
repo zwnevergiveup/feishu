@@ -4,12 +4,18 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.constraintlayout.widget.Constraints;
 
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
+import com.example.qiaoxi.widget.QXApplication;
 
 public class QXToolbar extends ConstraintLayout {
 
@@ -43,10 +49,33 @@ public class QXToolbar extends ConstraintLayout {
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.QXToolbar);
             int leftIconResourceID = typedArray.getResourceId(R.styleable.QXToolbar_leftButton_src,0);
-//            String titleText = typedArray.getString(R.styleable.QXToolbar_title);
+            String titleText = typedArray.getString(R.styleable.QXToolbar_title);
             int rightIconResourceID = typedArray.getResourceId(R.styleable.QXToolbar_rightButton_src, 0);
             int backgroundColor = typedArray.getColor(R.styleable.QXToolbar_background_color,0);
-//            int titleTextColor = typedArray.getColor(R.styleable.QXToolbar_titleTextColor, 0);
+            int titleTextColor = typedArray.getColor(R.styleable.QXToolbar_titleTextColor, 0);
+            int titleMarginStart = typedArray.getInteger(R.styleable.QXToolbar_titleTextMarginStart , -1);
+
+
+
+            if (titleText != null ) {
+                if (titleMarginStart != -1) {
+                    int dip = DisplayHelper.dip2Px(context, titleMarginStart);
+                    ConstraintSet c = new ConstraintSet();
+                    c.clone(context, R.layout.toolbar_qx);
+                    c.connect(mTitle.getId(),ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START,dip);
+                    c.applyTo(findViewById(R.id.toolbar_constraint_layout));
+                }else {
+                    ConstraintSet c = new ConstraintSet();
+                    c.clone(context, R.layout.toolbar_qx);
+                    c.connect(mTitle.getId(),ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END,0);
+                    c.applyTo(findViewById(R.id.toolbar_constraint_layout));
+                }
+                mTitle.setText(titleText);
+                if (titleTextColor != 0) {
+                    mTitle.setTextColor(titleTextColor);
+                }
+                mTitle.setVisibility(VISIBLE);
+            }
 
             if (leftIconResourceID != 0) {
                 mLeftIcon.setImageResource(leftIconResourceID);
@@ -57,14 +86,6 @@ public class QXToolbar extends ConstraintLayout {
                 mRightIcon.setImageResource(rightIconResourceID);
                 mRightIcon.setVisibility(VISIBLE);
             }
-
-//            if (titleText != null ) {
-//                mTitle.setText(titleText);
-//                if (titleTextColor != 0) {
-//                    mTitle.setTextColor(titleTextColor);
-//                }
-//                mTitle.setVisibility(VISIBLE);
-//            }
 
             if (backgroundColor != 0) {
                 setBackgroundColor(backgroundColor);

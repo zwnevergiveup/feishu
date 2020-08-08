@@ -2,8 +2,14 @@ package com.example.qiaoxi.view.activity;
 
 import android.animation.Animator;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -20,6 +26,7 @@ import com.example.qiaoxi.data.model.UserModel;
 import com.hyphenate.chat.EMClient;
 
 public class LoginActivity extends BaseActivity {
+    private ImageView catBg;
 
     @Override
     protected void setupView() {
@@ -45,6 +52,9 @@ public class LoginActivity extends BaseActivity {
 //
 //            }
 //        });
+        TextView tv = findViewById(R.id.logon_account);
+        tv.setText(Html.fromHtml(getString(R.string.logon)));
+        catBg = findViewById(R.id.cat_bg);
     }
 
     @Override
@@ -57,25 +67,54 @@ public class LoginActivity extends BaseActivity {
         loginViewModel.result.observe(this, new Observer<ResultModel>() {
             @Override
             public void onChanged(ResultModel resultModel) {
-                if (resultModel.status) {
-                    SPHelper.getInstance(getApplicationContext()).writeObject(loginViewModel.userName.getValue(),"lastLoginName");
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
-                }else {
-                    Toast.makeText(getApplicationContext(),resultModel.reason,Toast.LENGTH_SHORT).show();
-                }
+//                if (resultModel.status) {
+//                    SPHelper.getInstance(getApplicationContext()).writeObject(loginViewModel.userName.getValue(),"lastLoginName");
+//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                    finish();
+//                }else {
+//                    Toast.makeText(getApplicationContext(),resultModel.reason,Toast.LENGTH_SHORT).show();
+//                }
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
             }
         });
         loginViewModel.userModelLiveData.observe(this, new Observer<UserModel>() {
             @Override
             public void onChanged(UserModel userModel) {
-
             }
         });
     }
 
     @Override
     protected void setupEvent() {
+        EditText password = findViewById(R.id.input_secret);
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.e("qiaoxi","click");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    catBg.setImageDrawable(getDrawable(R.mipmap.cat_close_eye));
+                }else {
+                    catBg.setImageDrawable(getDrawable(R.mipmap.cat1));
+
+                }
+            }
+        });
 
     }
 

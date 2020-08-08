@@ -62,6 +62,7 @@ protobuf {
 }
 
 dependencies {
+    implementation 'androidx.cardview:cardview:1.0.0'
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"

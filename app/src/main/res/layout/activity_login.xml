@@ -12,112 +12,192 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#aa000000"
         tools:context=".view.activity.LoginActivity">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="220dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:src="@mipmap/cat1"
-            android:id="@+id/choose_login_logon_bg"
-            android:transitionName="shared_view_bg"
+            android:background="@color/main_green"
+            android:id="@+id/cat_bg"
             />
 
-        <com.example.qiaoxi.view.customerview.CustomerImgView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/cat1"
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="80dp"
-            android:visibility="@{viewmodel.lastUserIconVisible}"
-            />
-
-<!--        <com.airbnb.lottie.LottieAnimationView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:lottie_fileName="data.json"-->
-<!--            android:id="@+id/login_anim"-->
-<!--            />-->
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="150dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:visibility="@{viewmodel.nameEditVisible}"
-            >
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="@string/input_acount_remind"
-                android:text="@={viewmodel.userName}"
-                android:paddingStart="10dp"
-                android:id="@+id/input_account" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="230dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:hint="@string/input_passwd_remind"
-
-            >
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="textPassword"
-                android:paddingStart="10dp"
-                android:text="@={viewmodel.userPassword}"
-                android:id="@+id/input_secret" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textSize="18sp"
-            android:textColor="@color/pure_white"
-
-            android:onClick="@{() -> viewmodel.login()}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/green_r5_btn"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="100dp"
-            android:transitionName="shared_login_btn"
-            android:id="@+id/login" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginBottom="170dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="10dp"
+            android:id="@+id/login_card"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="40dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/login"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/main_green"
+                    android:id="@+id/title"
+                    />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/input_account_group"
+                    android:textColorHint="@color/light_gray"
+                    android:theme="@style/TextInputLayout_qx"
+
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="@string/input_acount_remind"
+                        android:text="@={viewmodel.userName}"
+                        android:textSize="17sp"
+                        android:textColor="@color/pure_black"
+
+                        android:id="@+id/input_account" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/input_account_group"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/input_passwd_remind"
+                    android:id="@+id/input_secret_group"
+                    android:textColorHint="@color/light_gray"
+                    android:theme="@style/TextInputLayout_qx"
+
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:inputType="textPassword"
+                        android:textSize="17sp"
+                        android:textColor="@color/pure_black"
+                        android:id="@+id/input_secret" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    app:layout_constraintEnd_toStartOf="@id/find_password_arrow"
+                    app:layout_constraintTop_toBottomOf="@id/input_secret_group"
+                    android:text="找回您的密码"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"
+                    />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/input_secret_group"
+                    android:src="@mipmap/right_arrow"
+                    android:scaleType="fitXY"
+                    android:id="@+id/find_password_arrow"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login"
+                    android:textSize="18sp"
+                    android:textColor="@color/pure_white"
+                    android:onClick="@{() -> viewmodel.login()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="60dp"
+                    android:background="@drawable/green_r5_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:transitionName="shared_login_btn"
+                    android:id="@+id/login"
+                    android:elevation="15dp"
+                    android:stateListAnimator="@null"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/login_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/logon_account"
+            android:text="@string/logon"
+            android:layout_marginTop="15dp"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/login"
+            android:textSize="13sp"
+            android:textColor="@color/danhui_0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/login_change_account"
-            android:text="@string/change_account"
-            android:layout_marginTop="15dp"
-            android:visibility="@{viewmodel.lastUserIconVisible}"
-            android:onClick="@{() -> viewmodel.changeAccount()}"
+            app:layout_constraintTop_toBottomOf="@id/logon_account"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="━━━━  快速登录  ━━━━"
+            android:id="@+id/quick_login_text"
             />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toStartOf="@id/quick_login_text"
+            app:layout_constraintTop_toBottomOf="@id/quick_login_text"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/wechat"
+            android:id="@+id/quick_login_wechat"
+            />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toStartOf="@id/quick_login_text"
+            app:layout_constraintEnd_toEndOf="@id/quick_login_text"
+            app:layout_constraintTop_toBottomOf="@id/quick_login_text"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/qq"
+            android:id="@+id/quick_login_qq"
+            />
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintEnd_toEndOf="@id/quick_login_text"
+            app:layout_constraintTop_toBottomOf="@id/quick_login_text"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/weibo"
+            android:id="@+id/quick_login_weibo"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

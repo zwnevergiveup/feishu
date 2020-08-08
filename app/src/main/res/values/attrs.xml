@@ -6,5 +6,6 @@
         <attr name="rightButton_src" format="reference"/>
         <attr name="background_color" format="color"/>
         <attr name="titleTextColor" format="color"/>
+        <attr name="titleTextMarginStart" format="integer"/>
     </declare-styleable>
 </resources>

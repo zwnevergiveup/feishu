@@ -35,4 +35,10 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:background">@mipmap/jingyu</item>
     </style>
+
+    <style name="TextInputLayout_qx">
+        <item name="colorControlNormal">@color/light_gray</item>
+        <item name="colorControlActivated">@color/main_green</item>
+        <item name="colorControlHighlight">@color/main_green</item>
+    </style>
 </resources>

@@ -52,12 +52,7 @@ public class LoginViewModel extends BaseViewModel {
         String a = (String)SPHelper.getInstance(context).readObject("lastLoginName",new TypeToken<String>(){}.getType());
         if (a != null) {
             userName.setValue(a);
-            lastUserIconVisible.setValue(View.VISIBLE);
-            nameEditVisible.setValue(View.GONE);
-            return;
         }
-        lastUserIconVisible.setValue(View.GONE);
-        nameEditVisible.setValue(View.VISIBLE);
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -119,12 +114,6 @@ public class LoginViewModel extends BaseViewModel {
             result.setValue(new ResultModel(false, "登陆失败，请重试"));
         }
 
-    }
-
-    public void changeAccount() {
-        lastUserIconVisible.setValue(View.GONE);
-        nameEditVisible.setValue(View.VISIBLE);
-        userName.setValue("");
     }
 
     public void logout(){
