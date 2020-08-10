@@ -52,13 +52,7 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
     }
 
     public void sendMessage() {
-        if (editText.getValue() != null && !editText.getValue().equals("")){
-            EMMessage a = EMMessage.createTxtSendMessage(editText.getValue(),conversationName);
-            EMClient.getInstance().chatManager().sendMessage(a);
-            MsgModel msg = new MsgModel(a);
-            editText.setValue("");
-            insertMsgModel(msg);
-        }
+
     }
 
     private void insertMsgModel(MsgModel msgModel) {

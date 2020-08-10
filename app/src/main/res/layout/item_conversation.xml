@@ -1,33 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <com.example.qiaoxi.view.customerview.CustomerImgView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@mipmap/guyu"
         android:layout_marginStart="20dp"
         android:id="@+id/conversation_icon"
+        android:stateListAnimator="@null"
+        android:elevation="10dp"
         />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="25dp"
         app:layout_constraintStart_toEndOf="@id/conversation_icon"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/conversation_icon"
+        app:layout_constraintEnd_toStartOf="@id/conversation_wait_read"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:gravity="center_vertical"
+        android:lines="1"
         android:text="会话对象"
         android:textColor="@color/pure_black"
         android:textSize="18sp"
         android:id="@+id/conversation_title"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/last_msg_time"
+        app:layout_constraintTop_toTopOf="@id/conversation_title"
+        app:layout_constraintBottom_toBottomOf="@id/conversation_title"
+        android:id="@+id/conversation_wait_read"
+        android:layout_marginStart="10dp"
+        android:text="10"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/pure_white"
+        android:background="@drawable/red_r12_bg"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:layout_marginEnd="30dp"
+        android:stateListAnimator="@null"
+        android:elevation="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toTopOf="@id/conversation_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical|right"
+        android:text="1mins ago"
+        android:textColor="@color/C1C1C1_gray"
+        android:textSize="12sp"
+        android:paddingEnd="20dp"
+        android:lines="1"
+        android:id="@+id/last_msg_time"
+
         />
 
     <TextView
@@ -40,18 +79,10 @@
         android:paddingEnd="20dp"
         android:id="@+id/conversation_last"
         android:text="测试：测试内容"
-        android:textSize="14sp"
+        android:textSize="13sp"
+        android:lines="1"
         android:textColor="@color/light_gray"
         android:gravity="center_vertical"
         />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        app:layout_constraintStart_toEndOf="@id/conversation_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/danhui_0"
-        />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

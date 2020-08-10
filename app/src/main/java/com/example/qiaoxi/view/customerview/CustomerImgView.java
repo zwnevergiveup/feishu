@@ -22,7 +22,8 @@ public class CustomerImgView extends AppCompatImageView {
     private int img_resourceID = 0;
     private Path mPath = new Path();
     private float width,height;
-
+    Paint paint = new Paint();
+    Path path = new Path();
 
     public CustomerImgView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context,attributeSet,defStyle);
@@ -45,16 +46,14 @@ public class CustomerImgView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Paint paint = new Paint();
         //去锯齿
         paint.setAntiAlias(true);
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(20);
-        Shader shader = new LinearGradient(0,0,width,height,Color.parseColor("#E91E63"),Color.parseColor("#2196F3"),Shader.TileMode.CLAMP);
-        paint.setShader(shader);
-        Path path = new Path();
-        path.addCircle(width / 2, height / 2 , height /2, Path.Direction.CW);
+//        Shader shader = new LinearGradient(0,0,width,height,Color.parseColor("#E91E63"),Color.parseColor("#2196F3"),Shader.TileMode.CLAMP);
+//        paint.setShader(shader);
+        path.addCircle(width / 2, height / 2 , height /2 - 2, Path.Direction.CW);
         canvas.clipPath(path);
         canvas.drawPath(path,paint);
         super.onDraw(canvas);

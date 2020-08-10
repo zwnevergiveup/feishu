@@ -24,11 +24,7 @@ public class MessageListenDataSource {
         EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {//not mainThread
             @Override
             public void onMessageReceived(List<EMMessage> list) {
-                list.forEach(emMessage -> {
-                    MsgModel msgModel = new MsgModel(emMessage);
-                    repository.processNewMessage(msgModel);
-                    repository.processNewConversation(new ConversationModel(msgModel.receive,msgModel.send,msgModel));
-                });
+
             }
 
             @Override

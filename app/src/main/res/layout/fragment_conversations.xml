@@ -23,11 +23,12 @@
             app:titleTextMarginStart="15"
             app:titleTextColor="@color/pure_black"
             app:rightButton_src="@mipmap/add_black"
+            android:background="@color/pure_white"
             />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/light_gray"
+            android:background="@color/danhui_0"
             android:id="@+id/toolbar_gap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +37,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/main_green"
+            android:background="@color/pure_white"
             android:id="@+id/conversations_recycler"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_gap"

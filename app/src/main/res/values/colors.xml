@@ -10,6 +10,8 @@
     <color name="pure_white">#ffffff</color>
     <color name="pure_red">#ff0000</color>
     <color name="light_gray">#8A8A8A</color>
+    <color name="C1C1C1_gray">#C1C1C1</color>
+
     <color name="rice_yellow">#FAFAFA</color>
     <color name="graph_white">#FFFAF0</color>
     <color name="danhui_0">#EAEAEA</color>
