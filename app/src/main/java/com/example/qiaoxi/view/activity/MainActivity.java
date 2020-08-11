@@ -103,8 +103,7 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         isExit++ ;
         if (isExit > 1) {
-            finish();
-            System.exit(0);
+            super.onBackPressed();
         }
         Toast.makeText(this,"再按一次退出", Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(() -> isExit = 0, 1000);
