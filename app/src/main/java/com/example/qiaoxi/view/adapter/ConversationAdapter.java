@@ -54,7 +54,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         holder.lastMessage.setText(model.lastMessage.content);
         holder.title.setText(model.compactMan);
         holder.lastMsgTime.setText(model.lastMessage.sendTime);
-
         holder.waitReadCount.setText(String.valueOf(model.unread));
         holder.icon.setImageDrawable(QXApplication.getContext().getDrawable(model.temp_profile));
 
@@ -64,7 +63,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                 int pos = holder.getLayoutPosition();
                 mOnConversationItemClickListener.onClick(holder.itemView,pos);
             });
-            
         }
     }
 

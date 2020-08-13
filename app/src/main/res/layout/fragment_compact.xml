@@ -22,24 +22,97 @@
             app:title="@string/compact"
             app:titleTextMarginStart="15"
             app:titleTextColor="@color/pure_black"
-            app:rightButton_src="@mipmap/search"
+            app:rightButton_src="@mipmap/search_black"
             />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/light_gray"
+            android:background="@color/danhui_0"
             android:id="@+id/toolbar_gap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/compact_toolbar" />
 
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
+            android:id="@+id/compact_add_friend"
+            android:src="@mipmap/add_compact"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/compact_add_friend"
+            app:layout_constraintEnd_toEndOf="@id/compact_add_friend"
+            app:layout_constraintTop_toBottomOf="@id/compact_add_friend"
+            android:textSize="15sp"
+            android:textColor="@color/gray_686868"
+            android:text="@string/add_compact"
+            android:id="@+id/add_compact_text"
+            android:layout_marginTop="5dp"
+
+            />
+
+
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
+            android:id="@+id/compact_groups"
+            android:src="@mipmap/chat_group"
+            android:layout_marginTop="30dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/compact_groups"
+            app:layout_constraintEnd_toEndOf="@id/compact_groups"
+            app:layout_constraintTop_toBottomOf="@id/compact_groups"
+            android:textSize="15sp"
+            android:textColor="@color/gray_686868"
+            android:text="@string/my_groups"
+            android:id="@+id/compact_groups_text"
+            android:layout_marginTop="5dp"
+
+            />
+
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
+            android:id="@+id/compact_secure_chat"
+            android:src="@mipmap/private_secret"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/compact_secure_chat"
+            app:layout_constraintEnd_toEndOf="@id/compact_secure_chat"
+            app:layout_constraintTop_toBottomOf="@id/compact_secure_chat"
+            android:textSize="15sp"
+            android:textColor="@color/gray_686868"
+            android:text="@string/secure_chat"
+            android:id="@+id/compact_secure_chat_text"
+            android:layout_marginTop="5dp"
+
+            />
+        
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/friend_recy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
+            app:layout_constraintTop_toBottomOf="@id/add_compact_text"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
