@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.ConversationModel;
+import com.example.qiaoxi.view.customerview.CustomerImgView;
 import com.example.qiaoxi.widget.QXApplication;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     private List<ConversationModel> models;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView icon;
+        public CustomerImgView icon;
         public TextView title;
         public TextView lastMessage;
         public TextView lastMsgTime;
@@ -55,7 +56,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         holder.title.setText(model.compactMan);
         holder.lastMsgTime.setText(model.lastMessage.sendTime);
         holder.waitReadCount.setText(String.valueOf(model.unread));
-        holder.icon.setImageDrawable(QXApplication.getContext().getDrawable(model.temp_profile));
+        holder.icon.setImgResourceID(model.temp_profile);
 
         View item = holder.itemView;
         if (mOnConversationItemClickListener != null) {

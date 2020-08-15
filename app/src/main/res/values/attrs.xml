@@ -8,4 +8,9 @@
         <attr name="titleTextColor" format="color"/>
         <attr name="titleTextMarginStart" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="CustomerImgView">
+        <attr name="qxSrc" format="reference"/>
+        <attr name="qxRadius" format="integer"/>
+    </declare-styleable>
 </resources>

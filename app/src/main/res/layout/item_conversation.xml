@@ -11,7 +11,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/guyu"
         android:layout_marginStart="20dp"
         android:id="@+id/conversation_icon"
         android:stateListAnimator="@null"

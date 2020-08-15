@@ -3,39 +3,60 @@ package com.example.qiaoxi.view.customerview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Shader;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.qiaoxi.R;
 
+
 public class CustomerImgView extends AppCompatImageView {
     private int img_resourceID = 0;
     private Path mPath = new Path();
     private float width,height;
-    Paint paint = new Paint();
+    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Path path = new Path();
+    Paint shadowPaint = new Paint();
+    Bitmap bitmap;
+    BlurMaskFilter bf;
 
     public CustomerImgView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context,attributeSet,defStyle);
+        initView();
     }
     public CustomerImgView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         img_resourceID = attributeSet.getAttributeResourceValue("http://schemas.android.com/apk/res/android","src",0);
+        initView();
     }
     public CustomerImgView(Context context) {
         super(context);
+        initView();
     }
 
+    private void initView() {
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
+        bf = new BlurMaskFilter(10,BlurMaskFilter.Blur.INNER);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLUE);
+//        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+        paint.setMaskFilter(bf);
+
+        shadowPaint.setColor(Color.BLACK);
+        shadowPaint.setStyle(Paint.Style.FILL);
+        shadowPaint.setAntiAlias(true);
+//        shadowPaint.setAlpha(0);
+
+    }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -46,20 +67,40 @@ public class CustomerImgView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //去锯齿
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(20);
-//        Shader shader = new LinearGradient(0,0,width,height,Color.parseColor("#E91E63"),Color.parseColor("#2196F3"),Shader.TileMode.CLAMP);
-//        paint.setShader(shader);
-        path.addCircle(width / 2, height / 2 , height /2 - 2, Path.Direction.CW);
-        canvas.clipPath(path);
-        canvas.drawPath(path,paint);
         super.onDraw(canvas);
+        float raduis = height / 12 > 40 ? 40: height / 12;
+        float shadowColor = height / 16 > 28? 28 : height / 16;
+//        paint.setShadowLayer(200 , 10, 10, getDarkerColor(Color.RED));
+
+        RectF rectF = new RectF(0 , 0, width-10 , height-10 );
+
+        if (bitmap != null) {
+            canvas.drawBitmap(bitmap.extractAlpha(paint, null), 20,20, paint);
+            canvas.drawBitmap(bitmap,null,rectF,shadowPaint);
+        }
+        canvas.save();
+
+//        canvas.drawRoundRect(rectF, 5, 5, shadowPaint);
+
+
+
+//        path.addCircle(width / 2, height / 2 , height /2 - 10, Path.Direction.CW);
+//        canvas.clipPath(path);
+//        canvas.drawPath(path,shadowPaint);
+//        super.onDraw(canvas);
 
 //        canvas.drawPath(path1,paint);
+
     }
+
+    private int getDarkerColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[1] = hsv[1] + 0.1f;
+        hsv[2] = hsv[2] - 0.1f;
+        return Color.HSVToColor(hsv);
+    }
+
     private Bitmap getResourceBitmap() {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled= true;
@@ -94,5 +135,10 @@ public class CustomerImgView extends AppCompatImageView {
         p.setColor(getResources().getColor(R.color.main_green));
         c.drawRect(0,0,width,height,p);
         return rect;
+    }
+
+    public void setImgResourceID(int resId) {
+        this.img_resourceID = resId;
+        bitmap = BitmapFactory.decodeResource(getResources(),resId);
     }
 }
