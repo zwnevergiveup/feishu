@@ -38,13 +38,13 @@ public class ConversationFragment extends Fragment {
             msg.sendTime = "昨天";
             msg.receive = "测试"+ i;
             if (i % 2 == 0) {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.chunfen,i + 1));
+                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.jilu,i + 1));
             }else if (i % 3 == 0) {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.dahan,i + 1));
+                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.jilu,i + 1));
             }else if (i % 5 == 0) {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.qiufen,i + 1));
+                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.jilu,i + 1));
             } else {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.xiazhi,i + 1));
+                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.jilu,i + 1));
             }
         }
 

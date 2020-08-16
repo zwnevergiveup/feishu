@@ -9,8 +9,11 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
@@ -22,11 +25,12 @@ public class CustomerImgView extends AppCompatImageView {
     private int img_resourceID = 0;
     private Path mPath = new Path();
     private float width,height;
-    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    Paint paint;
     Path path = new Path();
-    Paint shadowPaint = new Paint();
+    Paint shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Bitmap bitmap;
     BlurMaskFilter bf;
+    PorterDuffXfermode xFermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
 
     public CustomerImgView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context,attributeSet,defStyle);
@@ -44,16 +48,16 @@ public class CustomerImgView extends AppCompatImageView {
 
     private void initView() {
         setLayerType(LAYER_TYPE_SOFTWARE, null);
-        bf = new BlurMaskFilter(10,BlurMaskFilter.Blur.INNER);
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
-//        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2);
-        paint.setMaskFilter(bf);
 
-        shadowPaint.setColor(Color.BLACK);
-        shadowPaint.setStyle(Paint.Style.FILL);
+//        paint.setStyle(Paint.Style.STROKE);
+//        paint.setAntiAlias(true);
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Paint.Style.FILL);
+
+        paint.setFilterBitmap(false);
         shadowPaint.setAntiAlias(true);
+        shadowPaint.setShadowLayer(10 , 5, 10, getResources().getColor(R.color.C1C1C1_gray));
+
 //        shadowPaint.setAlpha(0);
 
     }
@@ -67,18 +71,28 @@ public class CustomerImgView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        float raduis = height / 12 > 40 ? 40: height / 12;
-        float shadowColor = height / 16 > 28? 28 : height / 16;
-//        paint.setShadowLayer(200 , 10, 10, getDarkerColor(Color.RED));
 
-        RectF rectF = new RectF(0 , 0, width-10 , height-10 );
+//        将绘制操作保存到新的图层，因为图像合成是很昂贵的操作，将用到硬件加速，这里将图像合成的处理放到离屏缓存中进行
+        int saveCount = canvas.saveLayer(0, 0, width, height, paint, Canvas.ALL_SAVE_FLAG);
 
-        if (bitmap != null) {
-            canvas.drawBitmap(bitmap.extractAlpha(paint, null), 20,20, paint);
-            canvas.drawBitmap(bitmap,null,rectF,shadowPaint);
-        }
-        canvas.save();
+
+//        super.onDraw(canvas);
+
+        canvas.drawBitmap(bitmap,null,new RectF(0,0,width,height),paint);
+
+        path.addCircle(width/2, height/2 , height /2, Path.Direction.CCW);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawPath(path,paint);
+
+        paint.setXfermode(null);
+
+        canvas.restoreToCount(saveCount);
+
+//        if (bitmap != null) {
+//            canvas.drawRoundRect(rectF,rectF.height() /2,rectF.width() / 2,shadowPaint);
+//
+//            canvas.drawBitmap(bitmap,null,rectF,paint);
+//        }
 
 //        canvas.drawRoundRect(rectF, 5, 5, shadowPaint);
 
@@ -93,52 +107,9 @@ public class CustomerImgView extends AppCompatImageView {
 
     }
 
-    private int getDarkerColor(int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[1] = hsv[1] + 0.1f;
-        hsv[2] = hsv[2] - 0.1f;
-        return Color.HSVToColor(hsv);
-    }
-
-    private Bitmap getResourceBitmap() {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inScaled= true;
-        Bitmap bitmap = Bitmap.createBitmap(64,64, Bitmap.Config.ARGB_8888);//BitmapFactory.decodeResource(getResources(),img_resourceID,options).copy(Bitmap.Config.ARGB_8888,true);
-        bitmap.eraseColor(Color.parseColor("#000000"));
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int newWidth = (int)this.width - 20;
-        int newHeight = (int)this.height- 20;
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-        return resizedBitmap;
-    }
-
-    private Bitmap getCircleBitmap() {
-        Bitmap circle = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(circle);
-        c.drawARGB(0, 0, 0, 0);
-        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-        p.setColor(getResources().getColor(R.color.main_green));
-        c.drawCircle(width / 2 , height / 2, width / 2, p);
-        return circle;
-    }
-    private Bitmap getRectBitmap() {
-        Bitmap rect = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(rect);
-        c.drawARGB(0, 0, 0, 0);
-        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-        p.setColor(getResources().getColor(R.color.main_green));
-        c.drawRect(0,0,width,height,p);
-        return rect;
-    }
-
     public void setImgResourceID(int resId) {
         this.img_resourceID = resId;
-        bitmap = BitmapFactory.decodeResource(getResources(),resId);
+//        bitmap = BitmapFactory.decodeResource(getResources(),resId);
+         bitmap=Bitmap.createBitmap(60,60, Bitmap.Config.ARGB_8888);
     }
 }
