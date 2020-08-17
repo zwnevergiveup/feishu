@@ -29,8 +29,13 @@ public class CustomerImgView extends AppCompatImageView {
     Path path = new Path();
     Paint shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Bitmap bitmap;
+    Bitmap bitmap2;
+    Bitmap mask;
     BlurMaskFilter bf;
     PorterDuffXfermode xFermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
+    RectF rectF;
+    float radius = 50;
+
 
     public CustomerImgView(Context context, AttributeSet attributeSet, int defStyle) {
         super(context,attributeSet,defStyle);
@@ -53,8 +58,7 @@ public class CustomerImgView extends AppCompatImageView {
 //        paint.setAntiAlias(true);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
-
-        paint.setFilterBitmap(false);
+        paint.setColor(Color.BLACK);
         shadowPaint.setAntiAlias(true);
         shadowPaint.setShadowLayer(10 , 5, 10, getResources().getColor(R.color.C1C1C1_gray));
 
@@ -67,6 +71,12 @@ public class CustomerImgView extends AppCompatImageView {
         super.onLayout(changed, left, top, right, bottom);
         width = getWidth();
         height = getHeight();
+        if (rectF == null) {
+            rectF = new RectF(0,0,width,height);
+        }
+        if (mask == null) {
+            createMaskBitmap();
+        }
     }
 
     @Override
@@ -78,11 +88,13 @@ public class CustomerImgView extends AppCompatImageView {
 
 //        super.onDraw(canvas);
 
-        canvas.drawBitmap(bitmap,null,new RectF(0,0,width,height),paint);
+        canvas.drawBitmap(bitmap,null,rectF,paint);
 
-        path.addCircle(width/2, height/2 , height /2, Path.Direction.CCW);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawPath(path,paint);
+//        path.addCircle(width/2, height/2 , height /2, Path.Direction.CCW);
+        paint.setXfermode(xFermode);
+//        canvas.drawPath(path,paint);
+        canvas.drawBitmap(mask,null,rectF,paint);
+
 
         paint.setXfermode(null);
 
@@ -107,9 +119,16 @@ public class CustomerImgView extends AppCompatImageView {
 
     }
 
+    private void createMaskBitmap() {
+        mask = Bitmap.createBitmap((int)width, (int)height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(mask);
+        canvas.drawRoundRect(rectF,radius,radius,paint);
+    }
+
     public void setImgResourceID(int resId) {
         this.img_resourceID = resId;
-//        bitmap = BitmapFactory.decodeResource(getResources(),resId);
-         bitmap=Bitmap.createBitmap(60,60, Bitmap.Config.ARGB_8888);
+        bitmap = BitmapFactory.decodeResource(getResources(),resId);
+        bitmap2 = BitmapFactory.decodeResource(getResources(),R.mipmap.chunfen);
+//         bitmap=Bitmap.createBitmap(60,60, Bitmap.Config.ARGB_8888);
     }
 }
