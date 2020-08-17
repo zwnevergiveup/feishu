@@ -56,7 +56,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         holder.title.setText(model.compactMan);
         holder.lastMsgTime.setText(model.lastMessage.sendTime);
         holder.waitReadCount.setText(String.valueOf(model.unread));
-        holder.icon.setImgResourceID(model.temp_profile);
+        holder.icon.setImageResource(model.temp_profile);
 
         View item = holder.itemView;
         if (mOnConversationItemClickListener != null) {

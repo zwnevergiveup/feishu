@@ -15,6 +15,10 @@
         android:id="@+id/conversation_icon"
         android:stateListAnimator="@null"
         android:elevation="10dp"
+        app:qxRadius="30"
+        android:scaleType="fitXY"
+        app:qxBorder="2"
+        app:qxBorderColor="@color/danhui_0"
         />
 
     <TextView
