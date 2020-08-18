@@ -22,37 +22,37 @@ import java.util.List;
 public class ConversationFragment extends Fragment {
     private RecyclerView mRecycler;
     private List<ConversationModel> conversationModels = new ArrayList<>();
+    private View root;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_conversations,container, false);
-        mRecycler = root.findViewById(R.id.conversations_recycler);
-        ConversationAdapter adapter = new ConversationAdapter();
-        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecycler.setAdapter(adapter);
+        if (root == null) {
+            root = inflater.inflate(R.layout.fragment_conversations, container, false);
+            mRecycler = root.findViewById(R.id.conversations_recycler);
+            ConversationAdapter adapter = new ConversationAdapter();
+            mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecycler.setAdapter(adapter);
 
 
-        for (int i = 0 ; i< 20; i ++) {
-            MsgModel msg = new MsgModel();
-            msg.content = "这是一条测试消息" + i;
-            msg.sendTime = "昨天";
-            msg.receive = "测试"+ i;
-            if (i % 2 == 0) {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.icon_people1,i + 1));
-            }else if (i % 3 == 0) {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.icon_people2,i + 1));
-            }else if (i % 5 == 0) {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.icon_people3,i + 1));
-            } else {
-                conversationModels.add(new ConversationModel("zw", "测试" + i,msg, R.mipmap.icon_people4,i + 1));
+            for (int i = 0; i < 20; i++) {
+                MsgModel msg = new MsgModel();
+                msg.content = "这是一条测试消息" + i;
+                msg.sendTime = "昨天";
+                msg.receive = "测试" + i;
+                if (i % 2 == 0) {
+                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people1, i + 1));
+                } else if (i % 3 == 0) {
+                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people2, i + 1));
+                } else if (i % 5 == 0) {
+                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people3, i + 1));
+                } else {
+                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people4, i + 1));
+                }
             }
+
+
+            adapter.setConversationModels(conversationModels);
         }
-
-
-
-
-        adapter.setConversationModels(conversationModels);
-
         return root;
     }
 
