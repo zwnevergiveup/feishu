@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class CompactViewModel extends BaseViewModel {
 
-    private MutableLiveData<List<String>> mContactList;
+    private MutableLiveData<List<UserModel>> mContactList;
 
     public CompactViewModel() {
         mContactList = new MutableLiveData<>();
@@ -29,39 +29,8 @@ public class CompactViewModel extends BaseViewModel {
         }
     }
 
-    public LiveData<List<String>> getContactList() {
+    public LiveData<List<UserModel>> getContactList() {
         return mContactList;
-    }
-    private void listenContact() {
-        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
-            @Override
-            public void onContactAdded(String s) {
-                mContactList.getValue().add(s);
-                Log.e("qiaoxi","has onContactAdded");
-            }
-
-            @Override
-            public void onContactDeleted(String s) {
-                Log.e("qiaoxi","has onContactDeleted");
-            }
-
-            @Override
-            public void onContactInvited(String s, String s1) {
-                Log.e("qiaoxi","has agreed");
-            }
-
-            @Override
-            public void onFriendRequestAccepted(String s) {
-                Log.e("qiaoxi","onFriendRequestAccepted");
-
-            }
-
-            @Override
-            public void onFriendRequestDeclined(String s) {
-                Log.e("qiaoxi","onFriendRequestDeclined");
-
-            }
-        });
     }
 
 }

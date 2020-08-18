@@ -7,14 +7,14 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-public class ListStringConvertor {
+public class ListUserModelConvertor {
     @TypeConverter
-    public List<String> string2UserModel(String str) {
-        return (List<String>) (JsonHelper.getInstance().getObject(str, new TypeToken<List<String>>() {}.getType()));
+    public List<UserModel> string2UserModels(String str) {
+        return (List<UserModel>) (JsonHelper.getInstance().getObject(str, new TypeToken<List<UserModel>>() {}.getType()));
     }
 
     @TypeConverter
-   public String userModel2String(List<String> models) {
+   public String userModels2String(List<UserModel> models) {
         return JsonHelper.getInstance().toJson(models);
     }
 }

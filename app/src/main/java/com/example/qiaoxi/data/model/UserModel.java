@@ -10,22 +10,26 @@ import java.util.List;
 
 
 @Entity(tableName = "userModels")
-@TypeConverters(ListStringConvertor.class)
+@TypeConverters(ListUserModelConvertor.class)
 public class UserModel {
     @PrimaryKey
     @NonNull
     public String userId;
 
     @ColumnInfo(name = "friends")
-    public List<String> friends;
+    public List<UserModel> friends;
 
     @ColumnInfo(name = "icon")
     public String icon;
 
+    @ColumnInfo(name = "privateFlag")
+    public boolean privateFlag;
 
-    public UserModel(String userId, List<String> friends, String icon) {
+
+    public UserModel(String userId, List<UserModel> friends, String icon, boolean privateFlag) {
         this.userId = userId;
         this.friends = friends;
         this.icon = icon;
+        this.privateFlag = privateFlag;
     }
 }
