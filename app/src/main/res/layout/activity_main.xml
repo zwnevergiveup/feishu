@@ -21,6 +21,7 @@
         app:menu="@menu/bottom_nav_menu"
         android:id="@+id/main_bottom_navigation"
         android:background="@color/pure_white"
+        app:itemBackground="@null"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -133,5 +133,14 @@
             android:id="@+id/friend_add"
             app:borderWidth="0dp" />
 
+        <com.example.qiaoxi.view.customerview.LetterNavigationView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@id/friend_recy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/friend_recy"
+            app:layout_constraintBottom_toBottomOf="@id/friend_recy"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
