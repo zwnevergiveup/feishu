@@ -120,26 +120,27 @@
             android:layout_marginEnd="40dp"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="80dp"
-            android:src="@mipmap/add"
-            android:scaleType="center"
-            android:backgroundTint="@color/main_green"
-            android:id="@+id/friend_add"
-            app:borderWidth="0dp" />
 
         <com.example.qiaoxi.view.customerview.LetterNavigationView
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toEndOf="@id/friend_recy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/friend_recy"
             app:layout_constraintBottom_toBottomOf="@id/friend_recy"
+            android:id="@+id/compact_letterNavigation"
+            />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/compact_letterNavigation"
+            android:visibility="invisible"
+            android:textSize="45sp"
+            android:textColor="@color/pure_black"
+            android:id="@+id/compact_showNavigationLetter"
+            android:gravity="center"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

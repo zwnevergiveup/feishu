@@ -6,6 +6,7 @@
 
     <color name="alpha0">#00000000</color>
     <color name="main_green">#06BFA7</color>
+    <color name="green_7706BFA7">#7706BFA7</color>
     <color name="pure_black">#000000</color>
     <color name="pure_white">#ffffff</color>
     <color name="pure_red">#ff0000</color>

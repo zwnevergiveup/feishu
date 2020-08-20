@@ -1,19 +1,25 @@
 package com.example.qiaoxi.view.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.UserModel;
+import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.adapter.CompactAdapter;
+import com.example.qiaoxi.view.customerview.LetterNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +29,8 @@ public class CompactFragment extends Fragment {
     private List<UserModel> compacts = new ArrayList<>();
     private RecyclerView mRecycler;
     private View root;
+    private LetterNavigationView letterNavigationView;
+    private TextView mShowLetterText;
 
 
     @Nullable
@@ -31,6 +39,8 @@ public class CompactFragment extends Fragment {
         if (root == null) {
             root = inflater.inflate(R.layout.fragment_compact, container, false);
             mRecycler = root.findViewById(R.id.friend_recy);
+            letterNavigationView = root.findViewById(R.id.compact_letterNavigation);
+            mShowLetterText = root.findViewById(R.id.compact_showNavigationLetter);
             mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
             CompactAdapter adapter = new CompactAdapter();
 
@@ -44,12 +54,33 @@ public class CompactFragment extends Fragment {
             compacts.add(new UserModel("臭猪", new ArrayList<>(), "", true));
             compacts.add(new UserModel("淑芬", new ArrayList<>(), "", false));
             compacts.add(new UserModel("菜蛋", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("二愣子", new ArrayList<>(), "", false));
+            compacts.add(new UserModel("二ssssssssssssssss愣子", new ArrayList<>(), "", false));
             compacts.add(new UserModel("李狗子", new ArrayList<>(), "", false));
 
             adapter.setFriends(compacts);
             mRecycler.setAdapter(adapter);
+            setEvent();
         }
         return root;
+    }
+
+    private void setEvent() {
+        letterNavigationView.setScrollerListener(new LetterNavigationView.OnNavigationScrollerListener() {
+            @Override
+            public void onDown(String letter, int currentIndex) {
+
+
+            }
+
+            @Override
+            public void onScroll(String letter,int currentIndex) {
+
+            }
+
+            @Override
+            public void onUp() {
+
+            }
+        });
     }
 }
