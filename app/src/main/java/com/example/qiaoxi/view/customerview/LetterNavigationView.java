@@ -63,12 +63,12 @@ public class LetterNavigationView extends View {
     protected void onDraw(Canvas canvas) {
         for (int i = 0 ;i < mNavigationContent.length; i++) {
             mTextPaint.setTextSize(oneHeight * 3 / 4);
-            canvas.drawText(mNavigationContent[i],width * 4/ 5,(aPosition + oneHeight * i) + oneHeight / 2 ,mTextPaint);
+            canvas.drawText(mNavigationContent[i],width  / 2,(aPosition + oneHeight * i) + oneHeight / 2 ,mTextPaint);
         }
-        if (scrolling) {
-            Log.e("qiaoxi","mCurrentY: "+ mCurrentY);
-            canvas.drawCircle(width * 3 /10,mCurrentY, width * 3 / 10,mViewPaint);
-        }
+//        if (scrolling) {
+//            Log.e("qiaoxi","mCurrentY: "+ mCurrentY);
+//            canvas.drawCircle(width * 3 /10,mCurrentY, width * 3 / 10,mViewPaint);
+//        }
     }
 
     @Override

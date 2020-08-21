@@ -122,7 +122,7 @@
 
 
         <com.example.qiaoxi.view.customerview.LetterNavigationView
-            android:layout_width="100dp"
+            android:layout_width="30dp"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/friend_recy"
@@ -131,14 +131,14 @@
             />
 
         <TextView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toStartOf="@id/compact_letterNavigation"
             app:layout_constraintTop_toTopOf="@id/compact_letterNavigation"
             android:visibility="invisible"
-            android:textSize="45sp"
+            android:textSize="25sp"
             android:textColor="@color/pure_black"
+            android:background="@drawable/main_green_r12_bg"
             android:id="@+id/compact_showNavigationLetter"
             android:gravity="center"
             />
