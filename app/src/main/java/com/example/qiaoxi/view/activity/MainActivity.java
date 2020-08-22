@@ -1,10 +1,8 @@
 package com.example.qiaoxi.view.activity;
 
 import android.os.Handler;
-import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +12,6 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.ConversationModel;
 import com.example.qiaoxi.dataprocess.ConversationsViewModel;
 import com.example.qiaoxi.view.adapter.ViewPagerAdapter;
-import com.example.qiaoxi.view.customerview.QXToolbar;
 import com.example.qiaoxi.view.fragment.CompactFragment;
 import com.example.qiaoxi.view.fragment.ConversationFragment;
 import com.example.qiaoxi.view.fragment.DiscoverFragment;

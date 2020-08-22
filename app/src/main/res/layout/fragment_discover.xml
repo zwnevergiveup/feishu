@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.youth.banner.Banner
+
+    <com.example.qiaoxi.view.customerview.QXToolbar
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/discover_banner"
-        android:background="@color/pure_black"
+        android:id="@+id/information_toolbar"
+        app:title="@string/compact"
+        app:titleTextMarginStart="15"
+        app:titleTextColor="@color/pure_black"
+        app:rightButton_src="@mipmap/search_black"
+        app:background_color="@color/pure_white"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/danhui_0"
+        android:id="@+id/toolbar_gap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/information_toolbar" />
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
+        android:id="@+id/discover_tablayout"
+        app:tabRippleColor="@color/alpha0"
+        />
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/discover_tablayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/information_viewpage"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
