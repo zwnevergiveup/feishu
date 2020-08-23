@@ -45,9 +45,10 @@ public class CardViewAdapter extends BannerAdapter<BannerModel, CardViewAdapter.
 
     @Override
     public void onBindView(BannerViewHolder holder, BannerModel data, int position, int size) {
-        Glide.with(mContext)
-                .load(data.imgPath)
-                .into(holder.imageView);
+//        Glide.with(mContext)
+//                .load(data.imgPath)
+//                .into(holder.imageView);
+        holder.imageView.setImageResource(data.imgPath);
         holder.textView.setText(data.abstractContent);
     }
 }
