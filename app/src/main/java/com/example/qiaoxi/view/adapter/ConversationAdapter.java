@@ -53,7 +53,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ConversationModel model = models.get(position);
         holder.lastMessage.setText(model.lastMessage.content);
-        holder.title.setText(model.compactMan);
+        holder.title.setText(model.contactMan);
         holder.lastMsgTime.setText(model.lastMessage.sendTime);
         holder.waitReadCount.setText(String.valueOf(model.unread));
         holder.icon.setImageResource(model.temp_profile);

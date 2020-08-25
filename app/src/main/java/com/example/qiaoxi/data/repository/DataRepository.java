@@ -71,8 +71,8 @@ public class DataRepository  implements MessageDataDelegate, ConversationModelDe
     }
 
     @Override
-    public List<MsgModel> readMsgFromDB( String current ,String compact) {
-        return db.msgModelDao().loadMsgByName(compact,current);
+    public List<MsgModel> readMsgFromDB( String current ,String contact) {
+        return db.msgModelDao().loadMsgByName(contact,current);
     }
 
     @Override

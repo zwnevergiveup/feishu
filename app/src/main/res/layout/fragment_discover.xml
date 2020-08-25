@@ -11,7 +11,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/information_toolbar"
-        app:title="@string/compact"
+        app:title="@string/contact"
         app:titleTextMarginStart="15"
         app:titleTextColor="@color/pure_black"
         app:rightButton_src="@mipmap/search_black"

@@ -18,8 +18,8 @@ public class ConversationModel {
     @ColumnInfo(name = "current_name")
     public String currentName;
 
-    @ColumnInfo(name = "compact_man")
-    public String compactMan;
+    @ColumnInfo(name = "contact_man")
+    public String contactMan;
 
     @ColumnInfo(name = "last_message")
     public MsgModel lastMessage;
@@ -35,18 +35,18 @@ public class ConversationModel {
 
 
 
-    public ConversationModel(String currentName, String compactMan, MsgModel lastMessage) {
+    public ConversationModel(String currentName, String contactMan, MsgModel lastMessage) {
         this.currentName = currentName;
-        this.compactMan = compactMan;
+        this.contactMan = contactMan;
         this.lastMessage = lastMessage;
-        this.conversationKey = currentName+compactMan;
+        this.conversationKey = currentName+contactMan;
     }
 
-    public ConversationModel(String currentName, String compactMan, MsgModel lastMessage, int temp_profile, int unread) {
+    public ConversationModel(String currentName, String contactMan, MsgModel lastMessage, int temp_profile, int unread) {
         this.currentName = currentName;
-        this.compactMan = compactMan;
+        this.contactMan = contactMan;
         this.lastMessage = lastMessage;
-        this.conversationKey = currentName+compactMan;
+        this.conversationKey = currentName+contactMan;
         this.temp_profile = temp_profile;
         this.unread = unread;
     }

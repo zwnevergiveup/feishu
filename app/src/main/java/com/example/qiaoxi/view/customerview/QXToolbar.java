@@ -2,6 +2,7 @@ package com.example.qiaoxi.view.customerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -55,8 +56,6 @@ public class QXToolbar extends ConstraintLayout {
             int titleTextColor = typedArray.getColor(R.styleable.QXToolbar_titleTextColor, 0);
             int titleMarginStart = typedArray.getInteger(R.styleable.QXToolbar_titleTextMarginStart , -1);
 
-
-
             if (titleText != null ) {
                 if (titleMarginStart != -1) {
                     int dip = DisplayHelper.dip2Px(context, titleMarginStart);
@@ -95,9 +94,10 @@ public class QXToolbar extends ConstraintLayout {
         }
     }
 
-    public void setTitleText(String title, int color) {
+    public void setTitleText(String title, int color,boolean bold) {
         this.mTitle.setTextColor(color);
         this.mTitle.setText(title);
+        mTitle.getPaint().setFakeBoldText(bold);
         this.mTitle.setVisibility(VISIBLE);
     }
 }

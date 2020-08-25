@@ -9,7 +9,7 @@ public interface MessageDataDelegate {
 
     void write2DB(MsgModel msgModel);
 
-    List<MsgModel> readMsgFromDB(String current , String compact);
+    List<MsgModel> readMsgFromDB(String current , String contact);
 
     List<MsgModel> findMsgFromDB(String send, String receive);
 }

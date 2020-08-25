@@ -7,7 +7,7 @@
     <string name="logout">退出登录</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="conversation">会话</string>
-    <string name="compact">联系人</string>
+    <string name="contact">联系人</string>
     <string name="mine">我的</string>
     <string name="discover">发现</string>
     <string name="send">发送</string>
@@ -17,7 +17,7 @@
     <string name="please_enter_message">请输入消息</string>
     <string name="change_account">切换账号</string>
     <string name="logon"><![CDATA[还没有账号？<b><font color="#06BFA7">点击注册</font></b>]]></string>
-    <string name="add_compact">添加好友</string>
+    <string name="add_contact">添加好友</string>
     <string name="my_groups">我的群组</string>
     <string name="secure_chat">私密聊天</string>
 

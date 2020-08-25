@@ -1,7 +1,7 @@
 package com.example.qiaoxi.view.fragment;
 
 import android.app.Service;
-import android.media.AudioAttributes;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -18,15 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.UserModel;
-import com.example.qiaoxi.view.adapter.CompactAdapter;
+import com.example.qiaoxi.view.ContactDetailActivity;
+import com.example.qiaoxi.view.adapter.ContactAdapter;
 import com.example.qiaoxi.view.customerview.LetterNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompactFragment extends Fragment {
+public class ContactFragment extends Fragment {
 
-    private List<UserModel> compacts = new ArrayList<>();
+    private List<UserModel> contacts = new ArrayList<>();
     private RecyclerView mRecycler;
     private View root;
     private LetterNavigationView letterNavigationView;
@@ -40,30 +41,36 @@ public class CompactFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (root == null) {
-            root = inflater.inflate(R.layout.fragment_compact, container, false);
+            root = inflater.inflate(R.layout.fragment_contact, container, false);
             mRecycler = root.findViewById(R.id.friend_recy);
-            letterNavigationView = root.findViewById(R.id.compact_letterNavigation);
-            mShowLetterText = root.findViewById(R.id.compact_showNavigationLetter);
+            letterNavigationView = root.findViewById(R.id.contact_letterNavigation);
+            mShowLetterText = root.findViewById(R.id.contact_showNavigationLetter);
             mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
             mVibrator = (Vibrator) getActivity().getApplication().getSystemService(Service.VIBRATOR_SERVICE);
 
-            CompactAdapter adapter = new CompactAdapter();
+            ContactAdapter adapter = new ContactAdapter();
 
-            compacts.add(new UserModel("二狗", new ArrayList<>(), "", true));
-            compacts.add(new UserModel("三毛", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("赵铁柱", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("李大海", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("狗剩", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("铁蛋", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("丑娃", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("臭猪", new ArrayList<>(), "", true));
-            compacts.add(new UserModel("淑芬", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("菜蛋", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("二ssssssssssssssss愣子", new ArrayList<>(), "", false));
-            compacts.add(new UserModel("李狗子", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("二狗", new ArrayList<>(), "", true));
+            contacts.add(new UserModel("三毛", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("赵铁柱", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("李大海", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("狗剩", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("铁蛋", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("丑娃", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("臭猪", new ArrayList<>(), "", true));
+            contacts.add(new UserModel("淑芬", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("菜蛋", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("二愣子", new ArrayList<>(), "", false));
+            contacts.add(new UserModel("李狗子", new ArrayList<>(), "", false));
 
-            adapter.setFriends(compacts);
+            adapter.setFriends(contacts);
             mRecycler.setAdapter(adapter);
+            adapter.setOnFriendItemClickListener(new ContactAdapter.onFriendItemClickListener() {
+                @Override
+                public void onClick(View view, int position) {
+                    getActivity().startActivity(new Intent(getActivity(), ContactDetailActivity.class));
+                }
+            });
             setEvent();
 
         }

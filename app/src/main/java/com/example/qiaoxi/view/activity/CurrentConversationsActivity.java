@@ -1,5 +1,6 @@
 package com.example.qiaoxi.view.activity;
 
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -48,7 +49,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
         mRecycler.setAdapter(messageAdapter);
 
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
-        toolbar.setTitleText(withWho,getResources().getColor(R.color.pure_black));
+        toolbar.setTitleText(withWho,getResources().getColor(R.color.pure_black), true);
     }
 
     @Override

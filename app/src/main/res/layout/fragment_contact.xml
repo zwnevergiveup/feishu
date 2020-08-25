@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.qiaoxi.dataprocess.CompactViewModel" />
+            type="com.example.qiaoxi.dataprocess.ContactViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/compact_toolbar"
-            app:title="@string/compact"
+            android:id="@+id/contact_toolbar"
+            app:title="@string/contact"
             app:titleTextMarginStart="15"
             app:titleTextColor="@color/pure_black"
             app:rightButton_src="@mipmap/search_black"
@@ -33,28 +33,28 @@
             android:id="@+id/toolbar_gap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/compact_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/contact_toolbar" />
 
         <ImageView
             android:layout_width="52dp"
             android:layout_height="52dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
-            android:id="@+id/compact_add_friend"
-            android:src="@mipmap/add_compact"
+            android:id="@+id/contact_add_friend"
+            android:src="@mipmap/add_contact"
             android:layout_marginTop="30dp"
             android:layout_marginStart="40dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/compact_add_friend"
-            app:layout_constraintEnd_toEndOf="@id/compact_add_friend"
-            app:layout_constraintTop_toBottomOf="@id/compact_add_friend"
+            app:layout_constraintStart_toStartOf="@id/contact_add_friend"
+            app:layout_constraintEnd_toEndOf="@id/contact_add_friend"
+            app:layout_constraintTop_toBottomOf="@id/contact_add_friend"
             android:textSize="13sp"
             android:textColor="@color/gray_686868"
-            android:text="@string/add_compact"
-            android:id="@+id/add_compact_text"
+            android:text="@string/add_contact"
+            android:id="@+id/add_contact_text"
             android:layout_marginTop="5dp"
 
             />
@@ -66,20 +66,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
-            android:id="@+id/compact_groups"
+            android:id="@+id/contact_groups"
             android:src="@mipmap/chat_group"
             android:layout_marginTop="30dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/compact_groups"
-            app:layout_constraintEnd_toEndOf="@id/compact_groups"
-            app:layout_constraintTop_toBottomOf="@id/compact_groups"
+            app:layout_constraintStart_toStartOf="@id/contact_groups"
+            app:layout_constraintEnd_toEndOf="@id/contact_groups"
+            app:layout_constraintTop_toBottomOf="@id/contact_groups"
             android:textSize="13sp"
             android:textColor="@color/gray_686868"
             android:text="@string/my_groups"
-            android:id="@+id/compact_groups_text"
+            android:id="@+id/contact_groups_text"
             android:layout_marginTop="5dp"
 
             />
@@ -89,7 +89,7 @@
             android:layout_height="52dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
-            android:id="@+id/compact_secure_chat"
+            android:id="@+id/contact_secure_chat"
             android:src="@mipmap/private_secret"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="40dp"
@@ -97,13 +97,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/compact_secure_chat"
-            app:layout_constraintEnd_toEndOf="@id/compact_secure_chat"
-            app:layout_constraintTop_toBottomOf="@id/compact_secure_chat"
+            app:layout_constraintStart_toStartOf="@id/contact_secure_chat"
+            app:layout_constraintEnd_toEndOf="@id/contact_secure_chat"
+            app:layout_constraintTop_toBottomOf="@id/contact_secure_chat"
             android:textSize="13sp"
             android:textColor="@color/gray_686868"
             android:text="@string/secure_chat"
-            android:id="@+id/compact_secure_chat_text"
+            android:id="@+id/contact_secure_chat_text"
             android:layout_marginTop="5dp"
 
             />
@@ -114,7 +114,7 @@
             android:layout_height="0dp"
             android:id="@+id/friend_recy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_compact_text"
+            app:layout_constraintTop_toBottomOf="@id/add_contact_text"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="40dp"
@@ -127,19 +127,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/friend_recy"
             app:layout_constraintBottom_toBottomOf="@id/friend_recy"
-            android:id="@+id/compact_letterNavigation"
+            android:id="@+id/contact_letterNavigation"
             />
 
         <TextView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintEnd_toStartOf="@id/compact_letterNavigation"
-            app:layout_constraintTop_toTopOf="@id/compact_letterNavigation"
+            app:layout_constraintEnd_toStartOf="@id/contact_letterNavigation"
+            app:layout_constraintTop_toTopOf="@id/contact_letterNavigation"
             android:visibility="invisible"
             android:textSize="25sp"
             android:textColor="@color/pure_black"
             android:background="@drawable/main_green_r12_bg"
-            android:id="@+id/compact_showNavigationLetter"
+            android:id="@+id/contact_showNavigationLetter"
             android:gravity="center"
             />
 

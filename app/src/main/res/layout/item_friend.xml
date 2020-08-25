@@ -24,7 +24,7 @@
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/item_friend_group_name"
-        android:src="@mipmap/icon_people10"
+        android:src="@mipmap/icon_people26"
         android:id="@+id/item_friend_iv"
         android:scaleType="fitXY"
         app:qxRadius="30"

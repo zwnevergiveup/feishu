@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CompactViewModel extends BaseViewModel {
+public class ContactViewModel extends BaseViewModel {
 
     private MutableLiveData<List<UserModel>> mContactList;
 
-    public CompactViewModel() {
+    public ContactViewModel() {
         mContactList = new MutableLiveData<>();
         mContactList.setValue(new ArrayList<>());
         DataRepository repository = DataRepository.getInstance();

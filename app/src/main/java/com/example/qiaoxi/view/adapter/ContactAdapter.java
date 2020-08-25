@@ -14,7 +14,7 @@ import com.example.qiaoxi.data.model.UserModel;
 
 import java.util.List;
 
-public class CompactAdapter extends RecyclerView.Adapter<CompactAdapter.ViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
     private List<UserModel> friends;
     static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView friendName ;

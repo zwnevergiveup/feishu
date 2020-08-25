@@ -12,7 +12,7 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.ConversationModel;
 import com.example.qiaoxi.dataprocess.ConversationsViewModel;
 import com.example.qiaoxi.view.adapter.ViewPagerAdapter;
-import com.example.qiaoxi.view.fragment.CompactFragment;
+import com.example.qiaoxi.view.fragment.ContactFragment;
 import com.example.qiaoxi.view.fragment.ConversationFragment;
 import com.example.qiaoxi.view.fragment.DiscoverFragment;
 import com.example.qiaoxi.view.fragment.HomeFragment;
@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
         mPager = findViewById(R.id.main_pager);
         mNavigation = findViewById(R.id.main_bottom_navigation);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragments(new ConversationFragment(), new CompactFragment(), new DiscoverFragment(), new HomeFragment());
+        adapter.addFragments(new ConversationFragment(), new ContactFragment(), new DiscoverFragment(), new HomeFragment());
         mPager.setAdapter(adapter);
         mNavigation.setItemIconTintList(null);
         setItemIcon(0);
@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity {
     }
     private void setItemIcon(int position) {
         mNavigation.getMenu().getItem(0).setIcon(position == 0 ? getDrawable(R.mipmap.conversations_selected): getDrawable(R.mipmap.conversations));
-        mNavigation.getMenu().getItem(1).setIcon(position == 1 ? getDrawable(R.mipmap.compact_selected): getDrawable(R.mipmap.compact));
+        mNavigation.getMenu().getItem(1).setIcon(position == 1 ? getDrawable(R.mipmap.contact_selected): getDrawable(R.mipmap.contact));
         mNavigation.getMenu().getItem(2).setIcon(position == 2 ? getDrawable(R.mipmap.faxian_selected): getDrawable(R.mipmap.faxian));
         mNavigation.getMenu().getItem(3).setIcon(position == 3 ? getDrawable(R.mipmap.wode_selected): getDrawable(R.mipmap.wode));
     }
