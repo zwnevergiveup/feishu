@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Entity(tableName = "userModels")
@@ -25,9 +26,12 @@ public class UserModel {
     @ColumnInfo(name = "privateFlag")
     public boolean privateFlag;
 
+    @ColumnInfo(name = "userName")
+    public String userName;
 
-    public UserModel(String userId, List<UserModel> friends, String icon, boolean privateFlag) {
-        this.userId = userId;
+    public UserModel(String userName, List<UserModel> friends, String icon, boolean privateFlag) {
+        this.userId = UUID.randomUUID().toString().replaceAll("-","");
+        this.userName = userName;
         this.friends = friends;
         this.icon = icon;
         this.privateFlag = privateFlag;

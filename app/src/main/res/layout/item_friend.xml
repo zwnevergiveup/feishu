@@ -12,7 +12,6 @@
         app:layout_constraintStart_toStartOf="@id/item_friend_iv"
         app:layout_constraintEnd_toEndOf="@id/item_friend_iv"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="A"
         android:textColor="@color/pure_black"
         android:gravity="center"
         android:textSize="15sp"

@@ -111,5 +111,9 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //拼音
+    implementation 'com.github.promeg:tinypinyin:2.0.3'
+    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
 }
 

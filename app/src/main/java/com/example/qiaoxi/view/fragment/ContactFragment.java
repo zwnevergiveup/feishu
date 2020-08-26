@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,15 @@ import com.example.qiaoxi.data.model.UserModel;
 import com.example.qiaoxi.view.ContactDetailActivity;
 import com.example.qiaoxi.view.adapter.ContactAdapter;
 import com.example.qiaoxi.view.customerview.LetterNavigationView;
+import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class ContactFragment extends Fragment {
 
-    private List<UserModel> contacts = new ArrayList<>();
+    private List<Pair<String, UserModel>> contacts = new ArrayList<>();
     private RecyclerView mRecycler;
     private View root;
     private LetterNavigationView letterNavigationView;
@@ -49,19 +52,31 @@ public class ContactFragment extends Fragment {
             mVibrator = (Vibrator) getActivity().getApplication().getSystemService(Service.VIBRATOR_SERVICE);
 
             ContactAdapter adapter = new ContactAdapter();
-
-            contacts.add(new UserModel("二狗", new ArrayList<>(), "", true));
-            contacts.add(new UserModel("三毛", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("赵铁柱", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("李大海", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("狗剩", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("铁蛋", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("丑娃", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("臭猪", new ArrayList<>(), "", true));
-            contacts.add(new UserModel("淑芬", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("菜蛋", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("二愣子", new ArrayList<>(), "", false));
-            contacts.add(new UserModel("李狗子", new ArrayList<>(), "", false));
+            List<UserModel> models = new ArrayList<>();
+            models.add(new UserModel("二狗", new ArrayList<>(), "", true));
+            models.add(new UserModel("三毛", new ArrayList<>(), "", false));
+            models.add(new UserModel("a赵铁柱", new ArrayList<>(), "", false));
+            models.add(new UserModel("A李大海", new ArrayList<>(), "", false));
+            models.add(new UserModel("狗剩", new ArrayList<>(), "", false));
+            models.add(new UserModel("1铁蛋", new ArrayList<>(), "", false));
+            models.add(new UserModel("0丑娃", new ArrayList<>(), "", false));
+            models.add(new UserModel("臭猪", new ArrayList<>(), "", true));
+            models.add(new UserModel("淑芬", new ArrayList<>(), "", false));
+            models.add(new UserModel("菜蛋", new ArrayList<>(), "", false));
+            models.add(new UserModel("二愣子", new ArrayList<>(), "", false));
+            models.add(new UserModel("李狗子", new ArrayList<>(), "", false));
+            models.sort((o1, o2) -> {
+                int a = Pinyin.toPinyin(o1.userName,"").charAt(0);
+                int b = Pinyin.toPinyin(o2.userName,"").charAt(0);
+                if (a > 96 && a < 123 ) a -= 32;
+                if (b > 96 && b < 123 ) b -= 32;
+                if ((a > 47 && a < 58) && (b < 48 || b > 57)) return 1;
+                if ((b > 47 && b < 58) && (a < 48 || a > 57)) return -1;
+                return  a >= b? 1:-1;
+            });
+            models.forEach(userModel -> {
+                contacts.add(generatePairByLetter(userModel));
+            });
 
             adapter.setFriends(contacts);
             mRecycler.setAdapter(adapter);
@@ -89,7 +104,14 @@ public class ContactFragment extends Fragment {
                 if (!lastLetter.equals(letter)) {
                     mVibrator.vibrate(VibrationEffect.EFFECT_HEAVY_CLICK);
                     lastLetter = letter;
+                    Pair choose = contacts.stream().filter(stringUserModelPair -> stringUserModelPair.first.equals(letter)).findFirst().orElse(null);
+
+                    if (choose != null) {
+                        mRecycler.scrollToPosition(contacts.indexOf(choose));
+
+                    }
                 }
+
             }
 
             @Override
@@ -99,8 +121,13 @@ public class ContactFragment extends Fragment {
                 mShowLetterText.layout(mShowLetterText.getLeft(),Math.round(dy + top),mShowLetterText.getRight(),Math.round(mShowLetterText.getHeight() + dy + top));
                 if (!lastLetter.equals(letter)) {
                     mVibrator.vibrate(VibrationEffect.EFFECT_HEAVY_CLICK);
-
                     lastLetter = letter;
+                    Pair choose = contacts.stream().filter(stringUserModelPair -> stringUserModelPair.first.equals(letter)).findFirst().orElse(null);
+
+                    if (choose != null) {
+                        mRecycler.scrollToPosition(contacts.indexOf(choose));
+
+                    }
                 }
 
             }
@@ -115,5 +142,12 @@ public class ContactFragment extends Fragment {
             oneHeight = letterNavigationView.getHeight() / 27 * 14 / 15;
             top = letterNavigationView.getTop() + letterNavigationView.getHeight() / 30 - oneHeight ;
         });
+    }
+
+    private Pair<String,UserModel> generatePairByLetter(UserModel model){
+        char a = Pinyin.toPinyin(model.userName,"").charAt(0);
+        if (a > 47 && a < 58) return new Pair<>("#",model);
+        if (a > 96 && a < 123 ) a -= 32;
+        return new Pair<>(Character.toString(a),model);
     }
 }

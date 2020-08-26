@@ -1,5 +1,7 @@
 package com.example.qiaoxi.view.adapter;
 
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.UserModel;
+import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
-    private List<UserModel> friends;
+    private List<Pair<String, UserModel>> friends;
     static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView friendName ;
         public ImageView friendIcon;
@@ -33,7 +36,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         }
     }
 
-    public void setFriends(List<UserModel> list) {
+    public void setFriends(List<Pair<String, UserModel>> list) {
         this.friends = list;
     }
 
@@ -46,16 +49,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UserModel user = friends.get(position);
-        holder.friendName.setText(user.userId);
+        UserModel user = friends.get(position).second;
+        holder.friendName.setText(user.userName);
         if (user.privateFlag) {
             holder.privateFlag.setVisibility(View.VISIBLE);
         }
-        if (user.userId.equals("二狗") || user.userId.equals("臭猪")) {
+        if (position == 0 || (!friends.get(position - 1).first.equals(friends.get(position).first))) {
             holder.friendGroupName.setVisibility(View.VISIBLE);
-        }
-        if (user.userId.equals("丑娃") || user.userId.equals("淑芬")) {
-            holder.bottomGap.setVisibility(View.VISIBLE);
+            holder.friendGroupName.setText(friends.get(position).first);
         }
         View item = holder.itemView;
         if (mOnFriendItemClickListener != null) {
