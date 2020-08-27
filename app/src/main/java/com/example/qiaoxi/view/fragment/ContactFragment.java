@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.UserModel;
+import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.view.ContactDetailActivity;
 import com.example.qiaoxi.view.adapter.ContactAdapter;
+import com.example.qiaoxi.view.customerview.CustomerImgView;
 import com.example.qiaoxi.view.customerview.LetterNavigationView;
 import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class ContactFragment extends Fragment {
 
@@ -83,7 +85,11 @@ public class ContactFragment extends Fragment {
             adapter.setOnFriendItemClickListener(new ContactAdapter.onFriendItemClickListener() {
                 @Override
                 public void onClick(View view, int position) {
-                    getActivity().startActivity(new Intent(getActivity(), ContactDetailActivity.class));
+//                    CustomerImgView view1 = view.findViewById(R.id.item_friend_iv);
+                    Intent intent = new Intent(getActivity(),ContactDetailActivity.class);
+                    intent.putExtra("userModel",JsonHelper.getInstance().toJson(contacts.get(position).second));
+//                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), view1,"contactIcon");
+                    getActivity().startActivity(intent);
                 }
             });
             setEvent();
@@ -116,6 +122,7 @@ public class ContactFragment extends Fragment {
 
             @Override
             public void onScroll(String letter,int currentIndex) {
+                Log.e("qiaoxi",""+ mShowLetterText.getTop());
                 mShowLetterText.setText(letter);
                 float dy = currentIndex * oneHeight;
                 mShowLetterText.layout(mShowLetterText.getLeft(),Math.round(dy + top),mShowLetterText.getRight(),Math.round(mShowLetterText.getHeight() + dy + top));

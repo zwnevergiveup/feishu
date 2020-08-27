@@ -21,8 +21,13 @@ public class JsonHelper {
     }
 
     public <T> T getObject(String objStr, Type type) {
-        Gson gson = new Gson();
-        return gson.fromJson(objStr,type);
+        try {
+            Gson gson = new Gson();
+            return gson.fromJson(objStr,type);
+        }catch (Exception e) {
+            return  null;
+        }
+
     }
 
     public String toJson(Object t) {

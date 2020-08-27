@@ -13,12 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.UserModel;
+import com.example.qiaoxi.widget.QXApplication;
 import com.github.promeg.pinyinhelper.Pinyin;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
     private List<Pair<String, UserModel>> friends;
+    private Map<String, Pair<String, UserModel>> showLetter = new HashMap<>();
+
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView friendName ;
         public ImageView friendIcon;
@@ -38,6 +45,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     public void setFriends(List<Pair<String, UserModel>> list) {
         this.friends = list;
+        list.forEach(pair -> {
+            showLetter.putIfAbsent(pair.first,pair);
+        });
     }
 
     @NonNull
@@ -53,10 +63,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.friendName.setText(user.userName);
         if (user.privateFlag) {
             holder.privateFlag.setVisibility(View.VISIBLE);
+        }else {
+            holder.privateFlag.setVisibility(View.GONE);
+
         }
-        if (position == 0 || (!friends.get(position - 1).first.equals(friends.get(position).first))) {
+        if (friends.get(position) == showLetter.get(friends.get(position).first)) {
             holder.friendGroupName.setVisibility(View.VISIBLE);
             holder.friendGroupName.setText(friends.get(position).first);
+        }else {
+            holder.friendGroupName.setVisibility(View.GONE);
         }
         View item = holder.itemView;
         if (mOnFriendItemClickListener != null) {

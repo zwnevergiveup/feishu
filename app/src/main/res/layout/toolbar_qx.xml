@@ -9,10 +9,9 @@
         android:layout_height="25dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/qxtoolbar_title"
+        app:layout_constraintBottom_toBottomOf="@id/qxtoolbar_title"
         android:id="@+id/qxtoolbar_leftiv"
-        android:visibility="gone"
-        android:layout_marginBottom="15dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -21,20 +20,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:textSize="22sp"
         android:id="@+id/qxtoolbar_title"
-        android:visibility="gone"
         android:gravity="center"
-        android:layout_marginBottom="15dp"
         android:text="@string/login"
+        android:layout_marginBottom="15dp"
         />
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/qxtoolbar_title"
+        app:layout_constraintBottom_toBottomOf="@id/qxtoolbar_title"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/qxtoolbar_rightiv"
-        android:visibility="gone"
-        android:layout_marginBottom="15dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,8 @@
 package com.example.qiaoxi.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -12,7 +15,7 @@ import java.util.UUID;
 
 @Entity(tableName = "userModels")
 @TypeConverters(ListUserModelConvertor.class)
-public class UserModel {
+public class UserModel  {
     @PrimaryKey
     @NonNull
     public String userId;
@@ -30,10 +33,11 @@ public class UserModel {
     public String userName;
 
     public UserModel(String userName, List<UserModel> friends, String icon, boolean privateFlag) {
-        this.userId = UUID.randomUUID().toString().replaceAll("-","");
+        this.userId = UUID.randomUUID().toString().replaceAll("-","").substring(0,10);
         this.userName = userName;
         this.friends = friends;
         this.icon = icon;
         this.privateFlag = privateFlag;
     }
+
 }

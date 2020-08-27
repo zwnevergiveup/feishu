@@ -27,6 +27,7 @@
         android:id="@+id/item_friend_iv"
         android:scaleType="fitXY"
         app:qxRadius="30"
+        android:transitionName="contactIcon"
         />
     <ImageView
         android:layout_width="25dp"

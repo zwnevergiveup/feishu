@@ -110,7 +110,7 @@ dependencies {
     implementation 'com.youth.banner:banner:2.1.0'
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
 
     //拼音
     implementation 'com.github.promeg:tinypinyin:2.0.3'
