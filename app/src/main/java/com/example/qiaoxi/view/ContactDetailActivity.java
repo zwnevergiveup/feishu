@@ -15,6 +15,8 @@ import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.activity.BaseActivity;
 import com.example.qiaoxi.view.adapter.ImageAdapter;
 import com.example.qiaoxi.view.customerview.QXToolbar;
+import com.example.qiaoxi.view.dialog.BottomDialog;
+import com.example.qiaoxi.view.dialog.ContactMoreDialog;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -70,7 +72,10 @@ public class ContactDetailActivity extends BaseActivity {
 
     @Override
     protected void setupEvent() {
-
+        mToolbar.mRightIcon.setOnClickListener(view -> {
+            ContactMoreDialog dialog = new ContactMoreDialog(this);
+            dialog.show();
+        });
     }
 
 

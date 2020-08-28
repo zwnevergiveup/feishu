@@ -13,6 +13,7 @@
         app:title="二狗"
         app:titleTextColor="@color/pure_black"
         android:id="@+id/contact_detail_toolbar"
+        app:rightButton_src="@mipmap/more"
         />
     <View
         android:layout_width="match_parent"

@@ -41,4 +41,11 @@
         <item name="colorControlActivated">@color/main_green</item>
         <item name="colorControlHighlight">@color/main_green</item>
     </style>
+
+<!--    底部弹窗-->
+    <style name="bottomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item> <!--   activity颜色     -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item><!--边框-->
+    </style>
 </resources>

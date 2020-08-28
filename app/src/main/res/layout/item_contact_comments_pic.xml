@@ -9,6 +9,5 @@
         android:layout_height="match_parent"
         app:qxRadius="10"
         android:id="@+id/item_contact_comment_pic"
-        android:scaleType="fitXY"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
