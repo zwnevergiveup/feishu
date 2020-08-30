@@ -20,6 +20,8 @@
     <string name="add_contact">添加好友</string>
     <string name="my_groups">我的群组</string>
     <string name="secure_chat">私密聊天</string>
+    <string name="send_message">发送信息</string>
+    <string name="wallet">钱包</string>
 
 
 </resources>

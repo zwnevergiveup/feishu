@@ -76,6 +76,9 @@ public class ContactDetailActivity extends BaseActivity {
             ContactMoreDialog dialog = new ContactMoreDialog(this);
             dialog.show();
         });
+        mToolbar.mLeftIcon.setOnClickListener(view -> {
+            finish();
+        });
     }
 
 

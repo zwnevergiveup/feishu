@@ -21,7 +21,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/dialog_edit_contact_iv"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         app:layout_constraintTop_toBottomOf="@id/gap0"
         app:layout_constraintStart_toEndOf="@id/dialog_block_contact_iv"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +91,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         app:layout_constraintTop_toBottomOf="@id/gap1"
         app:layout_constraintStart_toEndOf="@id/dialog_share_contact_iv"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +126,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         app:layout_constraintTop_toBottomOf="@id/gap2"
         app:layout_constraintStart_toEndOf="@id/dialog_delete_contact_iv"
         app:layout_constraintEnd_toEndOf="parent"
