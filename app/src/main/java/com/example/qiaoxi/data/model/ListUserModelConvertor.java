@@ -10,7 +10,7 @@ import java.util.List;
 public class ListUserModelConvertor {
     @TypeConverter
     public List<UserModel> string2UserModels(String str) {
-        return (List<UserModel>) (JsonHelper.getInstance().getObject(str, new TypeToken<List<UserModel>>() {}.getType()));
+        return (JsonHelper.getInstance().getObject(str, new TypeToken<List<UserModel>>() {}.getType()));
     }
 
     @TypeConverter

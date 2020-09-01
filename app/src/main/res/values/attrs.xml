@@ -10,7 +10,6 @@
     </declare-styleable>
 
     <declare-styleable name="CustomerImgView">
-        <attr name="qxSrc" format="reference"/>
         <attr name="qxRadius" format="integer"/>
         <attr name="qxBorder" format="integer"/>
         <attr name="qxBorderColor" format="color"/>

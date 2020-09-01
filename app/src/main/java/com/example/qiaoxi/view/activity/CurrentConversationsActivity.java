@@ -3,7 +3,9 @@ package com.example.qiaoxi.view.activity;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,6 +30,8 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private String withWho;
     public static String FLAG = "UPDATE";
     private CurrentConversationsViewModel currentConversationsViewModel;
+    private ViewGroup overAllGroup;
+    private ViewGroup moreOperationGroup;
 
 
     protected void setupDataBinding() {
@@ -40,6 +44,9 @@ public final class CurrentConversationsActivity extends BaseActivity {
     }
 
     protected void setupView() {
+        overAllGroup = findViewById(R.id.current_conversation_overall);
+        moreOperationGroup = findViewById(R.id.current_conversation_more_operation);
+
         getWindow().setNavigationBarColor(getColor(R.color.rice_yellow));
         mRecycler = findViewById(R.id.current_conversation_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -49,7 +56,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
         mRecycler.setAdapter(messageAdapter);
 
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
-        toolbar.setTitleText(withWho,getResources().getColor(R.color.pure_black), true);
+        toolbar.setTitleText(withWho,getResources().getColor(R.color.pure_black), false);
     }
 
     @Override
@@ -71,6 +78,16 @@ public final class CurrentConversationsActivity extends BaseActivity {
                 createConversationNotification(withWho,msgModel.content);
             }
         });
+    }
+
+    public void moreOperationClicked(View view) {
+        if (moreOperationGroup.getVisibility() == View.GONE) {
+            overAllGroup.setBackgroundColor(getColor(R.color.pure_black));
+            moreOperationGroup.setVisibility(View.VISIBLE);
+        }else {
+            overAllGroup.setBackgroundColor(getColor(R.color.pure_white));
+            moreOperationGroup.setVisibility(View.GONE);
+        }
     }
 
     public void onBackClicked(View view) {

@@ -1,7 +1,9 @@
 package com.example.qiaoxi.view;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import com.example.qiaoxi.data.model.UserModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.activity.BaseActivity;
+import com.example.qiaoxi.view.activity.CurrentConversationsActivity;
 import com.example.qiaoxi.view.adapter.ImageAdapter;
 import com.example.qiaoxi.view.customerview.QXToolbar;
 import com.example.qiaoxi.view.dialog.BottomDialog;
@@ -81,5 +84,10 @@ public class ContactDetailActivity extends BaseActivity {
         });
     }
 
+    public void sendMsg(View view) {
+        startActivity(new Intent(this, CurrentConversationsActivity.class){{
+            putExtra("title",model.userName);
+        }});
+    }
 
 }

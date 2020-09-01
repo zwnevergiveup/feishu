@@ -39,6 +39,7 @@
             android:layout_height="0dp"
             android:background="@color/pure_white"
             android:id="@+id/conversations_recycler"
+            android:overScrollMode="never"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_gap"
             app:layout_constraintBottom_toBottomOf="parent" />

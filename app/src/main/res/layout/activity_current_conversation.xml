@@ -14,81 +14,150 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pure_white"
-        tools:context=".view.activity.CurrentConversationsActivity">
+        android:id="@+id/current_conversation_overall"
 
-        <com.example.qiaoxi.view.customerview.QXToolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/current_conversation_toolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:leftButton_src="@mipmap/back_arrow"
-            app:titleTextColor="@color/pure_black"
-            app:background_color="@color/background_gray"
-            >
-        </com.example.qiaoxi.view.customerview.QXToolbar>
+        >
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/danhui_0"
-            android:id="@+id/toolbar_gap"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/current_conversation_toolbar"
-            />
-        <androidx.recyclerview.widget.RecyclerView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/background_gray"
-            android:id="@+id/current_conversation_recycler"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/input_group"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_gap" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/input_group"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:background="@color/rice_yellow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/current_conversation_more_operation"
+            android:background="@drawable/bottom_let_right_radius"
+            tools:context=".view.activity.CurrentConversationsActivity">
 
-            >
-            <EditText
-                android:id="@+id/current_conversation_send_text"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:textSize="20sp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="30dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="5dp"
-                android:text="@={viewModel.editText}"
-                android:background="@drawable/message_input_style"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/current_conversation_send_btn"
+            <com.example.qiaoxi.view.customerview.QXToolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/current_conversation_toolbar"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:leftButton_src="@mipmap/black_arrow1"
+                app:rightButton_src="@mipmap/more"
+                app:titleTextColor="@color/pure_black"
+                app:titleTextMarginStart="60"
+                app:title="返回"
+                >
+            </com.example.qiaoxi.view.customerview.QXToolbar>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/danhui_0"
+                android:id="@+id/toolbar_gap"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_toolbar"
                 />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:overScrollMode="never"
+                android:id="@+id/current_conversation_recycler"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/input_group"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_gap" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/input_group"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                >
+                <Button
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/current_conversation_send_text"
+                    app:layout_constraintBottom_toBottomOf="@id/current_conversation_send_text"
+                    android:background="@mipmap/face_add"
+                    android:layout_marginStart="15dp"
+                    android:id="@+id/current_conversation_more_btn"
+                    android:onClick="moreOperationClicked"
+                    />
+                <EditText
+                    android:id="@+id/current_conversation_send_text"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:textSize="17sp"
+                    android:textColor="@color/pure_black"
+                    android:textColorHint="@color/C1C1C1_gray"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="15dp"
+                    android:text="@={viewModel.editText}"
+                    android:background="@drawable/message_input_style"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/current_conversation_send_btn"
+                    app:layout_constraintStart_toEndOf="@id/current_conversation_more_btn"
+                    android:layout_marginBottom="30dp"
+                    android:hint="请输入信息"
+                    />
 
-            <Button
-                android:id="@+id/current_conversation_send_btn"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:textAlignment="center"
-                android:textColor="@color/pure_white"
-                android:background="@drawable/green_r5_btn"
-                android:text="@string/send"
-                android:textSize="20sp"
-                android:layout_marginEnd="20dp"
-                android:onClick="@{() -> viewModel.sendMessage()}"
-                app:layout_constraintBaseline_toBaselineOf="@id/current_conversation_send_text"
-                app:layout_constraintEnd_toEndOf="parent" />
+                <Button
+                    android:id="@+id/current_conversation_send_btn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/pure_white"
+                    android:background="@mipmap/send"
+                    android:layout_marginEnd="15dp"
+                    android:onClick="@{() -> viewModel.sendMessage()}"
+                    app:layout_constraintBottom_toBottomOf="@id/current_conversation_send_text"
+                    app:layout_constraintTop_toTopOf="@id/current_conversation_send_text"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/current_conversation_more_operation"
+            android:visibility="gone"
+            >
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                app:qxRadius="5"
+                android:src="@mipmap/voice"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_voice"
+                />
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="@id/current_conversation_voice"
+                app:layout_constraintBottom_toBottomOf="@id/current_conversation_voice"
+                app:layout_constraintEnd_toStartOf="@id/current_conversation_voice"
+                android:layout_marginEnd="60dp"
+                app:qxRadius="5"
+                android:src="@mipmap/choose_emoji"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_emoji"
+                />
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="@id/current_conversation_voice"
+                app:layout_constraintBottom_toBottomOf="@id/current_conversation_voice"
+                app:layout_constraintStart_toEndOf="@id/current_conversation_voice"
+                android:layout_marginStart="30dp"
+                app:qxRadius="5"
+                android:src="@mipmap/choose_emoji"
+                android:scaleType="fitXY"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
