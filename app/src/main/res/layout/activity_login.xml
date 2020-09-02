@@ -102,6 +102,7 @@
                         android:inputType="textPassword"
                         android:textSize="17sp"
                         android:textColor="@color/pure_black"
+                        android:text="@={viewmodel.userPassword}"
                         android:id="@+id/input_secret" />
                 </com.google.android.material.textfield.TextInputLayout>
 

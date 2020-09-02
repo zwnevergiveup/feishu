@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.databinding.DataBindingUtil;
@@ -35,6 +36,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
 
     protected void setupDataBinding() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         withWho = getIntent().getStringExtra("title");
         currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
@@ -88,6 +90,15 @@ public final class CurrentConversationsActivity extends BaseActivity {
             overAllGroup.setBackgroundColor(getColor(R.color.pure_white));
             moreOperationGroup.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (moreOperationGroup.getVisibility() == View.VISIBLE) {
+            moreOperationClicked(overAllGroup);
+            return;
+        }
+        super.onBackPressed();
     }
 
     public void onBackClicked(View view) {

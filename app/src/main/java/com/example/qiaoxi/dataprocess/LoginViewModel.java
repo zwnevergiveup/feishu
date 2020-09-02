@@ -74,38 +74,22 @@ public class LoginViewModel extends BaseViewModel {
             return;
         }
         try{
-            RetrofitHelper.getInstance().getServerApi()
-                    .loginWithPassword(new LoginBean(userName.getValue(), userPassword.getValue()))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<Map<String, Object>>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
+            EMClient.getInstance().login(userName.getValue(), userPassword.getValue(), new EMCallBack() {
+                @Override
+                public void onSuccess() {
+                    result.postValue(new ResultModel(true,"登录成功"));
+                }
 
-                        }
+                @Override
+                public void onError(int i, String s) {
+                    result.postValue(new ResultModel(false, s));
+                }
 
-                        @Override
-                        public void onNext(Map<String, Object> map) {
-                            if (map.get("status") != null ) {
-                                Gson gson = new Gson();
-                                String json = gson.toJson(map.get("payload"));
-                                ResponseModel model = gson.fromJson(json, ResponseModel.class);
-                                if (model != null ) {
-                                    result.setValue(new ResultModel(model.status.equals("OK"),model.message));
-                                }
-                            }
-                        }
+                @Override
+                public void onProgress(int i, String s) {
 
-                        @Override
-                        public void onError(Throwable e) {
-                            result.setValue(new ResultModel(false, "登陆失败，请检查网络"));
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
+                }
+            });
 
         }catch (Exception e) {
             e.printStackTrace();

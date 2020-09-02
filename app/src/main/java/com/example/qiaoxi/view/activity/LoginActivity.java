@@ -64,19 +64,16 @@ public class LoginActivity extends BaseActivity {
         binding.setLifecycleOwner(this);
         binding.setViewmodel(loginViewModel);
 
-        loginViewModel.result.observe(this, new Observer<ResultModel>() {
-            @Override
-            public void onChanged(ResultModel resultModel) {
-//                if (resultModel.status) {
-//                    SPHelper.getInstance(getApplicationContext()).writeObject(loginViewModel.userName.getValue(),"lastLoginName");
-//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//                    finish();
-//                }else {
-//                    Toast.makeText(getApplicationContext(),resultModel.reason,Toast.LENGTH_SHORT).show();
-//                }
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        loginViewModel.result.observe(this, resultModel -> {
+                if (resultModel.status) {
+                    SPHelper.getInstance(getApplicationContext()).writeObject(loginViewModel.userName.getValue(),"lastLoginName");
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(),resultModel.reason,Toast.LENGTH_SHORT).show();
+                }
+//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
-            }
         });
         loginViewModel.userModelLiveData.observe(this, new Observer<UserModel>() {
             @Override

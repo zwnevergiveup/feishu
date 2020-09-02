@@ -120,43 +120,197 @@
             android:id="@+id/current_conversation_more_operation"
             android:visibility="gone"
             >
+
             <com.example.qiaoxi.view.customerview.CustomerImgView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toTopOf="@id/current_conversation_voice"
+                app:layout_constraintBottom_toBottomOf="@id/current_conversation_voice"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="30dp"
-                app:qxRadius="5"
+                app:layout_constraintEnd_toStartOf="@id/current_conversation_voice"
+                app:qxRadius="15"
+                android:src="@mipmap/emoji"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_emoji"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_emoji"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_emoji"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_emoji"
+                android:text="表情"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
+                />
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/current_conversation_emoji"
+                app:layout_constraintEnd_toStartOf="@id/current_conversation_shot"
+                android:layout_marginTop="40dp"
+                app:qxRadius="15"
                 android:src="@mipmap/voice"
                 android:scaleType="fitXY"
                 android:id="@+id/current_conversation_voice"
                 />
-            <com.example.qiaoxi.view.customerview.CustomerImgView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:layout_constraintTop_toTopOf="@id/current_conversation_voice"
-                app:layout_constraintBottom_toBottomOf="@id/current_conversation_voice"
-                app:layout_constraintEnd_toStartOf="@id/current_conversation_voice"
-                android:layout_marginEnd="60dp"
-                app:qxRadius="5"
-                android:src="@mipmap/choose_emoji"
-                android:scaleType="fitXY"
-                android:id="@+id/current_conversation_emoji"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_voice"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_voice"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_voice"
+                android:text="录音"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
                 />
+
             <com.example.qiaoxi.view.customerview.CustomerImgView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 app:layout_constraintTop_toTopOf="@id/current_conversation_voice"
                 app:layout_constraintBottom_toBottomOf="@id/current_conversation_voice"
                 app:layout_constraintStart_toEndOf="@id/current_conversation_voice"
-                android:layout_marginStart="30dp"
-                app:qxRadius="5"
-                android:src="@mipmap/choose_emoji"
+                app:layout_constraintEnd_toStartOf="@id/current_conversation_video"
+                app:qxRadius="15"
+                android:src="@mipmap/camera"
                 android:scaleType="fitXY"
+                android:id="@+id/current_conversation_shot"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_shot"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_shot"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_shot"
+                android:text="拍照"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
+                />
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toTopOf="@id/current_conversation_voice"
+                app:layout_constraintBottom_toBottomOf="@id/current_conversation_voice"
+                app:layout_constraintStart_toEndOf="@id/current_conversation_shot"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:qxRadius="15"
+                android:src="@mipmap/video"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_video"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_video"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_video"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_video"
+                android:text="录像"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
+                />
+
+
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_emoji"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/current_conversation_voice"
+                app:qxRadius="15"
+                android:layout_marginTop="40dp"
+                android:src="@mipmap/transfer"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_transfer"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_transfer"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_transfer"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_transfer"
+                android:text="转账"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
+                />
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toTopOf="@id/current_conversation_transfer"
+                app:layout_constraintBottom_toBottomOf="@id/current_conversation_transfer"
+                app:layout_constraintStart_toEndOf="@id/current_conversation_transfer"
+                app:layout_constraintEnd_toStartOf="@id/current_conversation_location"
+
+                app:qxRadius="15"
+                android:src="@mipmap/voice"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_red_package"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_red_package"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_red_package"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_red_package"
+                android:text="红包"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
+                />
+
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toTopOf="@id/current_conversation_transfer"
+                app:layout_constraintBottom_toBottomOf="@id/current_conversation_transfer"
+                app:layout_constraintStart_toEndOf="@id/current_conversation_red_package"
+                app:layout_constraintEnd_toStartOf="@id/current_conversation_video"
+                app:qxRadius="15"
+                android:src="@mipmap/location"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_location"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_location"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_location"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_location"
+                android:text="位置"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
+                />
+            <com.example.qiaoxi.view.customerview.CustomerImgView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toTopOf="@id/current_conversation_transfer"
+                app:layout_constraintBottom_toBottomOf="@id/current_conversation_transfer"
+                app:layout_constraintStart_toEndOf="@id/current_conversation_location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:qxRadius="15"
+                android:src="@mipmap/visitingcard"
+                android:scaleType="fitXY"
+                android:id="@+id/current_conversation_visiting_card"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/current_conversation_visiting_card"
+                app:layout_constraintEnd_toEndOf="@id/current_conversation_visiting_card"
+                app:layout_constraintTop_toBottomOf="@id/current_conversation_visiting_card"
+                android:text="名片"
+                android:layout_marginTop="5dp"
+                android:textColor="#d2d2d2"
+                android:textSize="15sp"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
