@@ -115,5 +115,8 @@ dependencies {
     //拼音
     implementation 'com.github.promeg:tinypinyin:2.0.3'
     implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
+
+    //魅族 push
+    implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
 }
 

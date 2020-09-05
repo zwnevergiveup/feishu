@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataRepository  implements MessageDataDelegate, ConversationModelDelegate, UserDataDelegate {
-    public static volatile DataRepository instance = null;
+    private static volatile DataRepository instance = null;
 
     private AppDatabase db;
 
