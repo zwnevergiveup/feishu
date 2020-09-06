@@ -25,4 +25,10 @@ public interface ServerApi {
     @POST("user/login")
     Observable<Map<String, Object>> loginWithPassword(@Body LoginBean loginBean);
 
+    /**
+     * 获取好友列表
+     */
+    @GET("user/getContactList")
+    Observable<Map<String, Object>> getContactList(@Query("userName") String userName);
+
 }

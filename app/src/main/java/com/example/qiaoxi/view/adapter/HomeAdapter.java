@@ -1,5 +1,6 @@
 package com.example.qiaoxi.view.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home,parent,false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("qiaoxi","send message");
+                EMMessage message = EMMessage.createTxtSendMessage("lalalala","zf");
+                EMClient.getInstance().chatManager().sendMessage(message);
+            }
+        });
         return new ViewHolder(view);
     }
 

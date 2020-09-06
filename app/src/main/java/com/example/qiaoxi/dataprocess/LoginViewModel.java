@@ -19,6 +19,7 @@ import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.helper.retrofit.RetrofitHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
+import com.example.qiaoxi.widget.QXApplication;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.EMCallBack;
@@ -77,6 +78,7 @@ public class LoginViewModel extends BaseViewModel {
             EMClient.getInstance().login(userName.getValue(), userPassword.getValue(), new EMCallBack() {
                 @Override
                 public void onSuccess() {
+                    QXApplication.currentUser = userName.getValue();
                     result.postValue(new ResultModel(true,"登录成功"));
                 }
 

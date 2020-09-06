@@ -22,6 +22,7 @@
         android:id="@+id/main_bottom_navigation"
         android:background="@color/pure_white"
         app:itemBackground="@null"
+        app:labelVisibilityMode="unlabeled"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,29 +32,8 @@ public class ConversationFragment extends Fragment {
             ConversationAdapter adapter = new ConversationAdapter();
             mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRecycler.setAdapter(adapter);
-
-
-            for (int i = 0; i < 20; i++) {
-                MsgModel msg = new MsgModel();
-                msg.content = "这是一条测试消息" + i;
-                msg.sendTime = "昨天";
-                msg.receive = "测试" + i;
-                if (i % 2 == 0) {
-                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people23, i + 1));
-                } else if (i % 3 == 0) {
-                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people24, i + 1));
-                } else if (i % 5 == 0) {
-                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people32, i + 1));
-                } else {
-                    conversationModels.add(new ConversationModel("zw", "测试" + i, msg, R.mipmap.icon_people32, i + 1));
-                }
-            }
-
-
             adapter.setConversationModels(conversationModels);
         }
         return root;
     }
-
-
 }

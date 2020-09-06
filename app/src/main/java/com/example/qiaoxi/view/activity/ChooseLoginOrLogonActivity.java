@@ -48,6 +48,7 @@ public class ChooseLoginOrLogonActivity extends BaseActivity{
                 .makeSceneTransitionAnimation(this, Pair.create(findViewById(R.id.choose_login), "shared_login_btn"));
         // start the new activity
         startActivity(intent);
+        finish();
     }
 
     @Override

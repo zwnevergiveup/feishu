@@ -53,6 +53,7 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     public void sendMessage() {
 
+
     }
 
     private void insertMsgModel(MsgModel msgModel) {

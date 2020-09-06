@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.data.model.ContactModel;
 import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
+import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.view.adapter.MessageAdapter;
 import com.example.qiaoxi.widget.QXApplication;
 import com.example.qiaoxi.view.customerview.QXToolbar;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.data.model.MsgModel;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +31,18 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
     private RecyclerView mRecycler;
     private List<MsgModel> emMessageList =new ArrayList<>();
-    private String withWho;
     public static String FLAG = "UPDATE";
     private CurrentConversationsViewModel currentConversationsViewModel;
     private ViewGroup overAllGroup;
     private ViewGroup moreOperationGroup;
+    private ContactModel mModel;
 
 
     protected void setupDataBinding() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        withWho = getIntent().getStringExtra("title");
+        mModel = JsonHelper.getInstance().getObject(getIntent().getStringExtra("contactModel"),new TypeToken<ContactModel>(){}.getType());
+        String withWho = "";
+        if (mModel != null) withWho = mModel.friendName;
         currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding. setLifecycleOwner(this);
@@ -58,7 +63,9 @@ public final class CurrentConversationsActivity extends BaseActivity {
         mRecycler.setAdapter(messageAdapter);
 
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
-        toolbar.setTitleText(withWho,getResources().getColor(R.color.pure_black), false);
+        if (mModel != null) {
+            toolbar.setTitleText(mModel.friendNickName, getResources().getColor(R.color.pure_black), false);
+        }
     }
 
     @Override
@@ -76,9 +83,6 @@ public final class CurrentConversationsActivity extends BaseActivity {
             emMessageList.add(msgModel);
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
-            if (!msgModel.send.equals(QXApplication.currentUser)) {
-                createConversationNotification(withWho,msgModel.content);
-            }
         });
     }
 
