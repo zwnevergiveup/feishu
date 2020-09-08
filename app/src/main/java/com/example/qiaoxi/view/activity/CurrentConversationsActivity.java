@@ -39,6 +39,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
 
     protected void setupDataBinding() {
+        
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mModel = JsonHelper.getInstance().getObject(getIntent().getStringExtra("contactModel"),new TypeToken<ContactModel>(){}.getType());
         String withWho = "";
