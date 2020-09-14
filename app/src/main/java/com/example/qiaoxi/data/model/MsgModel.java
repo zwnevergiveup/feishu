@@ -8,6 +8,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMTextMessageBody;
+
+import java.util.UUID;
+
 @Entity(tableName = "msgModels")
 public class MsgModel implements Parcelable {
     @PrimaryKey
@@ -15,7 +20,7 @@ public class MsgModel implements Parcelable {
     public String id;
 
     @ColumnInfo(name = "send_time")
-    public String sendTime;
+    public Long sendTime;
 
     @ColumnInfo(name = "send_name")
     public String send;
@@ -26,12 +31,20 @@ public class MsgModel implements Parcelable {
     @ColumnInfo(name = "content")
     public String content;
 
-
     public MsgModel(){ }
+
+    public MsgModel(EMMessage emMessage) {
+        EMTextMessageBody body = (EMTextMessageBody) emMessage.getBody();
+        content = body.getMessage();
+        send = emMessage.getFrom();
+        sendTime = emMessage.getMsgTime();
+        receive = emMessage.getTo();
+        id = UUID.randomUUID().toString().replace("-","").substring(0,12);
+    }
 
     public MsgModel(Parcel in) {
         id = in.readString();
-        sendTime = in.readString();
+        sendTime = in.readLong();
         send = in.readString();
         receive = in.readString();
         content = in.readString();
@@ -45,7 +58,7 @@ public class MsgModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
-        dest.writeString(sendTime);
+        dest.writeLong(sendTime);
         dest.writeString(send);
         dest.writeString(receive);
         dest.writeString(content);

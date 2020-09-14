@@ -8,6 +8,7 @@ import com.example.qiaoxi.data.repository.DataRepository;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMTextMessageBody;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -20,11 +21,14 @@ public class MessageListenDataSource {
     }
 
     private void setupMessageListen(){
-        Log.e("qiaoxi","setupMessageListen");
         EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {//not mainThread
             @Override
             public void onMessageReceived(List<EMMessage> list) {
-
+                list.forEach(emMessage -> {
+                    if (emMessage.getBody() instanceof EMTextMessageBody) {
+                        repository.processNewMessage(new MsgModel(emMessage));
+                    }
+                });
             }
 
             @Override

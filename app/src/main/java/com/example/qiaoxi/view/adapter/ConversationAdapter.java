@@ -54,7 +54,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         ConversationModel model = models.get(position);
         holder.lastMessage.setText(model.lastMessage.content);
         holder.title.setText(model.contactMan);
-        holder.lastMsgTime.setText(model.lastMessage.sendTime);
+        holder.lastMsgTime.setText(model.lastMessage.sendTime.toString());
         holder.waitReadCount.setText(String.valueOf(model.unread));
         holder.icon.setImageResource(model.temp_profile);
 

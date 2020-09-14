@@ -43,17 +43,19 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     @Override
     public void onResume(@NonNull LifecycleOwner owner) {
-        DataRepository repository = DataRepository.getInstance();
-        repository.registerMsgListener(this);
-        List<MsgModel> list = repository.readMsgFromDB(QXApplication.currentUser , conversationName);
-        if (list != null && list.size() > 0) {
-            lastMessages.setValue(list);
-        }
+//        DataRepository repository = DataRepository.getInstance();
+//        repository.registerMsgListener(this);
+//        List<MsgModel> list = repository.readMsgFromDB(QXApplication.currentUser , conversationName);
+//        if (list != null && list.size() > 0) {
+//            lastMessages.setValue(list);
+//        }
     }
 
     public void sendMessage() {
-
-
+        if (editText.getValue() != null && !editText.getValue().isEmpty()) {
+            EMMessage message = EMMessage.createTxtSendMessage(editText.getValue(), conversationName);
+            EMClient.getInstance().chatManager().sendMessage(message);
+        }
     }
 
     private void insertMsgModel(MsgModel msgModel) {

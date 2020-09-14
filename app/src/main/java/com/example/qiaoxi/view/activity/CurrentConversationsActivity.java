@@ -39,7 +39,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
 
     protected void setupDataBinding() {
-        
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mModel = JsonHelper.getInstance().getObject(getIntent().getStringExtra("contactModel"),new TypeToken<ContactModel>(){}.getType());
         String withWho = "";
@@ -81,9 +81,10 @@ public final class CurrentConversationsActivity extends BaseActivity {
         });
 
         currentConversationsViewModel.msgModelMutableLiveData.observe(this, msgModel -> {
-            emMessageList.add(msgModel);
-            mRecycler.getAdapter().notifyDataSetChanged();
-            mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
+//            emMessageList.add(msgModel);
+//            mRecycler.getAdapter().notifyDataSetChanged();
+//            mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
+            Log.e("qiaoxi",msgModel.content);
         });
     }
 
