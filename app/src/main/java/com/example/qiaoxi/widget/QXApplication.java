@@ -31,7 +31,6 @@ public class QXApplication extends Application {
         //注：如果你的 APP 中有第三方的服务启动，请在初始化 SDK（EMClient.getInstance().init(applicationContext, options)）方法的前面添加以下相关代码
         EMClient.getInstance().init(mContext,options);
         EMClient.getInstance().setDebugMode(false);
-        DataRepository repository = DataRepository.getInstance();
 
     }
     public static Context getContext(){

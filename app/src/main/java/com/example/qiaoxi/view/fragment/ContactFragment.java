@@ -29,6 +29,7 @@ import com.example.qiaoxi.view.adapter.ContactAdapter;
 import com.example.qiaoxi.view.customerview.CustomerImgView;
 import com.example.qiaoxi.view.customerview.LetterNavigationView;
 import com.github.promeg.pinyinhelper.Pinyin;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,11 @@ public class ContactFragment extends Fragment {
                 public void onClick(View view, int position) {
 //                    CustomerImgView view1 = view.findViewById(R.id.item_friend_iv);
                     Intent intent = new Intent(getActivity(),ContactDetailActivity.class);
-                    intent.putExtra("contactModel",JsonHelper.getInstance().toJson(contacts.get(position).second));
+                    Gson gson = new Gson();
+                    ContactModel model = contacts.get(position).second;
+                    String s = gson.toJson(model);
+//                    String str = JsonHelper.getInstance().toJson();
+                    intent.putExtra("contactModel",s);
 //                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), view1,"contactIcon");
                     getActivity().startActivity(intent);
                 }

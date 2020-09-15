@@ -15,6 +15,7 @@ import com.example.qiaoxi.data.model.network.LogonBean;
 import com.example.qiaoxi.data.model.network.ResponseModel;
 import com.example.qiaoxi.data.model.ResultModel;
 import com.example.qiaoxi.data.model.UserModel;
+import com.example.qiaoxi.data.repository.DataRepository;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
 import com.example.qiaoxi.helper.retrofit.RetrofitHelper;
@@ -80,6 +81,7 @@ public class LoginViewModel extends BaseViewModel {
                 public void onSuccess() {
                     QXApplication.currentUser = userName.getValue();
                     result.postValue(new ResultModel(true,"登录成功"));
+                    DataRepository repository = DataRepository.getInstance();
                 }
 
                 @Override
