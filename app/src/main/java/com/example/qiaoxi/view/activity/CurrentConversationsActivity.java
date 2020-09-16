@@ -81,10 +81,9 @@ public final class CurrentConversationsActivity extends BaseActivity {
         });
 
         currentConversationsViewModel.msgModelMutableLiveData.observe(this, msgModel -> {
-//            emMessageList.add(msgModel);
-//            mRecycler.getAdapter().notifyDataSetChanged();
-//            mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
-            Log.e("qiaoxi",msgModel.content);
+            emMessageList.add(msgModel);
+            mRecycler.getAdapter().notifyDataSetChanged();
+            mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
         });
     }
 

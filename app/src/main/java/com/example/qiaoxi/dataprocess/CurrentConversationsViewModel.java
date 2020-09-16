@@ -55,6 +55,8 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
         if (editText.getValue() != null && !editText.getValue().isEmpty()) {
             EMMessage message = EMMessage.createTxtSendMessage(editText.getValue(), conversationName);
             EMClient.getInstance().chatManager().sendMessage(message);
+            editText.setValue("");
+            msgModelMutableLiveData.postValue(new MsgModel(message));
         }
     }
 

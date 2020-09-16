@@ -37,42 +37,34 @@ public class ContactViewModel extends BaseViewModel {
     }
 
     public void getContactList() {
-//        RetrofitHelper.getInstance().getServerApi()
-//            .getContactList(QXApplication.currentUser)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(new Observer<Map<String, Object>>() {
-//                @Override
-//                public void onSubscribe(Disposable d) {
-//
-//                }
-//
-//                @Override
-//                public void onNext(Map<String, Object> map) {
-//                    if ( (Integer) JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(map.get("status")),new TypeToken<Integer>(){}.getType()) == 200) {
-//                        List<ContactModel> contactModels = JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(map.get("payload")),new TypeToken<List<ContactModel>>(){}.getType());
-//                        mContactList.setValue(contactModels);
-//                    }
-//                }
-//
-//                @Override
-//                public void onError(Throwable e) {
-//                    Log.e("qiaoxi",e.getMessage());
-//                }
-//
-//                @Override
-//                public void onComplete() {
-//
-//                }
-//            });
-        ContactModel model = new ContactModel();
-        model.userName = "zf";
-        model.friendName = "zw";
-        model.friendNickName = "lao";
-        model.mainId = "ssss";
-        mContactList.setValue(new ArrayList<ContactModel>(){{
-            add(model);
-        }});
+        RetrofitHelper.getInstance().getServerApi()
+            .getContactList(QXApplication.currentUser)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Observer<Map<String, Object>>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(Map<String, Object> map) {
+                    if ( (Integer) JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(map.get("status")),new TypeToken<Integer>(){}.getType()) == 200) {
+                        List<ContactModel> contactModels = JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(map.get("payload")),new TypeToken<List<ContactModel>>(){}.getType());
+                        mContactList.setValue(contactModels);
+                    }
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.e("qiaoxi",e.getMessage());
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
     }
 
 }

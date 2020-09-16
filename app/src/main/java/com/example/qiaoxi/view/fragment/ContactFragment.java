@@ -45,6 +45,7 @@ public class ContactFragment extends Fragment {
     private Vibrator mVibrator;
     private String lastLetter = "";
     private ContactViewModel viewModel;
+    private ContactAdapter adapter;
 
 
     @Nullable
@@ -59,7 +60,7 @@ public class ContactFragment extends Fragment {
             mVibrator = (Vibrator) getActivity().getApplication().getSystemService(Service.VIBRATOR_SERVICE);
             viewModel = new ContactViewModel();
 
-            ContactAdapter adapter = new ContactAdapter();
+            adapter = new ContactAdapter();
             adapter.setFriends(contacts);
             mRecycler.setAdapter(adapter);
             adapter.setOnFriendItemClickListener(new ContactAdapter.onFriendItemClickListener() {
@@ -97,6 +98,7 @@ public class ContactFragment extends Fragment {
             contactModels.forEach(model -> {
                 contacts.add(generatePairByLetter(model));
             });
+            adapter.setFriends(contacts);
         });
 
         letterNavigationView.setScrollerListener(new LetterNavigationView.OnNavigationScrollerListener() {
