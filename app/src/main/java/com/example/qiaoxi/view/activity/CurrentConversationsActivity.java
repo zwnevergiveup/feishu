@@ -42,6 +42,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private EditText editText;
     private int mWindowHeight = 0;
     private ViewGroup inputVG;
+    private ViewGroup current_conversation_more_operation;
 
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
@@ -82,6 +83,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
         MessageAdapter messageAdapter = new MessageAdapter();
         messageAdapter.setEmMessageList(emMessageList);
         mRecycler.setAdapter(messageAdapter);
+        current_conversation_more_operation = findViewById(R.id.current_conversation_more_operation);
 
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
         if (mModel != null) {
@@ -109,12 +111,16 @@ public final class CurrentConversationsActivity extends BaseActivity {
         });
 
         editText = findViewById(R.id.current_conversation_send_text);
-        ViewGroup inputVG = findViewById(R.id.input_group);
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
             }
         });
+
+    }
+
+    public void moreOperationClicked(View v) {
+        current_conversation_more_operation.setVisibility(current_conversation_more_operation.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
     }
 
     @Override
