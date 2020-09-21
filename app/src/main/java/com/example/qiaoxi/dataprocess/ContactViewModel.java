@@ -2,24 +2,17 @@ package com.example.qiaoxi.dataprocess;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.qiaoxi.data.model.ContactModel;
-import com.example.qiaoxi.data.model.UserModel;
-import com.example.qiaoxi.data.repository.DataRepository;
 import com.example.qiaoxi.helper.json.JsonHelper;
-import com.example.qiaoxi.helper.retrofit.RetrofitHelper;
 import com.example.qiaoxi.widget.QXApplication;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hyphenate.EMContactListener;
-import com.hyphenate.chat.EMClient;
+import com.example.qiaoxi.network.retrofit.RetrofitHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

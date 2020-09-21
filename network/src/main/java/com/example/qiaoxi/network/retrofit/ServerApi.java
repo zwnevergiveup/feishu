@@ -1,7 +1,7 @@
-package com.example.qiaoxi.helper.retrofit;
+package com.example.qiaoxi.network.retrofit;
 
-import com.example.qiaoxi.data.model.network.LoginBean;
-import com.example.qiaoxi.data.model.network.LogonBean;
+import com.example.qiaoxi.network.model.LoginBean;
+import com.example.qiaoxi.network.model.LogonBean;
 
 import java.util.Map;
 

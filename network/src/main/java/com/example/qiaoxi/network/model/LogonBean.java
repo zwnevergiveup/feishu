@@ -1,4 +1,4 @@
-package com.example.qiaoxi.data.model.network;
+package com.example.qiaoxi.network.model;
 
 public class LogonBean {
     String userName;
