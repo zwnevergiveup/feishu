@@ -2,37 +2,24 @@ package com.example.qiaoxi.dataprocess;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.qiaoxi.data.model.ChatMsg;
-import com.example.qiaoxi.data.model.network.LoginBean;
-import com.example.qiaoxi.data.model.network.LogonBean;
-import com.example.qiaoxi.data.model.network.ResponseModel;
 import com.example.qiaoxi.data.model.ResultModel;
 import com.example.qiaoxi.data.model.UserModel;
 import com.example.qiaoxi.data.repository.DataRepository;
 import com.example.qiaoxi.helper.db.AppDatabase;
 import com.example.qiaoxi.helper.db.DBHelper;
-import com.example.qiaoxi.helper.retrofit.RetrofitHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
 import com.example.qiaoxi.widget.QXApplication;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
-import java.util.Map;
-
 import io.netty.channel.ChannelFuture;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class LoginViewModel extends BaseViewModel {

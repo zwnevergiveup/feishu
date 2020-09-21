@@ -1,8 +1,6 @@
-package com.example.qiaoxi.helper.retrofit;
+package com.example.qiaoxi.network.retrofit;
 
 import android.util.Log;
-
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -10,7 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitHelper {
+class RetrofitHelper {
     private volatile  static RetrofitHelper sInstance;
     private Retrofit mRetrofit;
     private ServerApi mServerApi;

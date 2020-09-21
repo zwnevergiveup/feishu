@@ -1,7 +1,4 @@
-package com.example.qiaoxi.data.model.network;
-
-import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
+package com.example.qiaoxi.network.model;
 
 public class ResponseModel {
     public String message;
