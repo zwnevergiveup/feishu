@@ -1,12 +1,15 @@
 package com.example.qiaoxi.view.activity;
 
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +20,7 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.data.model.ContactModel;
 import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
+import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.adapter.MessageAdapter;
 import com.example.qiaoxi.widget.QXApplication;
 import com.example.qiaoxi.view.customerview.QXToolbar;
@@ -24,6 +28,7 @@ import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.data.model.MsgModel;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +38,30 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private List<MsgModel> emMessageList =new ArrayList<>();
     public static String FLAG = "UPDATE";
     private CurrentConversationsViewModel currentConversationsViewModel;
-    private ViewGroup overAllGroup;
-    private ViewGroup moreOperationGroup;
     private ContactModel mModel;
+    private EditText editText;
+    private int mWindowHeight = 0;
+    private ViewGroup inputVG;
+
+    private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+            Rect r = new Rect();
+            //获取当前窗口实际的可见区域
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+            int height = r.height();
+            if (mWindowHeight == 0) {
+                //第一次进来，记录下原始的可见窗口高度。
+                mWindowHeight = height;
+            } else {
+                inputVG.setTranslationY(height-mWindowHeight);
+            }
+        }
+    };
 
 
     protected void setupDataBinding() {
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mModel = JsonHelper.getInstance().getObject(getIntent().getStringExtra("contactModel"),new TypeToken<ContactModel>(){}.getType());
         String withWho = "";
         if (mModel != null) withWho = mModel.friendName;
@@ -49,12 +70,11 @@ public final class CurrentConversationsActivity extends BaseActivity {
         binding. setLifecycleOwner(this);
         binding.setViewModel(currentConversationsViewModel);
         getLifecycle().addObserver(currentConversationsViewModel);
+
+        getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mGlobalLayoutListener);
     }
 
     protected void setupView() {
-        overAllGroup = findViewById(R.id.current_conversation_overall);
-        moreOperationGroup = findViewById(R.id.current_conversation_more_operation);
-
         getWindow().setNavigationBarColor(getColor(R.color.rice_yellow));
         mRecycler = findViewById(R.id.current_conversation_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -67,6 +87,8 @@ public final class CurrentConversationsActivity extends BaseActivity {
         if (mModel != null) {
             toolbar.setTitleText(mModel.friendNickName, getResources().getColor(R.color.pure_black), false);
         }
+        editText = findViewById(R.id.current_conversation_send_text);
+        inputVG = findViewById(R.id.input_group);
     }
 
     @Override
@@ -85,28 +107,28 @@ public final class CurrentConversationsActivity extends BaseActivity {
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
         });
-    }
 
-    public void moreOperationClicked(View view) {
-        if (moreOperationGroup.getVisibility() == View.GONE) {
-            overAllGroup.setBackgroundColor(getColor(R.color.pure_black));
-            moreOperationGroup.setVisibility(View.VISIBLE);
-        }else {
-            overAllGroup.setBackgroundColor(getColor(R.color.pure_white));
-            moreOperationGroup.setVisibility(View.GONE);
-        }
+        editText = findViewById(R.id.current_conversation_send_text);
+        ViewGroup inputVG = findViewById(R.id.input_group);
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        if (moreOperationGroup.getVisibility() == View.VISIBLE) {
-            moreOperationClicked(overAllGroup);
-            return;
+        if (editText.hasFocus()) {
+            editText.clearFocus();
+        }else {
+            finish();
         }
-        super.onBackPressed();
     }
 
-    public void onBackClicked(View view) {
-        finish();
+    @Override
+    protected void onDestroy() {
+        getWindow().getDecorView().getViewTreeObserver().removeOnGlobalLayoutListener(mGlobalLayoutListener);
+        super.onDestroy();
     }
 }

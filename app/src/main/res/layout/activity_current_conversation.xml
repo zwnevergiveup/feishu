@@ -14,11 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pure_white"
-        android:id="@+id/current_conversation_overall"
-
-        >
-
-
+        android:id="@+id/current_conversation_overall">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -59,8 +55,8 @@
                 app:layout_constraintBottom_toTopOf="@id/input_group"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_gap" />
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

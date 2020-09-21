@@ -42,13 +42,13 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
     }
 
     @Override
-    public void onResume(@NonNull LifecycleOwner owner) {
-//        DataRepository repository = DataRepository.getInstance();
-//        repository.registerMsgListener(this);
-//        List<MsgModel> list = repository.readMsgFromDB(QXApplication.currentUser , conversationName);
-//        if (list != null && list.size() > 0) {
-//            lastMessages.setValue(list);
-//        }
+    public void onCreate(@NonNull LifecycleOwner owner) {
+        DataRepository repository = DataRepository.getInstance();
+        repository.registerMsgListener(this);
+        List<MsgModel> list = repository.readMsgFromDB(QXApplication.currentUser , conversationName);
+        if (list != null && list.size() > 0) {
+            lastMessages.setValue(list);
+        }
     }
 
     public void sendMessage() {
@@ -56,7 +56,9 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
             EMMessage message = EMMessage.createTxtSendMessage(editText.getValue(), conversationName);
             EMClient.getInstance().chatManager().sendMessage(message);
             editText.setValue("");
-            msgModelMutableLiveData.postValue(new MsgModel(message));
+            MsgModel model = new MsgModel(message);
+            msgModelMutableLiveData.postValue(model);
+            insertMsgModel(model);
         }
     }
 
@@ -72,7 +74,7 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
     }
 
     @Override
-    public void onPause(@NonNull LifecycleOwner owner) {
+    public void onDestroy(@NonNull LifecycleOwner owner) {
         DataRepository repository = DataRepository.getInstance();
         repository.unregisterMsgListener(this);
     }

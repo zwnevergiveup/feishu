@@ -93,6 +93,7 @@
         <activity android:name=".view.activity.CurrentConversationsActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppThemeSwipe"
+            android:windowSoftInputMode="stateAlwaysHidden"
            >
 
         </activity>
