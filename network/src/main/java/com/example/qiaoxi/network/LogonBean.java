@@ -1,6 +1,6 @@
-package com.example.qiaoxi.network.model;
+package com.example.qiaoxi.network;
 
-public class LogonBean {
+class LogonBean {
     String userName;
     String password;
     String phoneNumber;

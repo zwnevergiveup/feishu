@@ -1,7 +1,4 @@
-package com.example.qiaoxi.network.retrofit;
-
-import com.example.qiaoxi.network.model.LoginBean;
-import com.example.qiaoxi.network.model.LogonBean;
+package com.example.qiaoxi.network;
 
 import java.util.Map;
 
@@ -9,7 +6,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import retrofit2.http.*;
 
-public interface ServerApi {
+interface ServerApi {
 
     /**
      * 注册

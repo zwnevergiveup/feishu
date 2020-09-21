@@ -1,4 +1,4 @@
-package com.example.qiaoxi.network.retrofit;
+package com.example.qiaoxi.network;
 
 import android.util.Log;
 

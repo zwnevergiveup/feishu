@@ -6,9 +6,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.qiaoxi.data.model.ContactModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
+import com.example.qiaoxi.network.NetworkCallBacker;
+import com.example.qiaoxi.network.NetworkHelper;
+import com.example.qiaoxi.network.ResponseModel;
 import com.example.qiaoxi.widget.QXApplication;
 import com.google.gson.reflect.TypeToken;
-import com.example.qiaoxi.network.retrofit.RetrofitHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,34 +32,21 @@ public class ContactViewModel extends BaseViewModel {
     }
 
     public void getContactList() {
-        RetrofitHelper.getInstance().getServerApi()
-            .getContactList(QXApplication.currentUser)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Observer<Map<String, Object>>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-
+        NetworkHelper.getInstance().getContactList(QXApplication.currentUser, new NetworkCallBacker() {
+            @Override
+            public void onSuccess(ResponseModel model) {
+                if (model.status.equals("200")) {
+                    List<ContactModel> contactModels = JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(model.extraInfo),new TypeToken<List<ContactModel>>(){}.getType());
+                    mContactList.setValue(contactModels);
                 }
+            }
 
-                @Override
-                public void onNext(Map<String, Object> map) {
-                    if ( (Integer) JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(map.get("status")),new TypeToken<Integer>(){}.getType()) == 200) {
-                        List<ContactModel> contactModels = JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(map.get("payload")),new TypeToken<List<ContactModel>>(){}.getType());
-                        mContactList.setValue(contactModels);
-                    }
-                }
+            @Override
+            public void onFail(ResponseModel model) {
 
-                @Override
-                public void onError(Throwable e) {
-                    Log.e("qiaoxi",e.getMessage());
-                }
+            }
+        });
 
-                @Override
-                public void onComplete() {
-
-                }
-            });
     }
 
 }

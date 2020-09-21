@@ -1,4 +1,4 @@
-package com.example.qiaoxi.network.model;
+package com.example.qiaoxi.network;
 
 public class ResponseModel {
     public String message;
