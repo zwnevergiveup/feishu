@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.MsgModel;
+import com.example.qiaoxi.datasource.MsgModel;
 import com.hyphenate.chat.EMClient;
 
 import java.util.List;

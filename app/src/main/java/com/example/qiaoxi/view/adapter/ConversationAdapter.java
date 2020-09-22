@@ -1,19 +1,16 @@
 package com.example.qiaoxi.view.adapter;
 
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.ConversationModel;
+import com.example.qiaoxi.datasource.ConversationModel;
 import com.example.qiaoxi.view.customerview.CustomerImgView;
-import com.example.qiaoxi.widget.QXApplication;
 
 import java.util.List;
 

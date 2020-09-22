@@ -61,15 +61,18 @@ protobuf {
     generatedFilesBaseDir = "$projectDir/src/generated"
 }
 
+repositories {
+    flatDir {
+        dirs '../libs'
+    }
+}
+
 dependencies {
     implementation project(':network')
+    implementation project(':datasource')
     implementation 'androidx.cardview:cardview:1.0.0'
-    def room_version = "2.2.5"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
-    implementation 'androidx.room:room-runtime:2.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.0.0'
 
+//    implementation(name: 'hyphenatechat_3.6.7',ext: 'jar')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 

@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.ConversationModel;
-import com.example.qiaoxi.data.model.MsgModel;
+import com.example.qiaoxi.datasource.ConversationModel;
 import com.example.qiaoxi.view.adapter.ConversationAdapter;
 
 import java.util.ArrayList;

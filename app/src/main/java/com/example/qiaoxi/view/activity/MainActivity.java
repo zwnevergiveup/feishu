@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.ConversationModel;
+import com.example.qiaoxi.datasource.ConversationModel;
 import com.example.qiaoxi.dataprocess.ConversationsViewModel;
 import com.example.qiaoxi.view.adapter.ViewPagerAdapter;
 import com.example.qiaoxi.view.fragment.ContactFragment;

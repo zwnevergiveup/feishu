@@ -1,3 +1,4 @@
+include ':datasource'
 rootProject.name='qiaoxi'
 include ':app'
 include ':network'

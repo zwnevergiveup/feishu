@@ -2,7 +2,7 @@ package com.example.qiaoxi.dataprocess;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.qiaoxi.data.model.ContactModel;
+import com.example.qiaoxi.datasource.ContactModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.network.NetworkCallBacker;
 import com.example.qiaoxi.network.NetworkHelper;

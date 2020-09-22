@@ -8,11 +8,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.qiaoxi.data.model.ResultModel;
-import com.example.qiaoxi.data.model.UserModel;
-import com.example.qiaoxi.data.repository.DataRepository;
-import com.example.qiaoxi.helper.db.AppDatabase;
-import com.example.qiaoxi.helper.db.DBHelper;
+import com.example.qiaoxi.datasource.ResultModel;
+import com.example.qiaoxi.datasource.UserModel;
+import com.example.qiaoxi.datasource.DataRepository;
+import com.example.qiaoxi.datasource.AppDatabase;
+import com.example.qiaoxi.datasource.dbsave.DBHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
 import com.example.qiaoxi.widget.QXApplication;
 import com.google.gson.reflect.TypeToken;

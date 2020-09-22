@@ -7,13 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.BannerModel;
+import com.example.qiaoxi.datasource.BannerModel;
 import com.youth.banner.adapter.BannerAdapter;
 
 import java.util.List;

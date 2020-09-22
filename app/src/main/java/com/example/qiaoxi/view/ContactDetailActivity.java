@@ -3,7 +3,6 @@ package com.example.qiaoxi.view;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,15 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.ContactModel;
-import com.example.qiaoxi.data.model.UserModel;
+import com.example.qiaoxi.datasource.ContactModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.activity.BaseActivity;
 import com.example.qiaoxi.view.activity.CurrentConversationsActivity;
 import com.example.qiaoxi.view.adapter.ImageAdapter;
 import com.example.qiaoxi.view.customerview.QXToolbar;
-import com.example.qiaoxi.view.dialog.BottomDialog;
 import com.example.qiaoxi.view.dialog.ContactMoreDialog;
 import com.google.gson.reflect.TypeToken;
 

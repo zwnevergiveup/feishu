@@ -1,6 +1,5 @@
 package com.example.qiaoxi.view.adapter;
 
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.ContactModel;
-import com.example.qiaoxi.data.model.UserModel;
-import com.example.qiaoxi.widget.QXApplication;
-import com.github.promeg.pinyinhelper.Pinyin;
+import com.example.qiaoxi.datasource.ContactModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

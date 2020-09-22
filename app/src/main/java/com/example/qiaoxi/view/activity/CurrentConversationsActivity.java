@@ -1,14 +1,9 @@
 package com.example.qiaoxi.view.activity;
 
 import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.databinding.DataBindingUtil;
@@ -17,18 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.data.model.ContactModel;
+import com.example.qiaoxi.datasource.ContactModel;
 import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
-import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.adapter.MessageAdapter;
-import com.example.qiaoxi.widget.QXApplication;
 import com.example.qiaoxi.view.customerview.QXToolbar;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
-import com.example.qiaoxi.data.model.MsgModel;
+import com.example.qiaoxi.datasource.MsgModel;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 

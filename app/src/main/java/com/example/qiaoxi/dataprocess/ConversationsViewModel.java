@@ -5,9 +5,9 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.qiaoxi.widget.QXApplication;
-import com.example.qiaoxi.data.model.ConversationModel;
-import com.example.qiaoxi.data.repository.DataRepository;
-import com.example.qiaoxi.data.repository.ListenRepositoryData;
+import com.example.qiaoxi.datasource.ConversationModel;
+import com.example.qiaoxi.datasource.DataRepository;
+import com.example.qiaoxi.datasource.ListenRepositoryData;
 
 import java.util.List;
 

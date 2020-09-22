@@ -1,20 +1,17 @@
 package com.example.qiaoxi.dataprocess;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.qiaoxi.data.model.ConversationModel;
-import com.example.qiaoxi.data.model.MsgModel;
-import com.example.qiaoxi.data.repository.DataRepository;
-import com.example.qiaoxi.data.repository.ListenRepositoryData;
+import com.example.qiaoxi.datasource.ConversationModel;
+import com.example.qiaoxi.datasource.DataSourceHelper;
+import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.datasource.DataRepository;
+import com.example.qiaoxi.datasource.ListenRepositoryData;
 import com.example.qiaoxi.widget.QXApplication;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
 
@@ -53,12 +50,12 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     public void sendMessage() {
         if (editText.getValue() != null && !editText.getValue().isEmpty()) {
-            EMMessage message = EMMessage.createTxtSendMessage(editText.getValue(), conversationName);
-            EMClient.getInstance().chatManager().sendMessage(message);
+            DataSourceHelper.getInstance().sendMessage(editText.getValue(),conversationName, (message) -> {
+                MsgModel model = new MsgModel(message);
+                msgModelMutableLiveData.postValue(model);
+                insertMsgModel(model);
+            });
             editText.setValue("");
-            MsgModel model = new MsgModel(message);
-            msgModelMutableLiveData.postValue(model);
-            insertMsgModel(model);
         }
     }
 
