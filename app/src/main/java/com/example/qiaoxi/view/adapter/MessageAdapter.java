@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.datasource.DataSourceHelper;
 import com.example.qiaoxi.datasource.MsgModel;
-import com.hyphenate.chat.EMClient;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         holder.icon_left.setVisibility(View.VISIBLE);
         holder.icon_right.setVisibility(View.VISIBLE);
         MsgModel msgModel = msgModels.get(position);
-        if (msgModel.send.equals(EMClient.getInstance().getCurrentUser())){
+        if (msgModel.send.equals(DataSourceHelper.getInstance().getCurrentUserName())){
             holder.messageText_right.setText( msgModel.content);
             holder.messageText_left.setVisibility(View.GONE);
             holder.icon_left.setVisibility(View.GONE);

@@ -7,7 +7,8 @@ import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.hyphenate.chat.EMClient;
+
+import com.example.qiaoxi.datasource.DataSourceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void turnToLogin() {
-        if (EMClient.getInstance().isConnected()) {
+        if (DataSourceHelper.getInstance().isConnectedEM()) {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
         }else {
             startActivity(new Intent(SplashActivity.this,ChooseLoginOrLogonActivity.class));

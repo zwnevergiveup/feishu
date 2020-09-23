@@ -3,7 +3,7 @@ package com.example.qiaoxi.dataprocess;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.hyphenate.chat.EMClient;
+import com.example.qiaoxi.datasource.DataSourceHelper;
 
 public class MineViewModel extends BaseViewModel {
 
@@ -11,7 +11,7 @@ public class MineViewModel extends BaseViewModel {
 
     public MineViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue(EMClient.getInstance().getCurrentUser());
+        mText.setValue(DataSourceHelper.getInstance().getCurrentUserName());
     }
 
     public LiveData<String> getText() {

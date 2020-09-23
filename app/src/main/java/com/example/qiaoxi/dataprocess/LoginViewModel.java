@@ -8,16 +8,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.qiaoxi.datasource.CallBacker;
+import com.example.qiaoxi.datasource.DataSourceHelper;
 import com.example.qiaoxi.datasource.ResultModel;
 import com.example.qiaoxi.datasource.UserModel;
 import com.example.qiaoxi.datasource.DataRepository;
 import com.example.qiaoxi.datasource.AppDatabase;
-import com.example.qiaoxi.datasource.dbsave.DBHelper;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
 import com.example.qiaoxi.widget.QXApplication;
 import com.google.gson.reflect.TypeToken;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 
 import io.netty.channel.ChannelFuture;
 
@@ -37,7 +36,6 @@ public class LoginViewModel extends BaseViewModel {
     public LoginViewModel( Context context) {
         Log.e("qiaoxi","init loginViewModel");
         logout();
-        db = DBHelper.getInstance().getAppDatabase(context, "QX_DB");
         String a = (String)SPHelper.getInstance(context).readObject("lastLoginName",new TypeToken<String>(){}.getType());
         if (a != null) {
             userName.setValue(a);
@@ -63,22 +61,17 @@ public class LoginViewModel extends BaseViewModel {
             return;
         }
         try{
-            EMClient.getInstance().login(userName.getValue(), userPassword.getValue(), new EMCallBack() {
+            DataSourceHelper.getInstance().loginEM(userName.getValue(), userPassword.getValue(), new CallBacker() {
                 @Override
-                public void onSuccess() {
+                public void onSuccess(Object message) {
                     QXApplication.currentUser = userName.getValue();
-                    result.postValue(new ResultModel(true,"登录成功"));
+                    result.postValue(new ResultModel(true,(String) message));
                     DataRepository repository = DataRepository.getInstance();
                 }
 
                 @Override
-                public void onError(int i, String s) {
-                    result.postValue(new ResultModel(false, s));
-                }
-
-                @Override
-                public void onProgress(int i, String s) {
-
+                public void onFail(Object reason) {
+                    result.postValue(new ResultModel(false, (String)reason));
                 }
             });
 
@@ -92,20 +85,15 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     public void logout(){
-        EMClient.getInstance().logout(true, new EMCallBack() {
+        DataSourceHelper.getInstance().logoutEM(new CallBacker() {
             @Override
-            public void onSuccess() {
-                Log.e("qiaoxi","logout success");
+            public void onSuccess(Object message) {
+                Log.e("qiaoxi",(String) message);
             }
 
             @Override
-            public void onError(int i, String s) {
-                Log.e("qiaoxi","logout error");
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-
+            public void onFail(Object reason) {
+                Log.e("qiaoxi",(String) reason);
             }
         });
     }

@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +42,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("qiaoxi","send message");
-                EMMessage message = EMMessage.createTxtSendMessage("lalalala","zf");
-                EMClient.getInstance().chatManager().sendMessage(message);
+
             }
         });
         return new ViewHolder(view);

@@ -50,10 +50,9 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     public void sendMessage() {
         if (editText.getValue() != null && !editText.getValue().isEmpty()) {
-            DataSourceHelper.getInstance().sendMessage(editText.getValue(),conversationName, (message) -> {
-                MsgModel model = new MsgModel(message);
-                msgModelMutableLiveData.postValue(model);
-                insertMsgModel(model);
+            DataSourceHelper.getInstance().sendMessage(editText.getValue(),conversationName, (msgModel) -> {
+                msgModelMutableLiveData.postValue(msgModel);
+                insertMsgModel(msgModel);
             });
             editText.setValue("");
         }
