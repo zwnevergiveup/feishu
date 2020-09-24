@@ -12,8 +12,11 @@ import com.hyphenate.push.EMPushHelper;
 import com.hyphenate.push.EMPushType;
 import com.hyphenate.push.PushListener;
 
+import java.util.List;
+
 public class DataSourceHelper {
     private Context mContext = null;
+    private DataRepository repository = null;
 
     private static volatile  DataSourceHelper mInstance = null;
 
@@ -46,6 +49,8 @@ public class DataSourceHelper {
                 return super.isSupportPush(emPushType, emPushConfig);
             }
         });
+
+        repository = DataRepository.getInstance();
     }
 
     public static DataSourceHelper getInstance() {
@@ -67,6 +72,10 @@ public class DataSourceHelper {
         EMMessage message = EMMessage.createTxtSendMessage(content, toWho);
         EMClient.getInstance().chatManager().sendMessage(message);
         MsgModel model = new MsgModel(message);
+
+        repository.processNewMessage(model);
+        repository.processNewConversation(new ConversationModel(model.send,model.receive,model));
+
         lambda.noArg(model);
     }
 
@@ -117,5 +126,29 @@ public class DataSourceHelper {
         return EMClient.getInstance().isConnected();
     }
 
+
+    public void registerMessageListen(ListenRepositoryData<MsgModel> listener) {
+        repository.registerMsgListener(listener);
+    }
+
+    public void unregisterMessageListen(ListenRepositoryData<MsgModel> listener) {
+        repository.unregisterMsgListener(listener);
+    }
+
+    public void registerConversationListen(ListenRepositoryData<ConversationModel> listener) {
+        repository.unregisterConversationListener(listener);
+    }
+
+    public void unregisterConversationListen(ListenRepositoryData<ConversationModel> listener) {
+        repository.unregisterConversationListener(listener);
+    }
+
+    public List<MsgModel> readMsgHistory(String user, String contact, int size) {
+        return repository.readMsgFromDB(user,contact,size);
+    }
+
+    public List<ConversationModel> readConversationsList(String user) {
+        return repository.readConversationsFromDB(user);
+    }
 
 }

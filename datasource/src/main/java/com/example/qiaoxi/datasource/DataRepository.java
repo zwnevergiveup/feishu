@@ -3,7 +3,7 @@ package com.example.qiaoxi.datasource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataRepository  implements MessageDataDelegate, ConversationModelDelegate, UserDataDelegate {
+class DataRepository  implements MessageDataDelegate, ConversationModelDelegate, UserDataDelegate {
     private static volatile DataRepository instance = null;
 
     private AppDatabase db;
@@ -60,7 +60,7 @@ public class DataRepository  implements MessageDataDelegate, ConversationModelDe
     }
 
     @Override
-    public List<MsgModel> readMsgFromDB( String current ,String contact) {
+    public List<MsgModel> readMsgFromDB( String current ,String contact, int size) {
         return db.msgModelDao().loadMsgByName(contact,current);
     }
 

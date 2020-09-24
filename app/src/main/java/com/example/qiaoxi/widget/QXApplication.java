@@ -8,7 +8,6 @@ import com.example.qiaoxi.datasource.DataSourceHelper;
 
 public class QXApplication extends Application {
     private  static Context mContext;
-    public static String currentUser;
 
 
     @Override

@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.qiaoxi.datasource.DataSourceHelper;
 import com.example.qiaoxi.widget.QXApplication;
 import com.example.qiaoxi.datasource.ConversationModel;
-import com.example.qiaoxi.datasource.DataRepository;
 import com.example.qiaoxi.datasource.ListenRepositoryData;
 
 import java.util.List;
@@ -18,9 +18,8 @@ public class ConversationsViewModel extends BaseViewModel implements ListenRepos
 
     @Override
     public void onResume(@NonNull LifecycleOwner owner) {
-        DataRepository repository = DataRepository.getInstance();
-        repository.registerConversationListener(this);
-        List<ConversationModel> conversationModels = repository.readConversationsFromDB(QXApplication.currentUser);
+        DataSourceHelper.getInstance().registerConversationListen(this);
+        List<ConversationModel> conversationModels = DataSourceHelper.getInstance().readConversationsList(DataSourceHelper.getInstance().getCurrentUserName());
         if (conversationModels != null && conversationModels.size() > 0 ) {
             conversations.setValue(conversationModels);
         }
@@ -28,14 +27,12 @@ public class ConversationsViewModel extends BaseViewModel implements ListenRepos
 
     @Override
     public void onPause(@NonNull LifecycleOwner owner) {
-        DataRepository repository = DataRepository.getInstance();
-        repository.unregisterConversationListener(this);
+        DataSourceHelper.getInstance().unregisterConversationListen(this);
     }
 
     @Override
     public void sendNewModel(ConversationModel conversationModel) {
-        DataRepository repository = DataRepository.getInstance();
-        List<ConversationModel> conversationModels = repository.readConversationsFromDB(QXApplication.currentUser);
+        List<ConversationModel> conversationModels = DataSourceHelper.getInstance().readConversationsList(DataSourceHelper.getInstance().getCurrentUserName());
         if (conversationModels != null && conversationModels.size() > 0 ) {
             conversations.postValue(conversationModels);
         }

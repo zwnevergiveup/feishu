@@ -12,7 +12,6 @@ import com.example.qiaoxi.datasource.CallBacker;
 import com.example.qiaoxi.datasource.DataSourceHelper;
 import com.example.qiaoxi.datasource.ResultModel;
 import com.example.qiaoxi.datasource.UserModel;
-import com.example.qiaoxi.datasource.DataRepository;
 import com.example.qiaoxi.datasource.AppDatabase;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
 import com.example.qiaoxi.widget.QXApplication;
@@ -64,9 +63,7 @@ public class LoginViewModel extends BaseViewModel {
             DataSourceHelper.getInstance().loginEM(userName.getValue(), userPassword.getValue(), new CallBacker() {
                 @Override
                 public void onSuccess(Object message) {
-                    QXApplication.currentUser = userName.getValue();
                     result.postValue(new ResultModel(true,(String) message));
-                    DataRepository repository = DataRepository.getInstance();
                 }
 
                 @Override

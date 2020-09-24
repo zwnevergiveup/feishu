@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.qiaoxi.datasource.ConversationModel;
 import com.example.qiaoxi.datasource.DataSourceHelper;
 import com.example.qiaoxi.datasource.MsgModel;
-import com.example.qiaoxi.datasource.DataRepository;
 import com.example.qiaoxi.datasource.ListenRepositoryData;
 import com.example.qiaoxi.widget.QXApplication;
 
@@ -40,9 +39,8 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
-        DataRepository repository = DataRepository.getInstance();
-        repository.registerMsgListener(this);
-        List<MsgModel> list = repository.readMsgFromDB(QXApplication.currentUser , conversationName);
+        DataSourceHelper.getInstance().registerMessageListen(this);
+        List<MsgModel> list = DataSourceHelper.getInstance().readMsgHistory(DataSourceHelper.getInstance().getCurrentUserName() , conversationName,10);
         if (list != null && list.size() > 0) {
             lastMessages.setValue(list);
         }
@@ -52,16 +50,9 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
         if (editText.getValue() != null && !editText.getValue().isEmpty()) {
             DataSourceHelper.getInstance().sendMessage(editText.getValue(),conversationName, (msgModel) -> {
                 msgModelMutableLiveData.postValue(msgModel);
-                insertMsgModel(msgModel);
             });
             editText.setValue("");
         }
-    }
-
-    private void insertMsgModel(MsgModel msgModel) {
-        DataRepository repository = DataRepository.getInstance();
-        repository.processNewMessage(msgModel);
-        repository.processNewConversation(new ConversationModel(msgModel.send,msgModel.receive,msgModel));
     }
 
     @Override
@@ -71,7 +62,6 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     @Override
     public void onDestroy(@NonNull LifecycleOwner owner) {
-        DataRepository repository = DataRepository.getInstance();
-        repository.unregisterMsgListener(this);
+        DataSourceHelper.getInstance().unregisterMessageListen(this);
     }
 }
