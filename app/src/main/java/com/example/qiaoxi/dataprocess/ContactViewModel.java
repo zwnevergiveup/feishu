@@ -3,6 +3,7 @@ package com.example.qiaoxi.dataprocess;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.qiaoxi.datasource.ContactModel;
+import com.example.qiaoxi.datasource.DataSourceHelper;
 import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.network.NetworkCallBacker;
 import com.example.qiaoxi.network.NetworkHelper;
@@ -24,7 +25,7 @@ public class ContactViewModel extends BaseViewModel {
     }
 
     public void getContactList() {
-        NetworkHelper.getInstance().getContactList(QXApplication.currentUser, new NetworkCallBacker() {
+        NetworkHelper.getInstance().getContactList(DataSourceHelper.getInstance().getCurrentUserName(), new NetworkCallBacker() {
             @Override
             public void onSuccess(ResponseModel model) {
                 if (model.status.equals("200")) {
