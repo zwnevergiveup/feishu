@@ -14,7 +14,7 @@ class RetrofitHelper {
     private ServerApi mServerApi;
     private RetrofitHelper() {
         mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.104:8080/")
+                .baseUrl("http://192.168.0.103:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(getOkHttpClient())
