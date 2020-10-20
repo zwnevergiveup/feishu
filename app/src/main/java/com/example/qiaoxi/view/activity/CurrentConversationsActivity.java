@@ -1,6 +1,7 @@
 package com.example.qiaoxi.view.activity;
 
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -35,6 +36,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private int mWindowHeight = 0;
     private ViewGroup inputVG;
     private ViewGroup current_conversation_more_operation;
+    private int mRecyclerHeight = 0;
 
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
@@ -48,6 +50,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
                 mWindowHeight = height;
             } else {
                 inputVG.setTranslationY(height-mWindowHeight);
+                mRecycler.setTranslationY(height-mWindowHeight);
             }
         }
     };
@@ -75,6 +78,9 @@ public final class CurrentConversationsActivity extends BaseActivity {
         MessageAdapter messageAdapter = new MessageAdapter();
         messageAdapter.setEmMessageList(emMessageList);
         mRecycler.setAdapter(messageAdapter);
+        mRecycler.post(() -> {
+            mRecyclerHeight = mRecycler.getBottom() - mRecycler.getTop();
+        });
         current_conversation_more_operation = findViewById(R.id.current_conversation_more_operation);
 
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
