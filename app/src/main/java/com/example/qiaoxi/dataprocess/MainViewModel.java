@@ -15,6 +15,7 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.datasource.DataSourceHelper;
 import com.example.qiaoxi.datasource.ListenRepositoryData;
 import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.network.NetworkHelper;
 import com.example.qiaoxi.widget.QXApplication;
 
 import java.util.Random;
@@ -36,6 +37,7 @@ public final class MainViewModel extends BaseViewModel implements ListenReposito
 
     @Override
     public void sendNewModel(MsgModel msgModel) {
+        if (msgModel.send.equals(DataSourceHelper.getInstance().getCurrentUserName())) return;
         NotificationManager manager = (NotificationManager) QXApplication.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification = new NotificationCompat.Builder(QXApplication.getContext(), "chat")
                 .setAutoCancel(true)

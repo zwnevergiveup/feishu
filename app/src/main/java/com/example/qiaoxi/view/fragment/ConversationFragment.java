@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.dataprocess.ConversationsViewModel;
+import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 import com.example.qiaoxi.datasource.ConversationModel;
 import com.example.qiaoxi.view.adapter.ConversationAdapter;
 
@@ -21,6 +24,7 @@ import java.util.List;
 public class ConversationFragment extends Fragment {
     private RecyclerView mRecycler;
     private List<ConversationModel> conversationModels = new ArrayList<>();
+    private ConversationsViewModel conversationsViewModel;
     private View root;
     @Nullable
     @Override
@@ -32,6 +36,9 @@ public class ConversationFragment extends Fragment {
             mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRecycler.setAdapter(adapter);
             adapter.setConversationModels(conversationModels);
+            conversationsViewModel = new ViewModelProvider(this).get(ConversationsViewModel.class);
+
+            getLifecycle().addObserver(conversationsViewModel);
         }
         return root;
     }
