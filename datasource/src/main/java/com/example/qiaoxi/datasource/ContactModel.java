@@ -20,6 +20,4 @@ public class ContactModel {
 
     @ColumnInfo(name = "friend_nickname")
     public String friendNickName;
-
-
 }

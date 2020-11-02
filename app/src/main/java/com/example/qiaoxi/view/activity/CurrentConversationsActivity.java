@@ -60,7 +60,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
         mModel = JsonHelper.getInstance().getObject(getIntent().getStringExtra("contactModel"),new TypeToken<ContactModel>(){}.getType());
         String withWho = "";
-        if (mModel != null) withWho = mModel.friendName;
+        if (mModel != null) withWho = mModel.friendName ;
         currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding. setLifecycleOwner(this);

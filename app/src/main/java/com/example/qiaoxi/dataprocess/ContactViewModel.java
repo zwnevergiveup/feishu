@@ -39,7 +39,6 @@ public class ContactViewModel extends BaseViewModel {
 
             }
         });
-
     }
 
 }

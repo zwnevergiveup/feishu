@@ -89,19 +89,22 @@
         <activity android:name=".view.fragment.ContactFragment">
 
         </activity>
+
+        <activity android:name=".view.ContactDetailActivity"
+            android:theme="@style/AppThemeSwipe"
+            android:parentActivityName=".view.activity.MainActivity"
+            >
+
+        </activity>
 <!--        聊天页面-->
         <activity android:name=".view.activity.CurrentConversationsActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppThemeSwipe"
             android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName=".view.ContactDetailActivity"
            >
-
         </activity>
-        <activity android:name=".view.ContactDetailActivity"
-            android:theme="@style/AppThemeSwipe"
-            >
 
-        </activity>
 
         <!-- MEIZU推送配置 start -->
         <receiver android:name="com.hyphenate.push.platform.meizu.EMMzMsgReceiver">
