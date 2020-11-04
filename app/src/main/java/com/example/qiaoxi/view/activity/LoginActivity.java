@@ -6,6 +6,7 @@ import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.example.qiaoxi.datasource.UserModel;
 
 public class LoginActivity extends BaseActivity {
     private ImageView catBg;
+    private ViewGroup loadingView;
 
     @Override
     protected void setupView() {
@@ -51,6 +53,7 @@ public class LoginActivity extends BaseActivity {
         TextView tv = findViewById(R.id.logon_account);
         tv.setText(Html.fromHtml(getString(R.string.logon)));
         catBg = findViewById(R.id.cat_bg);
+        loadingView = findViewById(R.id.login_loading_group);
     }
 
     @Override
@@ -104,11 +107,10 @@ public class LoginActivity extends BaseActivity {
                     catBg.setImageDrawable(getDrawable(R.mipmap.cat_close_eye));
                 }else {
                     catBg.setImageDrawable(getDrawable(R.mipmap.cat1));
-
                 }
             }
         });
-
+        loadingView.setOnClickListener(v -> { });
     }
 
 

@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         tools:context=".view.activity.LoginActivity">
 
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="220dp"
@@ -199,6 +200,23 @@
             android:src="@mipmap/weibo"
             android:id="@+id/quick_login_weibo"
             />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/alpha5"
+            android:id="@+id/login_loading_group"
+            android:elevation="15dp"
+            android:visibility="@{viewmodel.visibility}"
+            >
+            <ProgressBar
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

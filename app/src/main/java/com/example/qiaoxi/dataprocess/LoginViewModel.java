@@ -2,6 +2,7 @@ package com.example.qiaoxi.dataprocess;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -25,6 +26,7 @@ public class LoginViewModel extends BaseViewModel {
     public MutableLiveData<UserModel> userModelLiveData = new MutableLiveData<>();
     public MutableLiveData<String> userName = new MutableLiveData<>();
     public MutableLiveData<String> userPassword = new MutableLiveData<>();
+    public MutableLiveData<Integer> visibility = new MutableLiveData<>();
     public MutableLiveData<ResultModel> result = new MutableLiveData<>();
     public MutableLiveData<Integer> lastUserIconVisible = new MutableLiveData<>();
     public MutableLiveData<Integer> nameEditVisible = new MutableLiveData<>();
@@ -39,6 +41,7 @@ public class LoginViewModel extends BaseViewModel {
         if (a != null) {
             userName.setValue(a);
         }
+        visibility.setValue(View.INVISIBLE);
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -59,15 +62,18 @@ public class LoginViewModel extends BaseViewModel {
             result.setValue(new ResultModel(false, "请填写用户名和密码"));
             return;
         }
+        visibility.setValue(View.VISIBLE);
         try{
             DataSourceHelper.getInstance().loginEM(userName.getValue(), userPassword.getValue(), new CallBacker() {
                 @Override
                 public void onSuccess(Object message) {
+                    visibility.postValue(View.INVISIBLE);
                     result.postValue(new ResultModel(true,(String) message));
                 }
 
                 @Override
                 public void onFail(Object reason) {
+                    visibility.postValue(View.INVISIBLE);
                     result.postValue(new ResultModel(false, (String)reason));
                 }
             });
