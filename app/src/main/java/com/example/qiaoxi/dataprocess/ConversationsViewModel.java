@@ -11,7 +11,6 @@ import com.example.qiaoxi.datasource.ConversationModel;
 import com.example.qiaoxi.datasource.ListenRepositoryData;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class ConversationsViewModel extends BaseViewModel implements  ListenRepositoryData<MsgModel> {
 
@@ -23,6 +22,10 @@ public class ConversationsViewModel extends BaseViewModel implements  ListenRepo
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
         DataSourceHelper.getInstance().registerMessageListen(this);
+    }
+
+    @Override
+    public void onResume(@NonNull LifecycleOwner owner) {
         List<ConversationModel> conversationModels = DataSourceHelper.getInstance().readConversationsList(DataSourceHelper.getInstance().getCurrentUserName());
         if (conversationModels != null ) {
             conversations.setValue(conversationModels);
@@ -39,6 +42,7 @@ public class ConversationsViewModel extends BaseViewModel implements  ListenRepo
         conversations.getValue().forEach(conversationModel -> {
             if ((conversationModel.currentName.equals(msgModel.receive) && conversationModel.contactMan.equals(msgModel.send)) || (conversationModel.currentName.equals(msgModel.send) && conversationModel.contactMan.equals(msgModel.receive))) {
                 conversationModel.lastMessage = msgModel;
+                conversations.setValue(conversations.getValue());
             }
         });
     }

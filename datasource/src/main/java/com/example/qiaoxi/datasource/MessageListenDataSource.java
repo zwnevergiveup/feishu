@@ -20,7 +20,9 @@ public class MessageListenDataSource {
             public void onMessageReceived(List<EMMessage> list) {
                 list.forEach(emMessage -> {
                     if (emMessage.getBody() instanceof EMTextMessageBody) {
-                        repository.processNewMessage(new MsgModel(emMessage));
+                        MsgModel msgModel = new MsgModel(emMessage);
+                        repository.processNewMessage(msgModel);
+                        repository.processNewConversation(new ConversationModel(msgModel.send,msgModel.receive,msgModel));
                     }
                 });
             }

@@ -150,5 +150,4 @@ public class DataSourceHelper {
     public List<ConversationModel> readConversationsList(String user) {
         return repository.readConversationsFromDB(user);
     }
-
 }
