@@ -42,7 +42,7 @@ public class ConversationsViewModel extends BaseViewModel implements  ListenRepo
         conversations.getValue().forEach(conversationModel -> {
             if ((conversationModel.currentName.equals(msgModel.receive) && conversationModel.contactMan.equals(msgModel.send)) || (conversationModel.currentName.equals(msgModel.send) && conversationModel.contactMan.equals(msgModel.receive))) {
                 conversationModel.lastMessage = msgModel;
-                conversations.setValue(conversations.getValue());
+                conversations.postValue(conversations.getValue());
             }
         });
     }

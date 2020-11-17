@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
+    android:background="@color/graph_white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -48,13 +49,13 @@
         android:text="10"
         android:gravity="center"
         android:textSize="14sp"
+        android:visibility="invisible"
         android:textColor="@color/pure_white"
         android:background="@drawable/red_r12_bg"
         android:paddingStart="7dp"
         android:paddingEnd="7dp"
         android:layout_marginEnd="30dp"
         android:stateListAnimator="@null"
-        android:elevation="10dp"
         />
 
     <TextView

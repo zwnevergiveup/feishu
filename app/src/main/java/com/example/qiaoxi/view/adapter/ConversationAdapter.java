@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.datasource.ConversationModel;
 import com.example.qiaoxi.view.customerview.CustomerImgView;
@@ -52,8 +54,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         holder.lastMessage.setText(model.lastMessage.content);
         holder.title.setText(model.contactMan);
         holder.lastMsgTime.setText(model.lastMessage.sendTime.toString());
-        holder.waitReadCount.setText(String.valueOf(model.unread));
-        holder .icon.setImageResource(model.temp_profile);
+        holder.waitReadCount.setText(String.valueOf(model.unread));        holder.icon.setImageResource(model.temp_profile);
+        RequestOptions requestOptions = new RequestOptions().error(R.mipmap.icon_people25);
+        Glide.with(holder.itemView.getContext())
+                .load(model.temp_profile)
+                .apply(requestOptions)
+                .into(holder.icon);
 
         View item = holder.itemView;
         if (mOnConversationItemClickListener != null) {
@@ -72,6 +78,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     public interface onConversationItemClickListener {
         void onClick(View view, int position);
     }
+
 
     private ConversationAdapter.onConversationItemClickListener mOnConversationItemClickListener;
 

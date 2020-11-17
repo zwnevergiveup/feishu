@@ -93,6 +93,7 @@
                     app:layout_constraintStart_toEndOf="@id/current_conversation_more_btn"
                     android:layout_marginBottom="30dp"
                     android:hint="请输入信息"
+                    android:imeOptions="actionSend"
                     />
 
                 <Button
