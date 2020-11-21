@@ -21,7 +21,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/current_conversation_more_operation"
             android:background="@drawable/bottom_let_right_radius"
-            tools:context=".view.activity.CurrentConversationsActivity">
+            tools:context=".view.activity.CurrentConversationsActivity"
+            android:id="@+id/current_conversation_top"
+            >
 
             <com.example.qiaoxi.view.customerview.QXToolbar
                 android:layout_width="match_parent"
@@ -33,7 +35,7 @@
                 app:rightButton_src="@mipmap/more"
                 app:titleTextColor="@color/pure_black"
                 app:titleTextMarginStart="60"
-                app:title="返回"
+                app:title=""
                 >
             </com.example.qiaoxi.view.customerview.QXToolbar>
 
@@ -94,6 +96,7 @@
                     android:layout_marginBottom="30dp"
                     android:hint="请输入信息"
                     android:imeOptions="actionSend"
+                    android:inputType="text"
                     />
 
                 <Button
@@ -140,6 +143,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
+                android:id="@+id/current_conversation_emoji_text"
                 />
             <com.example.qiaoxi.view.customerview.CustomerImgView
                 android:layout_width="46dp"
@@ -163,6 +167,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
+                android:id="@+id/current_conversation_voice_text"
                 />
 
             <com.example.qiaoxi.view.customerview.CustomerImgView
@@ -184,6 +189,7 @@
                 app:layout_constraintEnd_toEndOf="@id/current_conversation_shot"
                 app:layout_constraintTop_toBottomOf="@id/current_conversation_shot"
                 android:text="拍照"
+                android:id="@+id/current_conversation_shot_text"
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
@@ -210,6 +216,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
+                android:id="@+id/current_conversation_video_text"
                 />
 
 
@@ -235,6 +242,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
+                android:id="@+id/current_conversation_transfer_text"
                 />
             <com.example.qiaoxi.view.customerview.CustomerImgView
                 android:layout_width="46dp"
@@ -243,7 +251,6 @@
                 app:layout_constraintBottom_toBottomOf="@id/current_conversation_transfer"
                 app:layout_constraintStart_toEndOf="@id/current_conversation_transfer"
                 app:layout_constraintEnd_toStartOf="@id/current_conversation_location"
-
                 app:qxRadius="15"
                 android:src="@mipmap/voice"
                 android:scaleType="fitXY"
@@ -259,6 +266,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
+                android:id="@+id/current_conversation_red_package_text"
                 />
 
             <com.example.qiaoxi.view.customerview.CustomerImgView
@@ -283,6 +291,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
+                android:id="@+id/current_conversation_location_text"
                 />
             <com.example.qiaoxi.view.customerview.CustomerImgView
                 android:layout_width="46dp"
@@ -306,6 +315,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#d2d2d2"
                 android:textSize="15sp"
+                android:id="@+id/current_conversation_visiting_card_text"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

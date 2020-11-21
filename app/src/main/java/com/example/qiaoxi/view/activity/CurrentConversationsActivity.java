@@ -1,5 +1,6 @@
 package com.example.qiaoxi.view.activity;
 
+import android.content.Context;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -10,6 +11,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,10 +22,12 @@ import com.example.qiaoxi.R;
 import com.example.qiaoxi.datasource.ContactModel;
 import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
+import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.adapter.MessageAdapter;
 import com.example.qiaoxi.view.customerview.QXToolbar;
 import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.widget.QXApplication;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -39,7 +44,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
     private int mWindowHeight = 0;
     private ViewGroup inputVG;
     private ViewGroup current_conversation_more_operation;
-    private int mRecyclerHeight = 0;
+    private int devHeight = 0;
 
     private ViewTreeObserver.OnGlobalLayoutListener mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
@@ -52,12 +57,21 @@ public final class CurrentConversationsActivity extends BaseActivity {
                 //第一次进来，记录下原始的可见窗口高度。
                 mWindowHeight = height;
             } else {
-                inputVG.setTranslationY(height-mWindowHeight);
-                mRecycler.setTranslationY(height-mWindowHeight);
+//                inputVG.offsetTopAndBottom(height-mWindowHeight);
+                Log.e("qiaoxi","run onGlobalLayout");
+                if (devHeight != (height - mWindowHeight)) {
+                    Log.e("qiaoxi","run set layout");
+                    ConstraintSet set = new ConstraintSet();
+                    ConstraintLayout layout = findViewById(R.id.current_conversation_top);
+                    set.clone(layout);
+                    set.connect(R.id.input_group,ConstraintSet.BOTTOM,R.id.current_conversation_top,ConstraintSet.BOTTOM, mWindowHeight-height - (mWindowHeight - height == 0? 0: DisplayHelper.dip2Px(QXApplication.getContext(),20)));
+                    set.applyTo(layout);
+                    mRecycler.scrollToPosition(emMessageList.size() - 1);
+                }
             }
+            devHeight = height - mWindowHeight;
         }
     };
-
 
     protected void setupDataBinding() {
 
@@ -81,9 +95,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
         MessageAdapter messageAdapter = new MessageAdapter();
         messageAdapter.setEmMessageList(emMessageList);
         mRecycler.setAdapter(messageAdapter);
-        mRecycler.post(() -> {
-            mRecyclerHeight = mRecycler.getBottom() - mRecycler.getTop();
-        });
+
         current_conversation_more_operation = findViewById(R.id.current_conversation_more_operation);
 
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
@@ -92,6 +104,20 @@ public final class CurrentConversationsActivity extends BaseActivity {
         }
         editText = findViewById(R.id.current_conversation_send_text);
         inputVG = findViewById(R.id.input_group);
+
+        mRecycler.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                Log.e("qiaoxi","recy layout changed");
+            }
+        });
+
+        inputVG.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                Log.e("qiaoxi","inputVG layout changed");
+            }
+        });
     }
 
     @Override
@@ -112,20 +138,14 @@ public final class CurrentConversationsActivity extends BaseActivity {
         });
 
         editText = findViewById(R.id.current_conversation_send_text);
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-            }
+        editText.setOnFocusChangeListener((v, hasFocus) -> {
         });
 
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    currentConversationsViewModel.sendMessage();
-                }
-                return false;
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                currentConversationsViewModel.sendMessage();
             }
+            return false;
         });
 
     }
