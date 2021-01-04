@@ -11,16 +11,24 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
+import com.example.qiaoxi.dataprocess.BaseViewModel;
+import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class  BaseActivity<T extends BaseViewModel> extends AppCompatActivity {
     protected String TAGS = "qiaoxi";
     protected int normalNotificationID = 0;
+    protected T mViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +56,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
+    protected void setupViewModel( @NonNull Class<T> modelClass, @Nullable ViewModelProvider.Factory factory) {
+        mViewModel = factory == null? new ViewModelProvider(this).get(modelClass) : new ViewModelProvider(this, factory).get(modelClass);
+    }
     protected abstract void setupView();
     protected abstract void setupDataBinding();
     protected abstract void setupEvent();

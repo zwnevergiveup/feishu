@@ -11,6 +11,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.dataprocess.BaseViewModel;
 import com.example.qiaoxi.datasource.ContactModel;
 import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
@@ -33,12 +36,11 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CurrentConversationsActivity extends BaseActivity {
+public final class CurrentConversationsActivity extends BaseActivity<CurrentConversationsViewModel> {
 
     private RecyclerView mRecycler;
     private List<MsgModel> emMessageList =new ArrayList<>();
     public static String FLAG = "UPDATE";
-    private CurrentConversationsViewModel currentConversationsViewModel;
     private ContactModel mModel;
     private EditText editText;
     private int mWindowHeight = 0;
@@ -78,11 +80,11 @@ public final class CurrentConversationsActivity extends BaseActivity {
         mModel = JsonHelper.getInstance().getObject(getIntent().getStringExtra("contactModel"),new TypeToken<ContactModel>(){}.getType());
         String withWho = "";
         if (mModel != null) withWho = mModel.friendName ;
-        currentConversationsViewModel = new ViewModelProvider(this,new CurrentConversationsViewModel.Factory(withWho)).get(CurrentConversationsViewModel.class);
+        setupViewModel(CurrentConversationsViewModel.class,new CurrentConversationsViewModel.Factory(withWho));
         ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
         binding. setLifecycleOwner(this);
-        binding.setViewModel(currentConversationsViewModel);
-        getLifecycle().addObserver(currentConversationsViewModel);
+        binding.setViewModel(mViewModel);
+        getLifecycle().addObserver(mViewModel);
 
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mGlobalLayoutListener);
     }
@@ -124,14 +126,14 @@ public final class CurrentConversationsActivity extends BaseActivity {
     protected void setupEvent() {
         QXToolbar toolbar = findViewById(R.id.current_conversation_toolbar);
         toolbar.mLeftIcon.setOnClickListener(v -> finish());
-        currentConversationsViewModel.lastMessages.observe(this, msgModels -> {
+        mViewModel.lastMessages.observe(this, msgModels -> {
             emMessageList.clear();
             emMessageList.addAll(msgModels);
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
         });
 
-        currentConversationsViewModel.msgModelMutableLiveData.observe(this, msgModel -> {
+        mViewModel.msgModelMutableLiveData.observe(this, msgModel -> {
             emMessageList.add(msgModel);
             mRecycler.getAdapter().notifyDataSetChanged();
             mRecycler.scrollToPosition(mRecycler.getAdapter().getItemCount() - 1);
@@ -143,7 +145,7 @@ public final class CurrentConversationsActivity extends BaseActivity {
 
         editText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEND) {
-                currentConversationsViewModel.sendMessage();
+                mViewModel.sendMessage();
             }
             return false;
         });

@@ -22,7 +22,7 @@ import com.example.qiaoxi.databinding.ActivityLoginBinding;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
 import com.example.qiaoxi.datasource.UserModel;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity<LoginViewModel> {
     private ImageView catBg;
     private ViewGroup loadingView;
 
@@ -58,14 +58,14 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void setupDataBinding() {
-        LoginViewModel loginViewModel = new ViewModelProvider(this,new LoginViewModel.Factory(getApplicationContext())).get(LoginViewModel.class);
-        ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        setupViewModel(LoginViewModel.class,new LoginViewModel.Factory(getApplicationContext()));
+       ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
         binding.setLifecycleOwner(this);
-        binding.setViewmodel(loginViewModel);
+        binding.setViewmodel(mViewModel);
 
-        loginViewModel.result.observe(this, resultModel -> {
+        mViewModel.result.observe(this, resultModel -> {
                 if (resultModel.status) {
-                    SPHelper.getInstance(getApplicationContext()).writeObject(loginViewModel.userName.getValue(),"lastLoginName");
+                    SPHelper.getInstance(getApplicationContext()).writeObject(mViewModel.userName.getValue(),"lastLoginName");
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 }else {
@@ -74,7 +74,7 @@ public class LoginActivity extends BaseActivity {
 //            startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
         });
-        loginViewModel.userModelLiveData.observe(this, new Observer<UserModel>() {
+        mViewModel.userModelLiveData.observe(this, new Observer<UserModel>() {
             @Override
             public void onChanged(UserModel userModel) {
             }

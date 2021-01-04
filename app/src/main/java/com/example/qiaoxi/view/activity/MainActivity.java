@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<MainViewModel> {
 
     private int isExit = 0;
     private RecyclerView mRecycler;
@@ -36,12 +36,11 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private ViewPager mPager;
     private BottomNavigationView mNavigation;
-    private MainViewModel mViewModel;
 
 
     @Override
     protected void setupDataBinding() {
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        setupViewModel(MainViewModel.class,null);
         getLifecycle().addObserver(mViewModel);
     }
 
