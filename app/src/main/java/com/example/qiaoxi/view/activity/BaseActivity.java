@@ -18,23 +18,22 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
 import com.example.qiaoxi.dataprocess.BaseViewModel;
-import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 
-public abstract class  BaseActivity<T extends BaseViewModel> extends AppCompatActivity {
+public abstract class  BaseActivity<V extends BaseViewModel> extends AppCompatActivity {
     protected String TAGS = "qiaoxi";
     protected int normalNotificationID = 0;
-    protected T mViewModel;
+    protected V mViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupDataBinding();
-        setupView();
+        initViews();
+        afterViews();
         setupEvent();
     }
     @Override
@@ -56,11 +55,16 @@ public abstract class  BaseActivity<T extends BaseViewModel> extends AppCompatAc
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
-    protected void setupViewModel( @NonNull Class<T> modelClass, @Nullable ViewModelProvider.Factory factory) {
+    protected void setupViewModel( @NonNull Class<V> modelClass, @Nullable ViewModelProvider.Factory factory, @NonNull BaseActivity activity, @NonNull int layout) {
         mViewModel = factory == null? new ViewModelProvider(this).get(modelClass) : new ViewModelProvider(this, factory).get(modelClass);
+        ViewDataBinding binding =  DataBindingUtil.setContentView(activity, layout);
+        binding.setLifecycleOwner(activity);
+        binding.setVariable(BR.viewModel,mViewModel);
+        getLifecycle().addObserver(mViewModel);
     }
-    protected abstract void setupView();
-    protected abstract void setupDataBinding();
+
+    protected abstract void initViews();
+    protected abstract void afterViews();
     protected abstract void setupEvent();
 
     public void createConversationNotification( String title, String text){

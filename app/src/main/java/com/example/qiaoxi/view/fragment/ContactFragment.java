@@ -30,58 +30,56 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactFragment extends Fragment {
+public class ContactFragment extends BaseFragment<ContactViewModel> {
 
     private List<Pair<String, ContactModel>> contacts = new ArrayList<>();
     private RecyclerView mRecycler;
-    private View root;
     private LetterNavigationView letterNavigationView;
     private TextView mShowLetterText;
     float oneHeight , top;
     private Vibrator mVibrator;
     private String lastLetter = "";
-    private ContactViewModel viewModel;
     private ContactAdapter adapter;
 
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (root == null) {
-            root = inflater.inflate(R.layout.fragment_contact, container, false);
-            mRecycler = root.findViewById(R.id.friend_recy);
-            letterNavigationView = root.findViewById(R.id.contact_letterNavigation);
-            mShowLetterText = root.findViewById(R.id.contact_showNavigationLetter);
-            mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mVibrator = (Vibrator) getActivity().getApplication().getSystemService(Service.VIBRATOR_SERVICE);
-            viewModel = new ContactViewModel();
-
-            adapter = new ContactAdapter();
-            adapter.setFriends(contacts);
-            mRecycler.setAdapter(adapter);
-            adapter.setOnFriendItemClickListener(new ContactAdapter.onFriendItemClickListener() {
-                @Override
-                public void onClick(View view, int position) {
-//                    CustomerImgView view1 = view.findViewById(R.id.item_friend_iv);
-                    Intent intent = new Intent(getActivity(),ContactDetailActivity.class);
-                    Gson gson = new Gson();
-                    ContactModel model = contacts.get(position).second;
-                    String s = gson.toJson(model);
-//                    String str = JsonHelper.getInstance().toJson();
-                    intent.putExtra("contactModel",s);
-//                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), view1,"contactIcon");
-                    getActivity().startActivity(intent);
-                }
-            });
-            setEvent();
-
-        }
-        return root;
+    protected void initViews(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        setupViewModel(ContactViewModel.class, inflater,container,R.layout.fragment_contact);
     }
 
+    @Override
+    protected void afterViews() {
+        mRecycler = root.findViewById(R.id.friend_recy);
+        letterNavigationView = root.findViewById(R.id.contact_letterNavigation);
+        mShowLetterText = root.findViewById(R.id.contact_showNavigationLetter);
+        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mVibrator = (Vibrator) getActivity().getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+        adapter = new ContactAdapter();
+        adapter.setFriends(contacts);
+        mRecycler.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void setupEvent() {
+        adapter.setOnFriendItemClickListener((view, position) -> {
+//                    CustomerImgView view1 = view.findViewById(R.id.item_friend_iv);
+            Intent intent = new Intent(getActivity(),ContactDetailActivity.class);
+            Gson gson = new Gson();
+            ContactModel model = contacts.get(position).second;
+            String s = gson.toJson(model);
+//                    String str = JsonHelper.getInstance().toJson();
+            intent.putExtra("contactModel",s);
+//                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), view1,"contactIcon");
+            getActivity().startActivity(intent);
+        });
+
+        setEvent();
+
+    }
 
     private void setEvent() {
-        viewModel.mContactList.observe(getViewLifecycleOwner(), contactModels -> {
+        mViewModel.mContactList.observe(getViewLifecycleOwner(), contactModels -> {
             contactModels.sort((o1, o2) -> {
                 int a = Pinyin.toPinyin(o1.friendNickName,"").charAt(0);
                 int b = Pinyin.toPinyin(o2.friendNickName,"").charAt(0);

@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     private ViewGroup loadingView;
 
     @Override
-    protected void setupView() {
+    protected void afterViews() {
 //        LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.login_anim);
 //        animationView.playAnimation();
 //        animationView.addAnimatorListener(new Animator.AnimatorListener() {
@@ -57,11 +57,8 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     }
 
     @Override
-    protected void setupDataBinding() {
-        setupViewModel(LoginViewModel.class,new LoginViewModel.Factory(getApplicationContext()));
-       ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
-        binding.setLifecycleOwner(this);
-        binding.setViewmodel(mViewModel);
+    protected void initViews() {
+        setupViewModel(LoginViewModel.class,new LoginViewModel.Factory(getApplicationContext()),this,R.layout.activity_login);
 
         mViewModel.result.observe(this, resultModel -> {
                 if (resultModel.status) {

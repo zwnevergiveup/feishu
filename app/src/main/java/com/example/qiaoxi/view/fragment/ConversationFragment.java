@@ -27,41 +27,40 @@ import com.example.qiaoxi.view.adapter.ConversationAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConversationFragment extends Fragment {
+public class ConversationFragment extends BaseFragment<ConversationsViewModel> {
     private RecyclerView mRecycler;
     private List<ConversationModel> conversationModels = new ArrayList<>();
-    private ConversationsViewModel conversationsViewModel;
-    private View root;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (root == null) {
-            root = inflater.inflate(R.layout.fragment_conversations, container, false);
-            mRecycler = root.findViewById(R.id.conversations_recycler);
-            ConversationAdapter adapter = new ConversationAdapter();
-            mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mRecycler.setAdapter(adapter);
-            adapter.setConversationModels(conversationModels);
-            conversationsViewModel = new ViewModelProvider(this).get(ConversationsViewModel.class);
 
-            getLifecycle().addObserver(conversationsViewModel);
-            adapter.setOnConversationItemClickListener((view, position) -> {
-                startActivity(new Intent(getActivity(), CurrentConversationsActivity.class){{
-                    ContactModel model = new ContactModel();
-                    model.friendNickName = conversationModels.get(position).contactMan;
-                    model.friendName = conversationModels.get(position).contactMan;
-                    putExtra("contactModel", JsonHelper.getInstance().toJson(model));
-                }});
-            });
-            setEvent();
-        }
-        return root;
+
+    @Override
+    protected void initViews(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        setupViewModel(ConversationsViewModel.class,inflater,container,R.layout.fragment_conversations);
     }
-    private void setEvent(){
-        conversationsViewModel.conversations.observe(getActivity(), models -> {
+
+    @Override
+    protected void afterViews() {
+        mRecycler = root.findViewById(R.id.conversations_recycler);
+        ConversationAdapter adapter = new ConversationAdapter();
+        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecycler.setAdapter(adapter);
+        adapter.setConversationModels(conversationModels);
+        adapter.setOnConversationItemClickListener((view, position) -> {
+            startActivity(new Intent(getActivity(), CurrentConversationsActivity.class){{
+                ContactModel model = new ContactModel();
+                model.friendNickName = conversationModels.get(position).contactMan;
+                model.friendName = conversationModels.get(position).contactMan;
+                putExtra("contactModel", JsonHelper.getInstance().toJson(model));
+            }});
+        });
+    }
+
+    @Override
+    protected void setupEvent() {
+        mViewModel.conversations.observe(getActivity(), models -> {
             conversationModels.clear();
             conversationModels.addAll(models);
             mRecycler.getAdapter().notifyDataSetChanged();
         });
     }
+
 }

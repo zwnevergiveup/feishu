@@ -12,31 +12,37 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
+import com.example.qiaoxi.dataprocess.HomeViewModel;
 import com.example.qiaoxi.view.adapter.HomeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment<HomeViewModel> {
     View root = null;
     RecyclerView mRecycler = null;
     List<String> itemNames = new ArrayList<>();
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (root == null) {
-            root = inflater.inflate(R.layout.fragment_home, container, false);
-            mRecycler = root.findViewById(R.id.home_recycler);
-            mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-            HomeAdapter adapter = new HomeAdapter();
-            setItemNames();
-            adapter.itemNames = itemNames;
-            mRecycler.setAdapter(adapter);
-
-        }
-
-        return root;
+    protected void initViews(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        setupViewModel(HomeViewModel.class,inflater,container,R.layout.fragment_home);
     }
+
+    @Override
+    protected void afterViews() {
+        mRecycler = root.findViewById(R.id.home_recycler);
+        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        HomeAdapter adapter = new HomeAdapter();
+        setItemNames();
+        adapter.itemNames = itemNames;
+        mRecycler.setAdapter(adapter);
+    }
+
+    @Override
+    protected void setupEvent() {
+
+    }
+
 
     private void setItemNames() {
         itemNames.add("钱包");

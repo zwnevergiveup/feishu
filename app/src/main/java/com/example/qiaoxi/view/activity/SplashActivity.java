@@ -62,10 +62,10 @@ public class SplashActivity extends BaseActivity {
         finish();
     }
     @Override
-    protected void setupView() { }
+    protected void afterViews() { }
 
     @Override
-    protected void setupDataBinding() { }
+    protected void initViews() { }
 
     @Override
     protected void setupEvent() { }

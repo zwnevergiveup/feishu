@@ -39,14 +39,13 @@ public class MainActivity extends BaseActivity<MainViewModel> {
 
 
     @Override
-    protected void setupDataBinding() {
-        setupViewModel(MainViewModel.class,null);
+    protected void initViews() {
+        setupViewModel(MainViewModel.class,null,this,R.layout.activity_main);
         getLifecycle().addObserver(mViewModel);
     }
 
     @Override
-    protected void setupView() {
-        setContentView(R.layout.activity_main);
+    protected void afterViews() {
         mPager = findViewById(R.id.main_pager);
         mNavigation = findViewById(R.id.main_bottom_navigation);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());

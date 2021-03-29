@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.example.qiaoxi.dataprocess.LoginViewModel" />
     </data>
 
@@ -75,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:hint="@string/input_acount_remind"
-                        android:text="@={viewmodel.userName}"
+                        android:text="@={viewModel.userName}"
                         android:textSize="17sp"
                         android:textColor="@color/pure_black"
 
@@ -103,7 +103,7 @@
                         android:inputType="textPassword"
                         android:textSize="17sp"
                         android:textColor="@color/pure_black"
-                        android:text="@={viewmodel.userPassword}"
+                        android:text="@={viewModel.userPassword}"
                         android:id="@+id/input_secret" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,7 +131,7 @@
                     android:text="@string/login"
                     android:textSize="18sp"
                     android:textColor="@color/pure_white"
-                    android:onClick="@{() -> viewmodel.login()}"
+                    android:onClick="@{() -> viewModel.login()}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="20dp"
@@ -206,7 +206,7 @@
             android:background="@color/alpha5"
             android:id="@+id/login_loading_group"
             android:elevation="15dp"
-            android:visibility="@{viewmodel.visibility}"
+            android:visibility="@{viewModel.visibility}"
             >
             <ProgressBar
                 android:layout_width="100dp"

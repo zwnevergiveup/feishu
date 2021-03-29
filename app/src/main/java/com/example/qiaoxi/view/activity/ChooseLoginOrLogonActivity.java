@@ -19,7 +19,7 @@ public class ChooseLoginOrLogonActivity extends BaseActivity{
 
     CustomerVideoView vv ;
     @Override
-    protected void setupView() {
+    protected void afterViews() {
         setContentView(R.layout.activity_logon_or_login);
         vv = findViewById(R.id.choose_login_logon_bg);
         vv.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.choose_bg));
@@ -35,7 +35,7 @@ public class ChooseLoginOrLogonActivity extends BaseActivity{
     }
 
     @Override
-    protected void setupDataBinding() {
+    protected void initViews() {
 
     }
 

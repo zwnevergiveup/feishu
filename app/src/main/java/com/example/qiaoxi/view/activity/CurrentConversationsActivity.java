@@ -75,21 +75,15 @@ public final class CurrentConversationsActivity extends BaseActivity<CurrentConv
         }
     };
 
-    protected void setupDataBinding() {
-
+    protected void initViews() {
         mModel = JsonHelper.getInstance().getObject(getIntent().getStringExtra("contactModel"),new TypeToken<ContactModel>(){}.getType());
         String withWho = "";
         if (mModel != null) withWho = mModel.friendName ;
-        setupViewModel(CurrentConversationsViewModel.class,new CurrentConversationsViewModel.Factory(withWho));
-        ActivityCurrentConversationBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_current_conversation);
-        binding. setLifecycleOwner(this);
-        binding.setViewModel(mViewModel);
-        getLifecycle().addObserver(mViewModel);
-
+        setupViewModel(CurrentConversationsViewModel.class,new CurrentConversationsViewModel.Factory(withWho),this,R.layout.activity_current_conversation);
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mGlobalLayoutListener);
     }
 
-    protected void setupView() {
+    protected void afterViews() {
         getWindow().setNavigationBarColor(getColor(R.color.rice_yellow));
         mRecycler = findViewById(R.id.current_conversation_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -107,19 +101,9 @@ public final class CurrentConversationsActivity extends BaseActivity<CurrentConv
         editText = findViewById(R.id.current_conversation_send_text);
         inputVG = findViewById(R.id.input_group);
 
-        mRecycler.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                Log.e("qiaoxi","recy layout changed");
-            }
-        });
+        mRecycler.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> Log.e("qiaoxi","recy layout changed"));
 
-        inputVG.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                Log.e("qiaoxi","inputVG layout changed");
-            }
-        });
+        inputVG.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> Log.e("qiaoxi","inputVG layout changed"));
     }
 
     @Override

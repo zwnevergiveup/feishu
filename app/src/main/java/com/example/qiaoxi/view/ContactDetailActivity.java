@@ -37,14 +37,14 @@ public class ContactDetailActivity extends BaseActivity {
     }};
     private ContactModel model;
     @Override
-    protected void setupDataBinding() {
+    protected void initViews() {
         setContentView(R.layout.activity_contact_detail);
         String objJson = getIntent().getStringExtra("contactModel");
         model = JsonHelper.getInstance().getObject(objJson,new TypeToken<ContactModel>(){}.getType());
     }
 
     @Override
-    protected void setupView() {
+    protected void afterViews() {
         mRecyclerView = findViewById(R.id.contact_detail_recy);
         mToolbar = findViewById(R.id.contact_detail_toolbar);
 
