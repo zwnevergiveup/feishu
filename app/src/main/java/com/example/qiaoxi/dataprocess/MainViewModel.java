@@ -15,16 +15,13 @@ import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.datasource.ContactModel;
-import com.example.qiaoxi.datasource.DataSourceHelper;
-import com.example.qiaoxi.datasource.ListenRepositoryData;
-import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.datasource.model.ContactModel;
+import com.example.qiaoxi.datasource.datasource.DataSourceHelper;
+import com.example.qiaoxi.datasource.datasource.ListenRepositoryData;
+import com.example.qiaoxi.datasource.model.MsgModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
-import com.example.qiaoxi.network.NetworkHelper;
 import com.example.qiaoxi.view.activity.CurrentConversationsActivity;
 import com.example.qiaoxi.widget.QXApplication;
-
-import java.util.Random;
 
 public final class MainViewModel extends BaseViewModel implements ListenRepositoryData<MsgModel> {
     public MainViewModel() {

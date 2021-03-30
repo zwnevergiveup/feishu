@@ -10,12 +10,11 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.qiaoxi.datasource.CallBacker;
-import com.example.qiaoxi.datasource.DataSourceHelper;
-import com.example.qiaoxi.datasource.ResultModel;
-import com.example.qiaoxi.datasource.UserModel;
-import com.example.qiaoxi.datasource.AppDatabase;
+import com.example.qiaoxi.datasource.datasource.DataSourceHelper;
+import com.example.qiaoxi.datasource.model.ResultModel;
+import com.example.qiaoxi.datasource.model.UserModel;
+import com.example.qiaoxi.datasource.db.AppDatabase;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
-import com.example.qiaoxi.widget.QXApplication;
 import com.google.gson.reflect.TypeToken;
 
 import io.netty.channel.ChannelFuture;

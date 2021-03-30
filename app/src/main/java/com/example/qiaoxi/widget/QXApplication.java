@@ -3,7 +3,7 @@ package com.example.qiaoxi.widget;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.qiaoxi.datasource.DataSourceHelper;
+import com.example.qiaoxi.datasource.datasource.DataSourceHelper;
 
 
 public class QXApplication extends Application {

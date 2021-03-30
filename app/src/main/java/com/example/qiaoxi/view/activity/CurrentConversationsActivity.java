@@ -1,35 +1,26 @@
 package com.example.qiaoxi.view.activity;
 
-import android.content.Context;
 import android.graphics.Rect;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.dataprocess.BaseViewModel;
-import com.example.qiaoxi.datasource.ContactModel;
+import com.example.qiaoxi.datasource.model.ContactModel;
 import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.adapter.MessageAdapter;
 import com.example.qiaoxi.view.customerview.QXToolbar;
-import com.example.qiaoxi.databinding.ActivityCurrentConversationBinding;
-import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.datasource.model.MsgModel;
 import com.example.qiaoxi.widget.QXApplication;
 import com.google.gson.reflect.TypeToken;
 

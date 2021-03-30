@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.datasource.ConversationModel;
+import com.example.qiaoxi.datasource.model.ConversationModel;
 import com.example.qiaoxi.view.customerview.CustomerImgView;
 
 import java.util.List;

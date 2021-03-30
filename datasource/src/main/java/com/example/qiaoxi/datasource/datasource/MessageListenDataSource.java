@@ -1,5 +1,7 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.datasource;
 
+import com.example.qiaoxi.datasource.model.ConversationModel;
+import com.example.qiaoxi.datasource.model.MsgModel;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;

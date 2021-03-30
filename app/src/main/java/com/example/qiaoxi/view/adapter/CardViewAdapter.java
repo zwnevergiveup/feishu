@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.datasource.BannerModel;
+import com.example.qiaoxi.datasource.model.BannerModel;
 import com.youth.banner.adapter.BannerAdapter;
 
 import java.util.List;

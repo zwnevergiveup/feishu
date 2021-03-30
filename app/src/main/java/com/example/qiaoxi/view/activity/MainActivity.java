@@ -5,14 +5,12 @@ import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
 import com.example.qiaoxi.dataprocess.MainViewModel;
-import com.example.qiaoxi.datasource.ConversationModel;
+import com.example.qiaoxi.datasource.model.ConversationModel;
 import com.example.qiaoxi.dataprocess.ConversationsViewModel;
 import com.example.qiaoxi.view.adapter.ViewPagerAdapter;
 import com.example.qiaoxi.view.fragment.ContactFragment;

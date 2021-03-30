@@ -1,4 +1,4 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

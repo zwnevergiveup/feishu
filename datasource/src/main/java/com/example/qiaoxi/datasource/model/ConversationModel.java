@@ -1,4 +1,4 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.model;
 
 
 import androidx.annotation.NonNull;
@@ -7,6 +7,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
+
+import com.example.qiaoxi.datasource.db.MsgConvertor;
 
 @Entity(tableName = "conversations")
 @TypeConverters(MsgConvertor.class)

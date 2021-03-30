@@ -1,10 +1,12 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
+
+import com.example.qiaoxi.datasource.db.ListUserModelConvertor;
 
 import java.util.List;
 import java.util.UUID;

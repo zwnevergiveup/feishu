@@ -1,4 +1,4 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

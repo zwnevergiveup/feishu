@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.datasource.ContactModel;
+import com.example.qiaoxi.datasource.model.ContactModel;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.db;
 
 import androidx.room.TypeConverter;
 
-import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.datasource.model.MsgModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

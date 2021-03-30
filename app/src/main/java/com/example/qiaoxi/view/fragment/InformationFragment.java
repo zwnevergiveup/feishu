@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.datasource.BannerModel;
+import com.example.qiaoxi.datasource.model.BannerModel;
 import com.example.qiaoxi.view.adapter.CardViewAdapter;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.RoundLinesIndicator;

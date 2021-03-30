@@ -1,4 +1,4 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.db;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.qiaoxi.datasource.ConversationModel;
+import com.example.qiaoxi.datasource.model.ConversationModel;
 
 import java.util.List;
 

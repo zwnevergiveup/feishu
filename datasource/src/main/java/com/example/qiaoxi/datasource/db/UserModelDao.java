@@ -1,4 +1,4 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.db;
 
 
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.qiaoxi.datasource.UserModel;
+import com.example.qiaoxi.datasource.model.UserModel;
 
 
 @Dao

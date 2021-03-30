@@ -1,10 +1,10 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.db;
 
 import android.content.Context;
 
 import androidx.room.Room;
 
-class DBHelper {
+public class DBHelper {
     private static volatile DBHelper instance = null;
     private DBHelper() { }
 

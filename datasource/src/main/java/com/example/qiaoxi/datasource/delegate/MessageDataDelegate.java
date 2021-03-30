@@ -1,6 +1,6 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.delegate;
 
-import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.datasource.model.MsgModel;
 
 import java.util.List;
 

@@ -1,25 +1,18 @@
 package com.example.qiaoxi.view.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
 import com.example.qiaoxi.dataprocess.ConversationsViewModel;
-import com.example.qiaoxi.dataprocess.CurrentConversationsViewModel;
-import com.example.qiaoxi.datasource.ContactModel;
-import com.example.qiaoxi.datasource.ConversationModel;
-import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.datasource.model.ContactModel;
+import com.example.qiaoxi.datasource.model.ConversationModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.view.activity.CurrentConversationsActivity;
 import com.example.qiaoxi.view.adapter.ConversationAdapter;

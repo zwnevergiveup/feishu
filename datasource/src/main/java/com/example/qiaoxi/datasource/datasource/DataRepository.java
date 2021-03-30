@@ -1,9 +1,18 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.datasource;
+
+import com.example.qiaoxi.datasource.db.AppDatabase;
+import com.example.qiaoxi.datasource.db.DBHelper;
+import com.example.qiaoxi.datasource.delegate.ConversationModelDelegate;
+import com.example.qiaoxi.datasource.delegate.MessageDataDelegate;
+import com.example.qiaoxi.datasource.delegate.UserDataDelegate;
+import com.example.qiaoxi.datasource.model.ConversationModel;
+import com.example.qiaoxi.datasource.model.MsgModel;
+import com.example.qiaoxi.datasource.model.UserModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class DataRepository  implements MessageDataDelegate, ConversationModelDelegate, UserDataDelegate {
+public class DataRepository  implements MessageDataDelegate, ConversationModelDelegate, UserDataDelegate {
     private static volatile DataRepository instance = null;
 
     private AppDatabase db;

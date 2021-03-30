@@ -1,6 +1,6 @@
 package com.example.qiaoxi.datasource;
 
-import com.hyphenate.chat.EMMessage;
+import com.example.qiaoxi.datasource.model.MsgModel;
 
 @FunctionalInterface
 public interface LambdaArg {

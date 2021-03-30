@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.datasource.DataSourceHelper;
-import com.example.qiaoxi.datasource.MsgModel;
+import com.example.qiaoxi.datasource.datasource.DataSourceHelper;
+import com.example.qiaoxi.datasource.model.MsgModel;
 
 import java.util.List;
 

@@ -2,7 +2,6 @@ package com.example.qiaoxi.view.fragment;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
@@ -14,12 +13,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.datasource.ContactModel;
+import com.example.qiaoxi.datasource.model.ContactModel;
 import com.example.qiaoxi.dataprocess.ContactViewModel;
 import com.example.qiaoxi.view.ContactDetailActivity;
 import com.example.qiaoxi.view.adapter.ContactAdapter;

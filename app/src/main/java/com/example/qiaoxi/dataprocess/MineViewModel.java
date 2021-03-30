@@ -3,7 +3,7 @@ package com.example.qiaoxi.dataprocess;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.qiaoxi.datasource.DataSourceHelper;
+import com.example.qiaoxi.datasource.datasource.DataSourceHelper;
 
 public class MineViewModel extends BaseViewModel {
 

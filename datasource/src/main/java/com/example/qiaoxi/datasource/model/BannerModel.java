@@ -1,4 +1,4 @@
-package com.example.qiaoxi.datasource;
+package com.example.qiaoxi.datasource.model;
 
 public class BannerModel {
     public int imgPath;

@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qiaoxi.R;
-import com.example.qiaoxi.dataprocess.ContactViewModel;
-import com.example.qiaoxi.datasource.ContactModel;
+import com.example.qiaoxi.datasource.model.ContactModel;
 import com.example.qiaoxi.helper.json.JsonHelper;
 import com.example.qiaoxi.helper.viewhelper.DisplayHelper;
 import com.example.qiaoxi.view.activity.BaseActivity;
