@@ -6,11 +6,10 @@ buildscript {
         google()
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenCentral()
-        jcenter()
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.android.tools.build:gradle:4.2.0'
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.12'
 
 
@@ -23,7 +22,6 @@ allprojects {
     repositories {
         google()
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-        jcenter()
     }
 }
 
