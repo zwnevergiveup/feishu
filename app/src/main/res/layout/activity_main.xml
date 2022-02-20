@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="view"
+            type="com.example.qiaoxi.view.activity.MainActivity" />
+        <variable
+            name="viewModel"
+            type="com.example.qiaoxi.dataprocess.MainViewModel" />
+    </data>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/main_pager"
-        />
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        android:id="@+id/main_bottom_navigation"
-        android:background="@color/pure_white"
-        app:itemBackground="@null"
-        app:labelVisibilityMode="unlabeled"
-        />
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/main_pager" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_nav_menu"
+            android:id="@+id/main_bottom_navigation"
+            android:background="@color/pure_white"
+            app:itemBackground="@null"
+            app:labelVisibilityMode="unlabeled" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -16,11 +16,11 @@ interface ServerApi {
     Observable<Map<String, Object>> logonWithInfo(@Body LogonBean logonBean);
 
     /**
-     * 登陆
+     * 登录
      * @return
      */
     @POST("user/login")
-    Observable<Map<String, Object>> loginWithPassword(@Body LoginBean loginBean);
+    Observable<Map<String, Object>> loginWithPassword(@Query("userName") String userName, @Query("password") String password);
 
     /**
      * 获取好友列表
