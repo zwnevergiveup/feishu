@@ -43,20 +43,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.messageText_right.setVisibility(View.VISIBLE);
-        holder.messageText_left.setVisibility(View.VISIBLE);
-        holder.icon_left.setVisibility(View.VISIBLE);
-        holder.icon_right.setVisibility(View.VISIBLE);
-        MsgModel msgModel = msgModels.get(position);
-        if (msgModel.send.equals(DataSourceHelper.getInstance().getCurrentUserName())){
-            holder.messageText_right.setText( msgModel.content);
-            holder.messageText_left.setVisibility(View.GONE);
-            holder.icon_left.setVisibility(View.GONE);
-        }else {
-            holder.messageText_left.setText( msgModel.content);
-            holder.messageText_right.setVisibility(View.GONE);
-            holder.icon_right.setVisibility(View.GONE);
-        }
+//        holder.messageText_right.setVisibility(View.VISIBLE);
+//        holder.messageText_left.setVisibility(View.VISIBLE);
+//        holder.icon_left.setVisibility(View.VISIBLE);
+//        holder.icon_right.setVisibility(View.VISIBLE);
+//        MsgModel msgModel = msgModels.get(position);
+//        if (msgModel.send.equals(DataSourceHelper.getInstance().getCurrentUserName())){
+//            holder.messageText_right.setText( msgModel.content);
+//            holder.messageText_left.setVisibility(View.GONE);
+//            holder.icon_left.setVisibility(View.GONE);
+//        }else {
+//            holder.messageText_left.setText( msgModel.content);
+//            holder.messageText_right.setVisibility(View.GONE);
+//            holder.icon_right.setVisibility(View.GONE);
+//        }
     }
 
     @Override

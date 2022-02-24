@@ -11,7 +11,7 @@ public class MineViewModel extends BaseViewModel {
 
     public MineViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue(DataSourceHelper.getInstance().getCurrentUserName());
+//        mText.setValue(DataSourceHelper.getInstance().getCurrentUserName());
     }
 
     public LiveData<String> getText() {

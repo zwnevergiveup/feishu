@@ -37,20 +37,20 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
-        DataSourceHelper.getInstance().registerMessageListen(this);
-        List<MsgModel> list = DataSourceHelper.getInstance().readMsgHistory(DataSourceHelper.getInstance().getCurrentUserName() , conversationName,10);
-        if (list != null && list.size() > 0) {
-            lastMessages.setValue(list);
-        }
+//        DataSourceHelper.getInstance().registerMessageListen(this);
+//        List<MsgModel> list = DataSourceHelper.getInstance().readMsgHistory(DataSourceHelper.getInstance().getCurrentUserName() , conversationName,10);
+//        if (list != null && list.size() > 0) {
+//            lastMessages.setValue(list);
+//        }
     }
 
     public void sendMessage() {
-        if (editText.getValue() != null && !editText.getValue().isEmpty()) {
-            DataSourceHelper.getInstance().sendMessage(editText.getValue(),conversationName, (msgModel) -> {
-                msgModelMutableLiveData.postValue(msgModel);
-            });
-            editText.setValue("");
-        }
+//        if (editText.getValue() != null && !editText.getValue().isEmpty()) {
+//            DataSourceHelper.getInstance().sendMessage(editText.getValue(),conversationName, (msgModel) -> {
+//                msgModelMutableLiveData.postValue(msgModel);
+//            });
+//            editText.setValue("");
+//        }
     }
 
     @Override
@@ -60,6 +60,6 @@ public final class CurrentConversationsViewModel extends BaseViewModel implement
 
     @Override
     public void onDestroy(@NonNull LifecycleOwner owner) {
-        DataSourceHelper.getInstance().unregisterMessageListen(this);
+//        DataSourceHelper.getInstance().unregisterMessageListen(this);
     }
 }

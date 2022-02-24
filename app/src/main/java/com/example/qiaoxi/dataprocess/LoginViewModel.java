@@ -15,6 +15,9 @@ import com.example.qiaoxi.datasource.model.ResultModel;
 import com.example.qiaoxi.datasource.model.UserModel;
 import com.example.qiaoxi.datasource.db.AppDatabase;
 import com.example.qiaoxi.helper.sharedpreferences.SPHelper;
+import com.example.qiaoxi.network.NetworkCallBacker;
+import com.example.qiaoxi.network.NetworkHelper;
+import com.example.qiaoxi.network.ResponseModel;
 import com.google.gson.reflect.TypeToken;
 
 import io.netty.channel.ChannelFuture;
@@ -62,21 +65,26 @@ public class LoginViewModel extends BaseViewModel {
             return;
         }
 //        visibility.setValue(View.VISIBLE);
-        result.postValue(new ResultModel(true,"登录成功"));
+        NetworkHelper.getInstance().login(userName.getValue(), userPassword.getValue(), new NetworkCallBacker() {
+            @Override
+            public void onSuccess(ResponseModel model) {
+                if (model.message.equals("true")) {
+                    result.postValue(new ResultModel(true,"登录成功"));
+                }else{
+                    result.postValue(new ResultModel(false,model.message));
+                }
+            }
+
+            @Override
+            public void onFail(ResponseModel model) {
+                result.postValue(new ResultModel(false,model.message));
+            }
+        });
+
 
     }
 
     public void logout(){
-        DataSourceHelper.getInstance().logoutEM(new CallBacker() {
-            @Override
-            public void onSuccess(Object message) {
-                Log.e("qiaoxi",(String) message);
-            }
 
-            @Override
-            public void onFail(Object reason) {
-                Log.e("qiaoxi",(String) reason);
-            }
-        });
     }
 }

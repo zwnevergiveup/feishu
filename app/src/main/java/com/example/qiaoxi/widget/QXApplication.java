@@ -15,7 +15,7 @@ public class QXApplication extends Application {
         super.onCreate();
         mContext = getApplicationContext();
 
-        DataSourceHelper.getInstance().initDataSourceHelper(mContext); //init dataSource module
+//        DataSourceHelper.getInstance().initDataSourceHelper(mContext); //init dataSource module
     }
     public static Context getContext(){
         return mContext;

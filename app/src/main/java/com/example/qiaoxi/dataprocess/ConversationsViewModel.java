@@ -20,20 +20,20 @@ public class ConversationsViewModel extends BaseViewModel implements  ListenRepo
 
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
-        DataSourceHelper.getInstance().registerMessageListen(this);
+//        DataSourceHelper.getInstance().registerMessageListen(this);
     }
 
     @Override
     public void onResume(@NonNull LifecycleOwner owner) {
-        List<ConversationModel> conversationModels = DataSourceHelper.getInstance().readConversationsList(DataSourceHelper.getInstance().getCurrentUserName());
-        if (conversationModels != null ) {
-            conversations.setValue(conversationModels);
-        }
+//        List<ConversationModel> conversationModels = DataSourceHelper.getInstance().readConversationsList(DataSourceHelper.getInstance().getCurrentUserName());
+//        if (conversationModels != null ) {
+//            conversations.setValue(conversationModels);
+//        }
     }
 
     @Override
     public void onDestroy(@NonNull LifecycleOwner owner) {
-        DataSourceHelper.getInstance().unregisterMessageListen(this);
+//        DataSourceHelper.getInstance().unregisterMessageListen(this);
     }
 
     @Override

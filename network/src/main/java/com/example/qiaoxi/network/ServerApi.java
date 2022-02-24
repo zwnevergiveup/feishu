@@ -19,8 +19,8 @@ interface ServerApi {
      * 登录
      * @return
      */
-    @POST("user/login")
-    Observable<Map<String, Object>> loginWithPassword(@Query("userName") String userName, @Query("password") String password);
+    @GET("/login")
+    Observable<Map<String, Object>> loginWithPassword(@Query("userName") String userName, @Query("pwd") String password);
 
     /**
      * 获取好友列表

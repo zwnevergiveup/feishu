@@ -22,10 +22,6 @@ public class DataRepository  implements MessageDataDelegate, ConversationModelDe
     private List<ListenRepositoryData> mConversationListeners = new ArrayList<>();
 
 
-    private DataRepository() {
-        db = DBHelper.getInstance().getAppDatabase(DataSourceHelper.getInstance().getContext(),"QX_DB");
-        new MessageListenDataSource(this);
-    }
 
     public static DataRepository getInstance() {
         if (instance == null) {

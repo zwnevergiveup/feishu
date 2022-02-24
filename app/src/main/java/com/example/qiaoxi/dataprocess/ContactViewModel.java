@@ -20,24 +20,24 @@ public class ContactViewModel extends BaseViewModel {
     public ContactViewModel() {
         mContactList = new MutableLiveData<>();
         mContactList.setValue(new ArrayList<>());
-        getContactList();
+//        getContactList();
     }
-
-    public void getContactList() {
-        NetworkHelper.getInstance().getContactList(DataSourceHelper.getInstance().getCurrentUserName(), new NetworkCallBacker() {
-            @Override
-            public void onSuccess(ResponseModel model) {
-                if (model.status.equals("200")) {
-                    List<ContactModel> contactModels = JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(model.extraInfo),new TypeToken<List<ContactModel>>(){}.getType());
-                    mContactList.setValue(contactModels);
-                }
-            }
-
-            @Override
-            public void onFail(ResponseModel model) {
-
-            }
-        });
-    }
+//
+//    public void getContactList() {
+//        NetworkHelper.getInstance().getContactList(DataSourceHelper.getInstance().getCurrentUserName(), new NetworkCallBacker() {
+//            @Override
+//            public void onSuccess(ResponseModel model) {
+//                if (model.status.equals("200")) {
+//                    List<ContactModel> contactModels = JsonHelper.getInstance().getObject(JsonHelper.getInstance().toJson(model.extraInfo),new TypeToken<List<ContactModel>>(){}.getType());
+//                    mContactList.setValue(contactModels);
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(ResponseModel model) {
+//
+//            }
+//        });
+//    }
 
 }

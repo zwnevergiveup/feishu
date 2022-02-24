@@ -54,12 +54,12 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void turnToLogin() {
-        if (DataSourceHelper.getInstance().isConnectedEM()) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        }else {
+//        if (DataSourceHelper.getInstance().isConnectedEM()) {
+//            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//        }else {
             startActivity(new Intent(SplashActivity.this,ChooseLoginOrLogonActivity.class));
-        }
-        finish();
+//        }
+//        finish();
     }
     @Override
     protected void afterViews() { }
